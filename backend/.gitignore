@@ -5,7 +5,7 @@
 vaani.db
 __pycache__/
 *.pyc
-frontend/node_modules/
+/frontend/node_modules/
 data/upload_*
 data/turn_*
 data/sim_*
