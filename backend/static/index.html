@@ -266,7 +266,8 @@ function renderBoard() {
         <div class="rk">${c.rank}</div>
         <div class="band b${c.band}">B${c.band}</div>
         <div>
-          <div class="txt">${c.transcript}</div>
+          <div class="txt">${c.text_english && c.text_english !== c.transcript ? c.text_english : c.transcript}</div>
+          ${c.text_english && c.text_english !== c.transcript ? `<div style="font-size:11px;color:var(--muted);font-style:italic">Original (${c.language || "?"}): ${c.transcript}</div>` : ""}
           <div class="why">${markReason(c.reason)}</div>
           <div class="chips">
             ${onCall ? `<span class="chip live"><span class="live-dot"></span>ON CALL · ${stageLabel}</span>` : ""}

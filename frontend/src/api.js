@@ -52,6 +52,7 @@ export const api = {
     for (const f of files) body.append("files", f, f.name);
     return json("/intake/audio", { method: "POST", body });
   },
+  removeCall: (id) => json(`/calls/${id}`, { method: "DELETE" }),
 };
 
 /**

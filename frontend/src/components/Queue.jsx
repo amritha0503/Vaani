@@ -95,9 +95,20 @@ function Row({ call, selected, onSelect, refFn }) {
         </span>
 
         <span className="min-w-0">
-          <span className="block truncate text-[13.5px] leading-snug text-ink">
-            {call.transcript}
-          </span>
+          {call.text_english && call.text_english !== call.transcript ? (
+            <>
+              <span className="block truncate text-[13.5px] leading-snug text-ink" title={call.text_english}>
+                {call.text_english}
+              </span>
+              <span className="mt-0.5 block truncate text-[12px] italic leading-snug text-water/80" title={call.transcript}>
+                Original ({call.language?.toUpperCase() || "?"}): {call.transcript}
+              </span>
+            </>
+          ) : (
+            <span className="block truncate text-[13.5px] leading-snug text-ink" title={call.transcript}>
+              {call.transcript}
+            </span>
+          )}
           <span className="mt-0.5 block">
             <Reason text={call.reason} />
           </span>

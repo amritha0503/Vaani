@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api, usePoll } from "../api.js";
 
 function Panel({ title, note, children, className = "" }) {
@@ -37,16 +37,23 @@ export function UploadPanel({ calls, onSelect, onPickOnMap }) {
   const [error, setError] = useState(null);
   const [dragging, setDragging] = useState(false);
   const [gpsBusy, setGpsBusy] = useState(null); // call id currently locating
-  const [gpsError, setGpsError] = useState(null);
+  const [gpsStatus, setGpsStatus] = useState({}); // id -> { state: 'locating' | 'granted' | 'denied', error?: string }
+  const promptedRef = useRef(new Set());
   const inputRef = useRef(null);
 
-  const useGps = (id) => {
+  const byId = new Map(calls.map((c) => [c.id, c]));
+
+  const requestGpsPermission = (id) => {
     if (!("geolocation" in navigator)) {
-      setGpsError("This browser has no location support.");
+      setGpsStatus((prev) => ({
+        ...prev,
+        [id]: { state: "denied", error: "This browser has no geolocation support." },
+      }));
       return;
     }
     setGpsBusy(id);
-    setGpsError(null);
+    setGpsStatus((prev) => ({ ...prev, [id]: { state: "locating" } }));
+
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
         try {
@@ -56,23 +63,53 @@ export function UploadPanel({ calls, onSelect, onPickOnMap }) {
             error_radius_m: pos.coords.accuracy,
             source: "gps",
           });
+          setGpsStatus((prev) => ({
+            ...prev,
+            [id]: { state: "granted", accuracy: Math.round(pos.coords.accuracy) },
+          }));
         } catch (e) {
-          setGpsError(e.message);
+          setGpsStatus((prev) => ({
+            ...prev,
+            [id]: { state: "denied", error: e.message },
+          }));
         } finally {
           setGpsBusy(null);
         }
       },
       (err) => {
         setGpsBusy(null);
-        setGpsError(
-          err?.code === 1
-            ? "Blocked: allow location for this page in the address-bar site settings, or use \"pick on map\"."
-            : "Location was not shared by the browser."
-        );
+        setGpsStatus((prev) => ({
+          ...prev,
+          [id]: {
+            state: "denied",
+            error:
+              err?.code === 1
+                ? "Permission denied. Allow location access in browser or pick on map."
+                : "Unable to retrieve device location.",
+          },
+        }));
       },
       { enableHighAccuracy: true, timeout: 12000 }
     );
   };
+
+  // Automatically check each completed upload:
+  // If no location mentioned in audio, proactively request user permission.
+  useEffect(() => {
+    queued.forEach((q) => {
+      const call = byId.get(q.id);
+      if (
+        call &&
+        !call.intake_stage &&
+        !call.extractor_pending &&
+        call.lat == null &&
+        !promptedRef.current.has(q.id)
+      ) {
+        promptedRef.current.add(q.id);
+        requestGpsPermission(q.id);
+      }
+    });
+  }, [queued, calls]);
 
   const send = async (files) => {
     const audio = [...files].filter(
@@ -91,7 +128,6 @@ export function UploadPanel({ calls, onSelect, onPickOnMap }) {
     }
   };
 
-  const byId = new Map(calls.map((c) => [c.id, c]));
   const done = queued.filter((q) => {
     const c = byId.get(q.id);
     return c && !c.extractor_pending && !c.intake_stage;
@@ -139,10 +175,9 @@ export function UploadPanel({ calls, onSelect, onPickOnMap }) {
           }}
         />
         <p className="mx-auto mt-3 max-w-md font-mono text-[10.5px] leading-relaxed text-muted">
-          Each file lands on the board immediately and fills in as it is worked:
-          transcribed locally by Whisper, triaged by the spotter, geocoded from any
-          landmark it mentions, then re-read by the model. Nothing is uploaded
-          anywhere — the audio stays on this machine.
+          Each file is transcribed and checked for a spoken landmark. If a location is
+          mentioned, it is automatically preferred and geocoded. If no location is mentioned,
+          the system asks permission to access your device location to place the emergency call.
         </p>
       </div>
 
@@ -151,46 +186,98 @@ export function UploadPanel({ calls, onSelect, onPickOnMap }) {
           {error}
         </p>
       )}
-      {gpsError && (
-        <p role="alert" className="mt-3 font-mono text-[11px] text-band2">
-          {gpsError}
-        </p>
-      )}
 
       {queued.length > 0 && (
-        <ul className="mt-4 space-y-px" aria-label="Uploaded recordings">
+        <ul className="mt-4 space-y-2" aria-label="Uploaded recordings">
           {queued.map((q) => {
             const call = byId.get(q.id);
             const st = statusOf(call);
-            const needsLocation = call && !call.intake_stage && call.lat == null;
+            const isProcessing = call && (call.intake_stage || call.extractor_pending);
+            const hasAudioLocation =
+              call && !isProcessing && call.lat != null && call.location_source !== "gps";
+            const needsUserLocation =
+              call && !isProcessing && call.lat == null;
+            const hasGpsLocation =
+              call && !isProcessing && call.lat != null && call.location_source === "gps";
+            const gpsInfo = gpsStatus[q.id];
+
             return (
-              <li key={q.id}>
+              <li
+                key={q.id}
+                className="rounded-[4px] border border-line bg-panel p-2 transition-colors hover:border-line/80"
+              >
                 <button
                   onClick={() => call && onSelect(q.id)}
                   disabled={!call}
-                  className="flex w-full items-center gap-3 rounded-[3px] px-2 py-1.5 text-left transition-colors hover:bg-raised disabled:cursor-default"
+                  className="flex w-full items-center gap-3 text-left transition-colors disabled:cursor-default"
                 >
-                  <span className="min-w-0 flex-1 truncate font-mono text-[11px] text-ink-2">
+                  <span className="min-w-0 flex-1 truncate font-mono text-[11.5px] font-medium text-ink">
                     {q.filename}
                   </span>
                   <span className={`font-mono text-[10.5px] ${st.tone}`}>{st.label}</span>
                 </button>
-                {needsLocation && (
-                  <div className="flex items-center gap-2 px-2 pb-1.5">
-                    <span className="font-mono text-[10px] text-band2">no landmark heard —</span>
-                    <button
-                      onClick={() => useGps(q.id)}
-                      disabled={gpsBusy === q.id}
-                      className="rounded-sm border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted transition-colors hover:border-water hover:text-ink disabled:opacity-50"
-                    >
-                      {gpsBusy === q.id ? "locating…" : "use my GPS"}
-                    </button>
-                    <button
-                      onClick={() => onPickOnMap?.(q.id)}
-                      className="rounded-sm border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted transition-colors hover:border-water hover:text-ink"
-                    >
-                      pick on map
-                    </button>
+
+                {/* Case 1: Location mentioned in audio -> PREFER THIS LOCATION */}
+                {hasAudioLocation && (
+                  <div className="mt-1.5 flex flex-wrap items-center gap-1.5 rounded-sm bg-ok/10 px-2 py-1 font-mono text-[10.5px] text-ok">
+                    <span>📍</span>
+                    <span className="font-semibold">
+                      Spoken location detected: "{call.landmark || 'Landmark'}"
+                    </span>
+                    <span className="text-muted">
+                      · preferred & placed
+                      {call.hand_m != null ? ` (${call.hand_m.toFixed(1)}m above drainage)` : ""}
+                    </span>
+                  </div>
+                )}
+
+                {/* Case 2: Placed via user device GPS */}
+                {hasGpsLocation && (
+                  <div className="mt-1.5 flex flex-wrap items-center gap-1.5 rounded-sm bg-water/10 px-2 py-1 font-mono text-[10.5px] text-water">
+                    <span>🛰️</span>
+                    <span className="font-semibold">Placed via user device GPS</span>
+                    <span className="text-muted">
+                      · ({call.lat.toFixed(4)}, {call.lon.toFixed(4)})
+                      {call.error_radius_m ? ` ±${Math.round(call.error_radius_m)}m` : ""}
+                    </span>
+                  </div>
+                )}
+
+                {/* Case 3: No location mentioned in audio -> ASK USER PERMISSION */}
+                {needsUserLocation && (
+                  <div className="mt-2 rounded-sm border border-band2/40 bg-band2/10 p-2.5">
+                    <div className="flex items-start gap-2">
+                      <span className="text-[13px] text-band2">⚠️</span>
+                      <div className="min-w-0 flex-1">
+                        <p className="font-mono text-[11px] font-semibold text-ink">
+                          No location mentioned in audio
+                        </p>
+                        <p className="mt-0.5 font-mono text-[10px] text-muted">
+                          Emergency teams need your location to dispatch help. Grant access to your device GPS?
+                        </p>
+                        <div className="mt-2 flex flex-wrap items-center gap-2">
+                          <button
+                            onClick={() => requestGpsPermission(q.id)}
+                            disabled={gpsBusy === q.id}
+                            className="flex items-center gap-1 rounded-sm bg-water px-2.5 py-1 font-mono text-[10.5px] font-semibold text-ground shadow-sm hover:opacity-90 disabled:opacity-50"
+                          >
+                            <span>📍</span>
+                            {gpsBusy === q.id ? "Requesting access…" : "Allow Location Access"}
+                          </button>
+                          <button
+                            onClick={() => onPickOnMap?.(q.id)}
+                            className="rounded-sm border border-line bg-raised px-2 py-1 font-mono text-[10px] text-muted hover:text-ink"
+                          >
+                            Pick on Map Instead
+                          </button>
+                        </div>
+                        {gpsInfo?.error && (
+                          <p className="mt-1.5 font-mono text-[10px] text-band2">
+                            {gpsInfo.error}
+                          </p>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 )}
               </li>

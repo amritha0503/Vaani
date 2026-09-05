@@ -290,6 +290,17 @@ function OverridePanel({ call }) {
       {call.override !== 0 && call.override != null && (
         <span className="font-mono text-[10px] text-band2">operator-adjusted</span>
       )}
+      <button
+        onClick={async () => {
+          if (window.confirm("Remove this call from the queue?")) {
+            await api.removeCall(call.id);
+          }
+        }}
+        title="Remove / dismiss this call from the board"
+        className="rounded-sm border border-line bg-raised px-2 py-1 font-mono text-[10.5px] text-muted transition-colors hover:border-band3 hover:text-band3"
+      >
+        ✕ remove
+      </button>
       <span className="ml-auto font-mono text-[9.5px] text-muted">[ / ] to override</span>
     </div>
   );
@@ -414,7 +425,12 @@ export default function DetailPanel({ call, route, routeState, onPickOnMap }) {
             </>
           )}
         </Line>
-        <Line label="transcript">
+        {call.text_english && call.text_english !== call.transcript && (
+          <Line label="english">
+            <span className="font-medium text-ink">{call.text_english}</span>
+          </Line>
+        )}
+        <Line label={call.text_english && call.text_english !== call.transcript ? "original" : "transcript"}>
           <TranscriptEditor call={call} />
           {lowConfidence && (
             <p className="mt-1 text-band2">
