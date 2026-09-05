@@ -1,0 +1,53 @@
+{
+  "model_ver": "lgbm-s1-2018kerala-v1",
+  "features": [
+    "hand_m",
+    "slope_deg",
+    "twi",
+    "dist_drain_m"
+  ],
+  "monotone_constraints": {
+    "hand_m": -1,
+    "slope_deg": -1,
+    "twi": 1,
+    "dist_drain_m": -1
+  },
+  "design": "presence/absence 1:1, thinned to 300 m",
+  "n_train": 426,
+  "n_positive": 213,
+  "natural_prevalence": 0.00472,
+  "prior_shift_to_event_probability": -5.351,
+  "cv": "GroupKFold 5 x 2 km blocks",
+  "blocks": 96,
+  "fold_auc": [
+    0.867,
+    0.912,
+    0.885,
+    0.89,
+    0.871
+  ],
+  "blocked_auc": 0.877,
+  "blocked_brier": 0.1127,
+  "blocked_brier_uncalibrated": 0.1126,
+  "baseline_expertset": {
+    "auc": 0.87,
+    "brier": 0.1269
+  },
+  "baseline_hand_only_auc": 0.872,
+  "feature_importance_gain": {
+    "hand_m": 0.89,
+    "slope_deg": 0.007,
+    "twi": 0.015,
+    "dist_drain_m": 0.088
+  },
+  "labels": {
+    "flood_scene": "S1A_IW_GRDH_1SDV_20180821T004044_20180821T004109_023337_0289D5_rtc",
+    "dry_scene": "S1A_IW_GRDH_1SDV_20180117T004037_20180117T004102_020187_02270C_rtc",
+    "relative_orbit": "165",
+    "water_db": "-16.0",
+    "drop_db": "2.0"
+  },
+  "rain_72h_mm": 250.0,
+  "seed": 20180821,
+  "trained_at": "2026-09-05T10:06:07"
+}

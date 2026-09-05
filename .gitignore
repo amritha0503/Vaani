@@ -1,0 +1,10 @@
+# Secrets. Never commit real Twilio credentials.
+.env
+
+# Local state, not source.
+vaani.db
+__pycache__/
+*.pyc
+data/upload_*
+data/turn_*
+data/sim_*

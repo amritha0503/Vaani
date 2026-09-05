@@ -1,0 +1,5484 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-05T02:33:21Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 343714970,
+  "lat": 10.0971798,
+  "lon": 76.4511132,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "vengola govt homoeo dispensary"
+  }
+},
+{
+  "type": "node",
+  "id": 343719430,
+  "lat": 10.1147548,
+  "lon": 76.4778152,
+  "tags": {
+    "is_in": "Ernakulam;Kerala;KL;India;IN",
+    "is_in:country": "india",
+    "is_in:district": "Ernakulam",
+    "is_in:state": "kerala",
+    "name": "Perumbavoor",
+    "name:ar": "بيرمبافور",
+    "name:hi": "पेरुमबावूर",
+    "name:kn": "ಪೆರಂಬವೂರ್",
+    "name:ml": "പെരുമ്പാവൂർ",
+    "name:ru": "Перумбавур",
+    "name:ta": "பெரும்பாவூர்",
+    "name:te": "పెరుంబవూరు",
+    "place": "town",
+    "population": "5000",
+    "postal_code": "683500",
+    "wikidata": "Q2737591",
+    "wikimedia_commons": "Category:Perumbavoor",
+    "wikipedia": "en:Perumbavoor"
+  }
+},
+{
+  "type": "node",
+  "id": 594981675,
+  "lat": 10.1862860,
+  "lon": 76.5039430,
+  "tags": {
+    "alt_name": "Malayatur",
+    "name": "Malayattoor",
+    "name:ml": "മലയാറ്റൂർ",
+    "place": "village",
+    "wikidata": "Q6741656",
+    "wikimedia_commons": "Category:Malayattoor",
+    "wikipedia": "en:Malayattoor"
+  }
+},
+{
+  "type": "node",
+  "id": 1111438312,
+  "lat": 10.0250461,
+  "lon": 76.4496282,
+  "tags": {
+    "is_in": "Ernakulam;Kerala;KL;India;IN",
+    "is_in:country": "india",
+    "is_in:district": "Ernakulam",
+    "is_in:state": "kerala",
+    "name": "Pattimattom",
+    "name:ml": "പട്ടിമറ്റം",
+    "place": "village",
+    "wikidata": "Q7148583",
+    "wikipedia": "en:Pattimattom"
+  }
+},
+{
+  "type": "node",
+  "id": 1195407620,
+  "lat": 10.0947028,
+  "lon": 76.5575724,
+  "tags": {
+    "is_in": "Ernakulam;Kerala;KL;India;IN",
+    "is_in:country": "india",
+    "is_in:district": "Ernakulam",
+    "is_in:state": "kerala",
+    "name": "Odakkali",
+    "name:ml": "ഒടക്കാലി",
+    "place": "village",
+    "wikidata": "Q7077238",
+    "wikipedia": "en:Odakkali"
+  }
+},
+{
+  "type": "node",
+  "id": 1195407672,
+  "lat": 10.1015078,
+  "lon": 76.5416684,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Cherukunnam",
+    "name:ml": "ചെറുകുന്നം",
+    "network": "RTO17",
+    "place": "village",
+    "public_transport": "stop_position"
+  }
+},
+{
+  "type": "node",
+  "id": 2173763631,
+  "lat": 10.1710329,
+  "lon": 76.4289815,
+  "tags": {
+    "is_in": "Ernakulam;Kerala;KL;India;IN",
+    "is_in:country": "india",
+    "is_in:district": "Ernakulam",
+    "is_in:state": "kerala",
+    "name": "Mattoor",
+    "name:ml": "മറ്റൂർ",
+    "place": "village",
+    "wikidata": "Q6791867",
+    "wikipedia": "en:Mattoor"
+  }
+},
+{
+  "type": "node",
+  "id": 2712319325,
+  "lat": 10.0378334,
+  "lon": 76.4124754,
+  "tags": {
+    "amenity": "place_of_worship",
+    "check_date": "2026-01-29",
+    "name": "St. Peters & St. Pauls Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 2712321384,
+  "lat": 10.0368297,
+  "lon": 76.4069394,
+  "tags": {
+    "name": "Kizhakkambalam",
+    "name:ml": "കിഴക്കമ്പലം",
+    "place": "village",
+    "wikidata": "Q6419187",
+    "wikipedia": "en:Kizhakkambalam"
+  }
+},
+{
+  "type": "node",
+  "id": 2905549875,
+  "lat": 10.0855565,
+  "lon": 76.5046492,
+  "tags": {
+    "comment": "not exact location",
+    "is_in": "Kerala;KL;India;IN",
+    "name": "Pulluvazhi",
+    "name:ml": "പുല്ലുവഴി",
+    "place": "village",
+    "wikidata": "Q19678302",
+    "wikipedia": "en:Pulluvazhy"
+  }
+},
+{
+  "type": "node",
+  "id": 3864816858,
+  "lat": 10.0256394,
+  "lon": 76.4033185,
+  "tags": {
+    "name": "Pallikkara",
+    "name:ml": "പള്ളിക്കര",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 3875688705,
+  "lat": 10.0201201,
+  "lon": 76.4721192,
+  "tags": {
+    "name": "Valamboor",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4267894701,
+  "lat": 10.0989155,
+  "lon": 76.5169097,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Perakkattu Kshetram",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 4267897701,
+  "lat": 10.0987360,
+  "lon": 76.5205092,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Koottumadam Mahadeva Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 4683154377,
+  "lat": 10.1628794,
+  "lon": 76.4872377,
+  "tags": {
+    "name": "Koovappady",
+    "name:ml": "കൂവപ്പടി",
+    "place": "village",
+    "wikidata": "Q6430878",
+    "wikipedia": "en:Koovappady"
+  }
+},
+{
+  "type": "node",
+  "id": 4707065380,
+  "lat": 10.1666687,
+  "lon": 76.4627827,
+  "tags": {
+    "name": "Onampilly",
+    "name:ml": "ഓണമ്പിള്ളി",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 4812781526,
+  "lat": 10.1389329,
+  "lon": 76.4535590,
+  "tags": {
+    "alt_name": "Chelamattam",
+    "name": "Chelamattom",
+    "name:ml": "ചേലാമറ്റം",
+    "place": "neighbourhood",
+    "wikidata": "Q5089802",
+    "wikipedia": "en:Chelamattom"
+  }
+},
+{
+  "type": "node",
+  "id": 4812787047,
+  "lat": 10.1370803,
+  "lon": 76.4546601,
+  "tags": {
+    "alt_name": "Chelamattom Chowazhcha Kavu Bhagavathi Temple",
+    "amenity": "place_of_worship",
+    "name": "Chelamattom Kizhakkan Chowa Bhagavathi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 5519968510,
+  "lat": 10.1669591,
+  "lon": 76.4034673,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Thiru Nayathode Siva Narayana Temple തിരു നായത്തോട് ശിവ നാരായണ ക്ഷേത്രം",
+    "religion": "hindu",
+    "wikidata": "Q28172762",
+    "wikimedia_commons": "Category:Thirunayathode Siva Narayana Temple",
+    "wikipedia": "en:Thiru Nayathode Siva Narayana Temple"
+  }
+},
+{
+  "type": "node",
+  "id": 5755828848,
+  "lat": 10.0585226,
+  "lon": 76.4180911,
+  "tags": {
+    "addr:city": "Vilangu Post",
+    "addr:housenumber": "Oorakkadu",
+    "addr:postcode": "683561",
+    "addr:street": "Murivilangu",
+    "amenity": "place_of_worship",
+    "fixme": "The 'addr:housenumber' tag seems wrong and should be corrected",
+    "name": "St.Thomas Jacobite Syrian Church Oorakkadu",
+    "religion": "christian",
+    "service_times": "\"Sunday Morning Prayer @ 07.00 AM; Holy Mass @ 08:00AM\""
+  }
+},
+{
+  "type": "node",
+  "id": 5757830263,
+  "lat": 10.0366621,
+  "lon": 76.4162776,
+  "tags": {
+    "amenity": "bus_station",
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Molekkurish Bus Stop",
+    "network": "RTO17",
+    "operator": "private,ksrtc",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 5853078152,
+  "lat": 10.0345042,
+  "lon": 76.4301896,
+  "tags": {
+    "addr:street": "Ernakulam - Thekkady Road",
+    "amenity": "school",
+    "entrance": "yes",
+    "name": "Bethlehem girls high school",
+    "operator": "dayara",
+    "operator:type": "private"
+  }
+},
+{
+  "type": "node",
+  "id": 5877797378,
+  "lat": 10.1664343,
+  "lon": 76.5431207,
+  "tags": {
+    "name": "Chooramudy",
+    "name:ml": "ചൂരമുടി",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 5883316481,
+  "lat": 10.1154616,
+  "lon": 76.4794886,
+  "tags": {
+    "amenity": "marketplace",
+    "name": "Vegetable Market"
+  }
+},
+{
+  "type": "node",
+  "id": 6278237331,
+  "lat": 10.1703795,
+  "lon": 76.4923284,
+  "tags": {
+    "alt_name": "Thottuvai",
+    "name": "Thottuva",
+    "name:ml": "തോട്ടുവ",
+    "place": "village",
+    "wikidata": "Q7796947",
+    "wikipedia": "en:Thottuva"
+  }
+},
+{
+  "type": "node",
+  "id": 6726732347,
+  "lat": 10.1111149,
+  "lon": 76.4794514,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "orthodox",
+    "name": "പെരുമ്പാവൂർ ബെഥേൽ സുലൊക്കൊ ഓർത്തഡോക്സ് ചർച്ച്",
+    "name:en": "Perumbavoor Bethel Suloko Orthodox Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 6728794016,
+  "lat": 10.0219949,
+  "lon": 76.4016416,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "orthodox",
+    "name": "Malekkurish Palli",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 6810765380,
+  "lat": 10.1109989,
+  "lon": 76.5218430,
+  "tags": {
+    "addr:city": "Kuruppampady",
+    "addr:street": "Aluva - Munnar Road",
+    "amenity": "place_of_worship",
+    "denomination": "orthodox",
+    "name": "St. Marys Jacobite Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 6897373238,
+  "lat": 10.0476555,
+  "lon": 76.5317297,
+  "tags": {
+    "amenity": "place_of_worship",
+    "description": "church",
+    "name": "ST George Church Mannoor",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 6941153970,
+  "lat": 10.1177976,
+  "lon": 76.4794051,
+  "tags": {
+    "addr:city": "perumbavoor",
+    "amenity": "place_of_worship",
+    "name": "bhajanamadhom",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 6950282037,
+  "lat": 10.1102479,
+  "lon": 76.4757764,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "P P Road,Perumbavoor",
+    "addr:postcode": "683542",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Vathiyayath Hospital, Perumbavoor",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6950305591,
+  "lat": 10.1145519,
+  "lon": 76.4741792,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Perumbavoor",
+    "addr:postcode": "683542",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "name": "Luke Memorial Eye Hospital",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6950469928,
+  "lat": 10.1643998,
+  "lon": 76.4363587,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Chowara Road, Kalady",
+    "addr:postcode": "683574",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "name": "P.M.M. Hsopital",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6951412629,
+  "lat": 10.1142952,
+  "lon": 76.4726996,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "A.M. Road, Perumbavoor, Kunnathunadu",
+    "addr:postcode": "683542",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "fax": "2590712",
+    "healthcare": "hospital",
+    "name": "Sanjoe Hospital",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6951506913,
+  "lat": 10.1125425,
+  "lon": 76.4807714,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Perumbavoor",
+    "addr:postcode": "683542",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "name": "S. N. Mission Hospital",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6953070185,
+  "lat": 10.1111694,
+  "lon": 76.4815673,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Opposite K.S.R.T.C Bus Station, Perumbavoor",
+    "addr:postcode": "683542",
+    "addr:state": "Kerala",
+    "addr:street": "old muvattupuzha road",
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "M.V. Joseph Memorial Hospital",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6953866717,
+  "lat": 10.0641061,
+  "lon": 76.5204674,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Keezhillam P.O., Perumbavoor",
+    "addr:postcode": "683541",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Parathuvayalil Hospital",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6957624930,
+  "lat": 10.1864757,
+  "lon": 76.4993450,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Near St. Thomas School, Kalady - Malayattoor Road, Malayattoor",
+    "addr:postcode": "683574",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "fax": "2468966",
+    "name": "St. Thomas Hospital",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6965828313,
+  "lat": 10.1446050,
+  "lon": 76.4246723,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Kanjoor Grama Panchayat",
+    "addr:postcode": "683575",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Vimala Hospital, Ernakulam",
+    "operator:type": "private",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6966008682,
+  "lat": 10.0262289,
+  "lon": 76.4479498,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Pattimattom",
+    "addr:postcode": "683562",
+    "addr:state": "Kerala",
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "General Clinic",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6966379110,
+  "lat": 10.1169845,
+  "lon": 76.4726470,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "A.M.Road,Near Taluk Hospital",
+    "addr:postcode": "683542",
+    "addr:state": "Kerala",
+    "amenity": "clinic",
+    "name": "Lakshmi Homeo Clinic",
+    "source": "OpenGovernmentData"
+  }
+},
+{
+  "type": "node",
+  "id": 6992698474,
+  "lat": 10.1835507,
+  "lon": 76.4455289,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Patteswaram Devi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 6992704226,
+  "lat": 10.1753965,
+  "lon": 76.4461449,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "roman_catholic",
+    "name": "St.Antony's Kapela",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 6996400841,
+  "lat": 10.1521369,
+  "lon": 76.4509199,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Sree Narayana Gurudeva Mandapam",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 6999179725,
+  "lat": 10.1600415,
+  "lon": 76.4420620,
+  "tags": {
+    "addr:city": "KALADY",
+    "addr:postcode": "683550",
+    "addr:street": "THANNIPUZHA",
+    "amenity": "place_of_worship",
+    "denomination": "roman_catholic",
+    "name": "Saint Martin",
+    "religion": "christian",
+    "service_times": "ALWAYS"
+  }
+},
+{
+  "type": "node",
+  "id": 7211827242,
+  "lat": 10.1715820,
+  "lon": 76.4433920,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "jehovahs_witness",
+    "name": "Kingdom Hall of Jehovah's Witnesses",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7227134511,
+  "lat": 10.1147368,
+  "lon": 76.4767276,
+  "tags": {
+    "addr:city": "Perumbavoor",
+    "addr:postcode": "683542",
+    "addr:street": "Aluva - Munnar Road",
+    "amenity": "place_of_worship",
+    "name": "town juma masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7227135607,
+  "lat": 10.1711664,
+  "lon": 76.4176140,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "St.Antony's Grotto"
+  }
+},
+{
+  "type": "node",
+  "id": 7274208480,
+  "lat": 10.0277869,
+  "lon": 76.4054182,
+  "tags": {
+    "addr:city": "ernakulam",
+    "addr:street": "pallikara",
+    "amenity": "place_of_worship",
+    "check_date": "2026-01-08",
+    "name": "kumarapuram durga temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7334014233,
+  "lat": 10.1686120,
+  "lon": 76.4351163,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "adi shankara",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7362131517,
+  "lat": 10.1451328,
+  "lon": 76.4261682,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "roman_catholic",
+    "name": "St sebstian's Chapel Kanjoor",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7362607380,
+  "lat": 10.1264985,
+  "lon": 76.4268870,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "government health center"
+  }
+},
+{
+  "type": "node",
+  "id": 7362800641,
+  "lat": 10.0260500,
+  "lon": 76.4487527,
+  "tags": {
+    "amenity": "hospital",
+    "check_date": "2026-02-07",
+    "healthcare": "hospital",
+    "name": "Holycross Hospital",
+    "operator:type": "private"
+  }
+},
+{
+  "type": "node",
+  "id": 7362800642,
+  "lat": 10.0257347,
+  "lon": 76.4481762,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Kaithakkad Juma Masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7363104657,
+  "lat": 10.1662264,
+  "lon": 76.4383849,
+  "tags": {
+    "amenity": "marketplace",
+    "name": "Kalady Market"
+  }
+},
+{
+  "type": "node",
+  "id": 7366838822,
+  "lat": 10.1245457,
+  "lon": 76.4207864,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Kuttamana Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7464620683,
+  "lat": 10.1655341,
+  "lon": 76.4380153,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "roman_catholic",
+    "name": "Kapela"
+  }
+},
+{
+  "type": "node",
+  "id": 7464952078,
+  "lat": 10.1722960,
+  "lon": 76.4410929,
+  "tags": {
+    "addr:street": "Puthankavu Canal Road",
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "Dr sunnil"
+  }
+},
+{
+  "type": "node",
+  "id": 7465799121,
+  "lat": 10.0253084,
+  "lon": 76.4486962,
+  "tags": {
+    "amenity": "school",
+    "name": "Jama-Ath U.P School"
+  }
+},
+{
+  "type": "node",
+  "id": 7469428862,
+  "lat": 10.1172604,
+  "lon": 76.4923710,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Marthoma Church pattal",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7470137411,
+  "lat": 10.1106649,
+  "lon": 76.5177301,
+  "tags": {
+    "amenity": "police",
+    "name": "Kuruppampady Police Station"
+  }
+},
+{
+  "type": "node",
+  "id": 7470219633,
+  "lat": 10.1140229,
+  "lon": 76.4703715,
+  "tags": {
+    "amenity": "marketplace",
+    "name": "landrover marketing"
+  }
+},
+{
+  "type": "node",
+  "id": 7470219653,
+  "lat": 10.1166964,
+  "lon": 76.4735432,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "All Saints Church of South India (CSI) Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7470219659,
+  "lat": 10.1160891,
+  "lon": 76.4748226,
+  "tags": {
+    "amenity": "college",
+    "name": "Premier College"
+  }
+},
+{
+  "type": "node",
+  "id": 7470225294,
+  "lat": 10.1145127,
+  "lon": 76.4769979,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "dr shafi ent clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 7470468554,
+  "lat": 10.0715352,
+  "lon": 76.5116002,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Thaikkarachira Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7470468557,
+  "lat": 10.0699481,
+  "lon": 76.5136977,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Sharon Fellowship Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7470468562,
+  "lat": 10.0661795,
+  "lon": 76.5170323,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "st thomas parish hall keezhillam"
+  }
+},
+{
+  "type": "node",
+  "id": 7470468564,
+  "lat": 10.0656566,
+  "lon": 76.5175795,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "st thomas church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7472699459,
+  "lat": 10.1865284,
+  "lon": 76.4822625,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Gurudeva Temple Malayattoor West, ഗുരുദേവ ക്ഷേത്രം",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7472717775,
+  "lat": 10.1188936,
+  "lon": 76.4903118,
+  "tags": {
+    "addr:city": "Perumbavoor",
+    "addr:postcode": "683543",
+    "addr:street": "Small Road",
+    "amenity": "place_of_worship",
+    "name": "Aalpara Devi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7472998051,
+  "lat": 10.1124716,
+  "lon": 76.4226653,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "kunnuvazhy thaikav",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7472998061,
+  "lat": 10.1169024,
+  "lon": 76.4287003,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "pothiyil sree krishna temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7472998065,
+  "lat": 10.1185184,
+  "lon": 76.4319297,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "manjappetty mahavishnu temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7472998066,
+  "lat": 10.1188247,
+  "lon": 76.4335014,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "manjappetty central masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7472998074,
+  "lat": 10.1193924,
+  "lon": 76.4390089,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "pallipram west juma masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7472998082,
+  "lat": 10.1173486,
+  "lon": 76.4449849,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "kaniyapuram abdurrasak valiyullahi maqam",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7472998084,
+  "lat": 10.1171110,
+  "lon": 76.4450600,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "mudickal jumua masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7473577307,
+  "lat": 10.0995280,
+  "lon": 76.5041335,
+  "tags": {
+    "addr:street": "Iringole",
+    "amenity": "place_of_worship",
+    "name": "St Gregorious Jacobite Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7475291099,
+  "lat": 10.1386844,
+  "lon": 76.4309998,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Primary Health Centre,Kanjoor",
+    "operator": "Department of Health and Family Welfare",
+    "operator:type": "government",
+    "ref": "2280",
+    "type": "9"
+  }
+},
+{
+  "type": "node",
+  "id": 7475847726,
+  "lat": 10.0253766,
+  "lon": 76.4427780,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Badhar Musjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7476509024,
+  "lat": 10.1032696,
+  "lon": 76.5102815,
+  "tags": {
+    "addr:city": "KURUPPAMPADY",
+    "addr:postcode": "683545",
+    "addr:street": "PEECHINAMUGAL ROAD",
+    "amenity": "college",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "Baptist Bible College"
+  }
+},
+{
+  "type": "node",
+  "id": 7476568311,
+  "lat": 10.0195653,
+  "lon": 76.5717298,
+  "tags": {
+    "amenity": "place_of_worship",
+    "description": "madrassa,hall",
+    "name": "Thattuparamb juma masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7477093482,
+  "lat": 10.1041016,
+  "lon": 76.5097840,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Iringole Csi Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7481947111,
+  "lat": 10.0454673,
+  "lon": 76.5334432,
+  "tags": {
+    "name": "Mannoor",
+    "name:ml": "മണ്ണൂർ",
+    "place": "village",
+    "wikidata": "Q28173039",
+    "wikipedia": "en:Mannoor, Ernakulam"
+  }
+},
+{
+  "type": "node",
+  "id": 7484101014,
+  "lat": 10.0523465,
+  "lon": 76.5112765,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Kuzhoor Bhaghavathy Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7484137939,
+  "lat": 10.0604809,
+  "lon": 76.5064919,
+  "tags": {
+    "name": "Airapuram",
+    "name:ml": "ഐരാപുരം",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 7484142532,
+  "lat": 10.0603914,
+  "lon": 76.5047247,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Niravath Upasana Moorthi ( പരദേവത ക്ഷേത്രം)",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7485573209,
+  "lat": 10.0377792,
+  "lon": 76.4108774,
+  "tags": {
+    "amenity": "marketplace",
+    "name": "Kaizhakkambalam Market"
+  }
+},
+{
+  "type": "node",
+  "id": 7487908008,
+  "lat": 10.1485182,
+  "lon": 76.4991036,
+  "tags": {
+    "addr:postcode": "683544",
+    "addr:street": "akanad road",
+    "amenity": "place_of_worship",
+    "name": "karippurathu kavu",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7488853720,
+  "lat": 10.0243328,
+  "lon": 76.4033938,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Town Masjid Pallikara",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7488853777,
+  "lat": 10.0251984,
+  "lon": 76.4035266,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Philadelphia Pentecost Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7489096349,
+  "lat": 10.1617069,
+  "lon": 76.4063319,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Al Huda juma masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7495838184,
+  "lat": 10.1528325,
+  "lon": 76.4821909,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "ayyappa temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7498711487,
+  "lat": 10.0894302,
+  "lon": 76.4206156,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Thadiyitta Paramb Juma Masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7498711592,
+  "lat": 10.0922161,
+  "lon": 76.4406096,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Pookkulam Sree Subrahmanya swami Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7500281324,
+  "lat": 10.1139276,
+  "lon": 76.4625256,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Plakattuthazham Bhagavathi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7500281364,
+  "lat": 10.1109761,
+  "lon": 76.4756742,
+  "tags": {
+    "amenity": "marketplace",
+    "name": "Bull Market"
+  }
+},
+{
+  "type": "node",
+  "id": 7507337998,
+  "lat": 10.0837011,
+  "lon": 76.4660951,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bethseda mental health care center"
+  }
+},
+{
+  "type": "node",
+  "id": 7512040157,
+  "lat": 10.0191440,
+  "lon": 76.5502831,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "thablig juma masjid(Noorul huda juma masjid)",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 7525960130,
+  "lat": 10.1851526,
+  "lon": 76.4464779,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "pallipurath kavu",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 7673015521,
+  "lat": 10.1666308,
+  "lon": 76.4390495,
+  "tags": {
+    "name": "Kalady",
+    "name:ar": "كالادي",
+    "name:hi": "कालडी",
+    "name:kn": "ಕಾಲಡಿ",
+    "name:ml": "കാലടി",
+    "name:ta": "காலடி",
+    "name:te": "కాలడి",
+    "place": "town",
+    "wikidata": "Q3595324",
+    "wikimedia_commons": "Category:Kalady",
+    "wikipedia": "en:Kalady"
+  }
+},
+{
+  "type": "node",
+  "id": 7726206260,
+  "lat": 10.1158370,
+  "lon": 76.4805460,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Perumbavoor",
+    "addr:postcode": "683542",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "name": "Nangelil Hospital",
+    "source": "Local Knowledge"
+  }
+},
+{
+  "type": "node",
+  "id": 7726206272,
+  "lat": 10.1130831,
+  "lon": 76.4757260,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Kolenchery Road, Perumbavoor, Jyothi Junction",
+    "addr:postcode": "683542",
+    "addr:state": "Kerala",
+    "amenity": "clinic",
+    "name": "Janatha Homoeopathic Clinic & Research Centre",
+    "source": "Local Knowledge"
+  }
+},
+{
+  "type": "node",
+  "id": 7726206273,
+  "lat": 10.0888995,
+  "lon": 76.4682171,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Vengola",
+    "addr:postcode": "683556",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "name": "Ideal Mind Care Hospital",
+    "source": "Local Knowledge"
+  }
+},
+{
+  "type": "node",
+  "id": 7726206279,
+  "lat": 10.1149890,
+  "lon": 76.4813760,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Perumbavoor",
+    "addr:postcode": "683542",
+    "addr:state": "Kerala",
+    "amenity": "clinic",
+    "name": "Metro Clinic",
+    "source": "Local Knowledge"
+  }
+},
+{
+  "type": "node",
+  "id": 7726206280,
+  "lat": 10.1103550,
+  "lon": 76.4809510,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:postcode": "683542",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "name": "Ayurgrace Ayurveda Hospital",
+    "source": "Local Knowledge"
+  }
+},
+{
+  "type": "node",
+  "id": 7726206302,
+  "lat": 10.1123147,
+  "lon": 76.4611705,
+  "tags": {
+    "addr:district": "Ernakulam",
+    "addr:full": "Marampally, Perumbavoor",
+    "addr:postcode": "683547",
+    "addr:state": "Kerala",
+    "amenity": "hospital",
+    "name": "Badriya Holistic Hospital",
+    "source": "Local Knowledge"
+  }
+},
+{
+  "type": "node",
+  "id": 7796196166,
+  "lat": 10.2000693,
+  "lon": 76.5040551,
+  "tags": {
+    "addr:city": "Malayattoor",
+    "addr:housenumber": "Kadappara",
+    "addr:postcode": "683587",
+    "addr:street": "Malayattoor Kadappara Road",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "healthcare:speciality": "general",
+    "name": "Sparsam Hospital"
+  }
+},
+{
+  "type": "node",
+  "id": 8041361388,
+  "lat": 10.1457602,
+  "lon": 76.4724560,
+  "tags": {
+    "addr:city": "koovappady",
+    "addr:housenumber": "ayathupady",
+    "addr:postcode": "683544",
+    "addr:street": "Vallam - Kodanad Road",
+    "amenity": "place_of_worship",
+    "denomination": "roman_catholic",
+    "name": "olph church ayathupady",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 8095587422,
+  "lat": 10.1549387,
+  "lon": 76.4438004,
+  "tags": {
+    "addr:city": "Ernakulam",
+    "addr:housenumber": "16/50",
+    "addr:postcode": "683550",
+    "addr:street": "Okkal",
+    "amenity": "hospital",
+    "description": "Govt Homoeo Dispensary, Okkal",
+    "email": "ghdokkal@kerala.gov.in",
+    "healthcare": "hospital",
+    "healthcare:speciality": "general;Homoeopathy",
+    "image": "https://photos.app.goo.gl/fsLQoy6CB8DdjzPr5",
+    "name": "Govt Homoeo Dispensary Okkal",
+    "operator": "Government",
+    "operator:type": "government",
+    "phone": "+91-4842462526"
+  }
+},
+{
+  "type": "node",
+  "id": 8113939043,
+  "lat": 10.0953279,
+  "lon": 76.4490840,
+  "tags": {
+    "addr:city": "Near Perumbavoor",
+    "addr:postcode": "683547",
+    "addr:street": "M H Kavala",
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "yes",
+    "name": "govt homoeo dispensary vengola",
+    "operator": "Medical officer",
+    "operator:type": "government"
+  }
+},
+{
+  "type": "node",
+  "id": 8267199356,
+  "lat": 10.1083627,
+  "lon": 76.5600732,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "tiruvallazhappan temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8292457748,
+  "lat": 10.1126055,
+  "lon": 76.5160764,
+  "tags": {
+    "addr:street": "Kuruppampadi",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Maria Hospital"
+  }
+},
+{
+  "type": "node",
+  "id": 8320534718,
+  "lat": 10.1094664,
+  "lon": 76.5527690,
+  "tags": {
+    "amenity": "school",
+    "name": "Asamannoor Government Upper Primary School",
+    "survey:date": "2021-01-14"
+  }
+},
+{
+  "type": "node",
+  "id": 8323131117,
+  "lat": 10.1224074,
+  "lon": 76.5482606,
+  "tags": {
+    "amenity": "marketplace",
+    "name": "Chandha",
+    "survey:date": "2021-01-15"
+  }
+},
+{
+  "type": "node",
+  "id": 8323396827,
+  "lat": 10.0917417,
+  "lon": 76.5665750,
+  "tags": {
+    "amenity": "school",
+    "name": "Special schools",
+    "survey:date": "2021-01-15"
+  }
+},
+{
+  "type": "node",
+  "id": 8396867273,
+  "lat": 10.0394239,
+  "lon": 76.5797931,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "oorakuzhy masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 8396883704,
+  "lat": 10.0392711,
+  "lon": 76.5794773,
+  "tags": {
+    "amenity": "language_school",
+    "name": "HIM ooramkuzhy"
+  }
+},
+{
+  "type": "node",
+  "id": 8477870097,
+  "lat": 10.1279639,
+  "lon": 76.4776515,
+  "tags": {
+    "addr:city": "perumbavoor",
+    "addr:postcode": "683543",
+    "addr:street": "kanjirakkadu",
+    "amenity": "place_of_worship",
+    "name": "chakkarakkattu kavu",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8477870102,
+  "lat": 10.1269622,
+  "lon": 76.4776773,
+  "tags": {
+    "addr:city": "perumbavoor",
+    "addr:postcode": "683543",
+    "addr:street": "Kanjirakkadu",
+    "amenity": "school",
+    "name": "Goverment Lower Primary School, Kanjirakkadu"
+  }
+},
+{
+  "type": "node",
+  "id": 8530423799,
+  "lat": 10.1127815,
+  "lon": 76.5199792,
+  "tags": {
+    "addr:postcode": "683545",
+    "name": "Kuruppampady",
+    "name:ml": "കുറുപ്പുംപടി",
+    "place": "village",
+    "wikidata": "Q6447477",
+    "wikimedia_commons": "Category:Kuruppampady",
+    "wikipedia": "en:Kuruppampady"
+  }
+},
+{
+  "type": "node",
+  "id": 8779282340,
+  "lat": 10.1196804,
+  "lon": 76.5201192,
+  "tags": {
+    "CovidVaccineCenterId": "155294",
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "Rayamangalam FHC"
+  }
+},
+{
+  "type": "node",
+  "id": 8836005491,
+  "lat": 10.1102860,
+  "lon": 76.4825520,
+  "tags": {
+    "addr:city": "Perumbavoor",
+    "addr:postcode": "683542",
+    "addr:street": "Perumbavoor-Nellimolam Road",
+    "amenity": "place_of_worship",
+    "name": "Noorul Hudha Juma Masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 8850311018,
+  "lat": 10.0531854,
+  "lon": 76.4314872,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "mosque",
+    "religion": "muslim",
+    "survey:date": "2021-06-20"
+  }
+},
+{
+  "type": "node",
+  "id": 8864658959,
+  "lat": 10.0835067,
+  "lon": 76.4768328,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Bharadevatha Kavu",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8867974445,
+  "lat": 10.1274422,
+  "lon": 76.4290221,
+  "tags": {
+    "addr:postcode": "683575",
+    "amenity": "place_of_worship",
+    "name": "Thrikanikaavu Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8868003233,
+  "lat": 10.1287912,
+  "lon": 76.4291850,
+  "tags": {
+    "addr:city": "Ernakulam",
+    "addr:postcode": "683575",
+    "addr:street": "Thekkumbhagom",
+    "amenity": "place_of_worship",
+    "name": "Vellarappilly Central Juma Masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 8868245305,
+  "lat": 10.1337312,
+  "lon": 76.4460334,
+  "tags": {
+    "addr:postcode": "683575",
+    "amenity": "place_of_worship",
+    "name": "St. George Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 8868269598,
+  "lat": 10.1364100,
+  "lon": 76.4372025,
+  "tags": {
+    "addr:city": "Aluva",
+    "addr:postcode": "683575",
+    "amenity": "place_of_worship",
+    "name": "Siva Temple,Chirangara,Puthiyedam",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8868428663,
+  "lat": 10.1241114,
+  "lon": 76.4525442,
+  "tags": {
+    "addr:housenumber": "Parappuram Mudikkal kadavu Rd, Kizhakkumbhagom, Kerala 683575",
+    "addr:postcode": "683575",
+    "amenity": "place_of_worship",
+    "name": "Janmamkulangara Bhadrakali Temple Parappuram",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8868485465,
+  "lat": 10.1337314,
+  "lon": 76.4496563,
+  "tags": {
+    "addr:postcode": "683575",
+    "amenity": "place_of_worship",
+    "name": "Konathukudy Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8868519954,
+  "lat": 10.1336503,
+  "lon": 76.4541639,
+  "tags": {
+    "addr:housenumber": "Kizhakkumbhagom, Kerala 683575",
+    "addr:postcode": "683575",
+    "amenity": "place_of_worship",
+    "name": "Koyikkal Bhagavathi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8868631476,
+  "lat": 10.1227013,
+  "lon": 76.4258070,
+  "tags": {
+    "addr:housenumber": "Thekkumbhagom, Kerala 683575",
+    "addr:postcode": "683575",
+    "amenity": "place_of_worship",
+    "name": "Valiyaveettil Mookambika Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8868632609,
+  "lat": 10.1255224,
+  "lon": 76.4449413,
+  "tags": {
+    "addr:housenumber": "TN Puram Rd, Parappuram, Kizhakkumbhagom, Kerala 683575",
+    "addr:postcode": "683575",
+    "amenity": "place_of_worship",
+    "name": "Shirdi Sai Mandir",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8868765202,
+  "lat": 10.1355567,
+  "lon": 76.4308578,
+  "tags": {
+    "addr:city": "Ernakulam",
+    "addr:housenumber": "Kanjoor - Parappuram Rd, Thekkumbhagom, Kerala 683575",
+    "addr:postcode": "683575",
+    "addr:street": "res",
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "healthcare:speciality": "homeopathy",
+    "name": "Karthika Homeopathic Clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 8882455928,
+  "lat": 10.1362873,
+  "lon": 76.4036224,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Family Health Centre Chowara",
+    "ref": "1479",
+    "type": "75"
+  }
+},
+{
+  "type": "node",
+  "id": 8883197837,
+  "lat": 10.0739890,
+  "lon": 76.5030046,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Chakkarakkavu Bhagavathy Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8888026104,
+  "lat": 10.1323802,
+  "lon": 76.5348112,
+  "tags": {
+    "addr:city": "Vengoor",
+    "addr:postcode": "683546",
+    "addr:street": "Kuruppampady Panamkuzhy Road",
+    "amenity": "place_of_worship",
+    "denomination": "baptist",
+    "name": "ipc zion church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 8889305617,
+  "lat": 10.1224868,
+  "lon": 76.5577395,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "St Mary's chappal",
+    "religion": "christian",
+    "survey:date": "2021-07-03"
+  }
+},
+{
+  "type": "node",
+  "id": 8889666729,
+  "lat": 10.0814849,
+  "lon": 76.4614122,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Community Health Centre, Vengola",
+    "operator": "Department of Health and Family Welfare",
+    "operator:type": "government",
+    "ref": "1570",
+    "type": "15"
+  }
+},
+{
+  "type": "node",
+  "id": 8889893617,
+  "lat": 10.0527750,
+  "lon": 76.5782061,
+  "tags": {
+    "amenity": "school",
+    "name": "KTC NECT Public School",
+    "survey:date": "2021-07-03"
+  }
+},
+{
+  "type": "node",
+  "id": 8890425502,
+  "lat": 10.0714394,
+  "lon": 76.5525480,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Immanuel Marthoma Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 8892210734,
+  "lat": 10.1110396,
+  "lon": 76.4820045,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "orthodox",
+    "name": "St George Orthodox Chapel",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 8892286819,
+  "lat": 10.1155687,
+  "lon": 76.4815794,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Karunnya Pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 8892289529,
+  "lat": 10.1169141,
+  "lon": 76.4894128,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Brethen Assembly",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 8892723518,
+  "lat": 10.0209515,
+  "lon": 76.5653719,
+  "tags": {
+    "amenity": "school",
+    "name": "Arafa Public School Senior Secondary",
+    "survey:date": "2021-07-04"
+  }
+},
+{
+  "type": "node",
+  "id": 8895192462,
+  "lat": 10.1111575,
+  "lon": 76.5219130,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Malekurish Chapel",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 8895197317,
+  "lat": 10.1157672,
+  "lon": 76.4932964,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Onnamile Mosque",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 8895200678,
+  "lat": 10.1120063,
+  "lon": 76.5181412,
+  "tags": {
+    "amenity": "police",
+    "name": "Police station"
+  }
+},
+{
+  "type": "node",
+  "id": 8895210782,
+  "lat": 10.1132276,
+  "lon": 76.5084174,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Eravichira Siva Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 8900676161,
+  "lat": 10.0561671,
+  "lon": 76.5304801,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "St. Thomas Evangelical Church Of India Keezhillam Centre",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 8901172769,
+  "lat": 10.0549001,
+  "lon": 76.5772761,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Parepeedika Juma Masjid",
+    "religion": "muslim",
+    "survey:date": "2021-07-07"
+  }
+},
+{
+  "type": "node",
+  "id": 8931154124,
+  "lat": 10.1431938,
+  "lon": 76.5729500,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "Ayush Primary Health Center Homeopathy Hospital"
+  }
+},
+{
+  "type": "node",
+  "id": 8933703698,
+  "lat": 10.1399711,
+  "lon": 76.5370647,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "Aiswarya Homeopathic And Naturopathic Cilnic"
+  }
+},
+{
+  "type": "node",
+  "id": 8933703699,
+  "lat": 10.1400613,
+  "lon": 76.5371694,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "MGM Clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 8933703700,
+  "lat": 10.1408167,
+  "lon": 76.5368728,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "Nedumbillil Ayurvedic Clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 8933718430,
+  "lat": 10.1410690,
+  "lon": 76.5399275,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "St Johns Tooth Care"
+  }
+},
+{
+  "type": "node",
+  "id": 8933718431,
+  "lat": 10.1412540,
+  "lon": 76.5368685,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "Olive Homeo Hospital"
+  }
+},
+{
+  "type": "node",
+  "id": 8937372928,
+  "lat": 10.1165041,
+  "lon": 76.4593303,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 8952788054,
+  "lat": 10.0597163,
+  "lon": 76.4598522,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "level": "0",
+    "name": "St. George Poly Clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 8952791233,
+  "lat": 10.0604975,
+  "lon": 76.4593230,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "Health Care Clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 8998310240,
+  "lat": 10.0669091,
+  "lon": 76.4104490,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Community Health Centre Malayidamthuruthu",
+    "operator": "Department of Health and Family Welfare",
+    "operator:type": "government"
+  }
+},
+{
+  "type": "node",
+  "id": 8998310241,
+  "lat": 10.1412957,
+  "lon": 76.5494889,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Community Health Centre Vengoor",
+    "operator": "Department of Health and Family Welfare",
+    "operator:type": "government"
+  }
+},
+{
+  "type": "node",
+  "id": 9002229151,
+  "lat": 10.1365864,
+  "lon": 76.4257920,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Kavikulam Kavu",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9004189261,
+  "lat": 10.1698175,
+  "lon": 76.4311003,
+  "tags": {
+    "amenity": "driving_school",
+    "name": "SN Driving school"
+  }
+},
+{
+  "type": "node",
+  "id": 9004205629,
+  "lat": 10.1364414,
+  "lon": 76.4257117,
+  "tags": {
+    "amenity": "marketplace",
+    "name": "Vegetable and Fruit Promotion Council Keralam"
+  }
+},
+{
+  "type": "node",
+  "id": 9024392978,
+  "lat": 10.1426245,
+  "lon": 76.4265325,
+  "tags": {
+    "addr:city": "Aluva",
+    "addr:postcode": "683575",
+    "addr:street": "Nadukapunja road",
+    "amenity": "place_of_worship",
+    "name": "Nambiyedathkavu Sree Karthyayani Temple Kanjoor",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9031905366,
+  "lat": 10.1866522,
+  "lon": 76.4806448,
+  "tags": {
+    "addr:postcode": "683574",
+    "addr:street": "Kalady Malayattoor Road, Neeleeswaram, Kerala",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "healthcare:speciality": "ayurveda",
+    "name": "Government Ayurveda Hospital"
+  }
+},
+{
+  "type": "node",
+  "id": 9050743387,
+  "lat": 10.1345947,
+  "lon": 76.4032007,
+  "tags": {
+    "amenity": "driving_school",
+    "name": "John driving school"
+  }
+},
+{
+  "type": "node",
+  "id": 9064051990,
+  "lat": 10.0220464,
+  "lon": 76.5796390,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "West Mulavoor Masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 9069719441,
+  "lat": 10.1358734,
+  "lon": 76.4070910,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "Sreemoolam Clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 9072277742,
+  "lat": 10.0318969,
+  "lon": 76.5791034,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 9072350517,
+  "lat": 10.0236513,
+  "lon": 76.5653001,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Badarul Huda Masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 9077496078,
+  "lat": 10.1345365,
+  "lon": 76.4032685,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "St.Antony's Shrine",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9110518687,
+  "lat": 10.1428947,
+  "lon": 76.4345071,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "K. Sreedharan Vaithyan Ayurveda Clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 9239555517,
+  "lat": 10.1189443,
+  "lon": 76.5666702,
+  "tags": {
+    "name": "Pattangandam",
+    "place": "hamlet",
+    "survey:date": "2021-11-10"
+  }
+},
+{
+  "type": "node",
+  "id": 9258889018,
+  "lat": 10.1152833,
+  "lon": 76.5416800,
+  "tags": {
+    "name": "George",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9258959517,
+  "lat": 10.0906850,
+  "lon": 76.5688617,
+  "tags": {
+    "name": "Lakshamveedu",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9258976617,
+  "lat": 10.0897200,
+  "lon": 76.5637267,
+  "tags": {
+    "name": "Palleri molam colony",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9258988217,
+  "lat": 10.0822017,
+  "lon": 76.5539800,
+  "tags": {
+    "name": "Poothakuzhi Colony",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9259011917,
+  "lat": 10.0844883,
+  "lon": 76.5532583,
+  "tags": {
+    "name": "Nambeli Colony",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9259046417,
+  "lat": 10.0543713,
+  "lon": 76.5498346,
+  "tags": {
+    "name": "Karimbanakuzhi",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9259101317,
+  "lat": 10.0849767,
+  "lon": 76.5664967,
+  "tags": {
+    "name": "Edathikkavu",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9259118118,
+  "lat": 10.0842683,
+  "lon": 76.5678367,
+  "tags": {
+    "name": "Avaraan Colony",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9259123519,
+  "lat": 10.0953350,
+  "lon": 76.5528083,
+  "tags": {
+    "name": "Poomala lakshamveed",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9259187817,
+  "lat": 10.0918450,
+  "lon": 76.5562650,
+  "tags": {
+    "name": "Puramchira Colony",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9259364917,
+  "lat": 10.1009997,
+  "lon": 76.5479945,
+  "tags": {
+    "name": "Punnayam SC colony",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9259430718,
+  "lat": 10.1034609,
+  "lon": 76.5511624,
+  "tags": {
+    "name": "Ramdas colony",
+    "place": "hamlet",
+    "survey:date": "2021-11-17"
+  }
+},
+{
+  "type": "node",
+  "id": 9285334117,
+  "lat": 10.1829160,
+  "lon": 76.4062421,
+  "tags": {
+    "name": "Vengoor, Ambedkar Colony",
+    "place": "neighbourhood",
+    "survey:date": "2021-11-26"
+  }
+},
+{
+  "type": "node",
+  "id": 9285334119,
+  "lat": 10.1818184,
+  "lon": 76.4137125,
+  "tags": {
+    "amenity": "school",
+    "name": "Sanjo E.M. High School, Vengoor",
+    "survey:date": "2021-11-26"
+  }
+},
+{
+  "type": "node",
+  "id": 9329615817,
+  "lat": 10.1688176,
+  "lon": 76.4329962,
+  "tags": {
+    "amenity": "school",
+    "name": "Government L.P School",
+    "survey:date": "2021-12-11"
+  }
+},
+{
+  "type": "node",
+  "id": 9329636617,
+  "lat": 10.1683063,
+  "lon": 76.4325197,
+  "tags": {
+    "name": "Mattoor Harijan Colony",
+    "name:ml": "മറ്റൂർ ഹരിജൻ കോളനി",
+    "place": "neighbourhood",
+    "survey:date": "2021-12-11"
+  }
+},
+{
+  "type": "node",
+  "id": 9343429222,
+  "lat": 10.1006626,
+  "lon": 76.4888362,
+  "tags": {
+    "addr:street": "Vattakkattupady",
+    "amenity": "place_of_worship",
+    "name": "Muslim Jama Ath Masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 9345825858,
+  "lat": 10.0914276,
+  "lon": 76.4949297,
+  "tags": {
+    "addr:street": "nageli Pady",
+    "amenity": "place_of_worship",
+    "name": "Nagelil Family Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9345828345,
+  "lat": 10.0939229,
+  "lon": 76.4973191,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Nagelil Sree Bhagavathi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9345828827,
+  "lat": 10.1030413,
+  "lon": 76.4994289,
+  "tags": {
+    "addr:street": "Iringole",
+    "amenity": "place_of_worship",
+    "name": "Kalam Kulangara Shiva Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9350953605,
+  "lat": 10.1687900,
+  "lon": 76.4270574,
+  "tags": {
+    "name": "Mattoor Laksham Veedu Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9351959364,
+  "lat": 10.0806954,
+  "lon": 76.5089260,
+  "tags": {
+    "addr:street": "Pulluvazhi",
+    "amenity": "place_of_worship",
+    "name": "The Indian Pentecostal Church of God",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9352364657,
+  "lat": 10.0846134,
+  "lon": 76.5096242,
+  "tags": {
+    "addr:street": "Jayakeralam Nagar",
+    "amenity": "place_of_worship",
+    "name": "Evangelical Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9369196490,
+  "lat": 10.0676517,
+  "lon": 76.5288661,
+  "tags": {
+    "addr:street": "Parambipedika",
+    "amenity": "place_of_worship",
+    "building": "chapel",
+    "name": "Baselious Chapel",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9369351855,
+  "lat": 10.0693759,
+  "lon": 76.5238984,
+  "tags": {
+    "addr:street": "Pulikapadi",
+    "amenity": "place_of_worship",
+    "name": "The Indian Pentecostal Church of God Rehobot Worship Center",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9369999796,
+  "lat": 10.0670540,
+  "lon": 76.5145066,
+  "tags": {
+    "addr:street": "Thaikara chira, Keezhillam",
+    "amenity": "place_of_worship",
+    "name": "Puliyambilly Devi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9372114778,
+  "lat": 10.1055158,
+  "lon": 76.5178214,
+  "tags": {
+    "addr:street": "Rayamangalam",
+    "amenity": "place_of_worship",
+    "name": "Malikappurath Devi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9387116229,
+  "lat": 10.1425036,
+  "lon": 76.4058868,
+  "tags": {
+    "name": "Koollikara",
+    "name:ml": "കൂലിക്കര",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9387337071,
+  "lat": 10.1061781,
+  "lon": 76.4915585,
+  "tags": {
+    "addr:street": "Kanjira Mukk",
+    "amenity": "place_of_worship",
+    "name": "Blavath Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9387461010,
+  "lat": 10.1015737,
+  "lon": 76.4926609,
+  "tags": {
+    "addr:street": "Vattakkatupady",
+    "amenity": "place_of_worship",
+    "name": "Hira Masjid",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 9387461015,
+  "lat": 10.1007203,
+  "lon": 76.4889904,
+  "tags": {
+    "addr:street": "Vattakkattupady",
+    "amenity": "school",
+    "landuse": "religious",
+    "name": "Al Madrasathil Islamia"
+  }
+},
+{
+  "type": "node",
+  "id": 9387467420,
+  "lat": 10.0998946,
+  "lon": 76.4978035,
+  "tags": {
+    "addr:street": "Vattassery Manaka Pady",
+    "amenity": "place_of_worship",
+    "name": "Kunnathukavu Bhagavathi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9387615934,
+  "lat": 10.0968399,
+  "lon": 76.5087153,
+  "tags": {
+    "addr:street": "Peechanam Mukal",
+    "amenity": "place_of_worship",
+    "name": "Independent Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9387615935,
+  "lat": 10.0955418,
+  "lon": 76.5069414,
+  "tags": {
+    "addr:street": "Peechanam Mukal",
+    "amenity": "place_of_worship",
+    "name": "Marthoma Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9388068926,
+  "lat": 10.0858402,
+  "lon": 76.4979962,
+  "tags": {
+    "addr:street": "Pulluvazhi",
+    "amenity": "college",
+    "name": "Sanjoe Nursing College"
+  }
+},
+{
+  "type": "node",
+  "id": 9388068929,
+  "lat": 10.0845715,
+  "lon": 76.4978297,
+  "tags": {
+    "addr:street": "Pulluvazhi",
+    "amenity": "place_of_worship",
+    "name": "Malika Thazhath Pazhaya Veetil Sree Devi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9396048198,
+  "lat": 10.1157752,
+  "lon": 76.5186588,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Puli Mala Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9396171350,
+  "lat": 10.1134501,
+  "lon": 76.5180364,
+  "tags": {
+    "addr:street": "Kuruppampadi",
+    "amenity": "place_of_worship",
+    "name": "Brethren Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9396171352,
+  "lat": 10.1126820,
+  "lon": 76.5180771,
+  "tags": {
+    "addr:street": "Kuruppampadi",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Mattamana Hospital"
+  }
+},
+{
+  "type": "node",
+  "id": 9396171355,
+  "lat": 10.1122573,
+  "lon": 76.5183414,
+  "tags": {
+    "addr:street": "Kuruppampadi",
+    "amenity": "place_of_worship",
+    "name": "St. Pauls and St. Peter's Church Kappela",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9396550134,
+  "lat": 10.0972444,
+  "lon": 76.5282779,
+  "tags": {
+    "addr:street": "Vaikara",
+    "amenity": "place_of_worship",
+    "name": "Evangelical Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9396550135,
+  "lat": 10.0959935,
+  "lon": 76.5282543,
+  "tags": {
+    "addr:street": "Vaikara",
+    "amenity": "place_of_worship",
+    "name": "Marthoma Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9398304004,
+  "lat": 10.0947283,
+  "lon": 76.5331042,
+  "tags": {
+    "addr:street": "Vaikara",
+    "amenity": "place_of_worship",
+    "name": "Full Gospel Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9398753748,
+  "lat": 10.1111847,
+  "lon": 76.5058642,
+  "tags": {
+    "addr:street": "Vaidhyashala Padi",
+    "amenity": "place_of_worship",
+    "name": "Vellam Bhagavathi Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9402410217,
+  "lat": 10.1673821,
+  "lon": 76.4353074,
+  "tags": {
+    "amenity": "marketplace",
+    "name": "Kalady Grama Panchayath Public Market",
+    "survey:date": "2022-01-08"
+  }
+},
+{
+  "type": "node",
+  "id": 9412471109,
+  "lat": 10.0786236,
+  "lon": 76.5094152,
+  "tags": {
+    "addr:street": "Pulluvazi",
+    "amenity": "place_of_worship",
+    "name": "Siva Bhubaneswari Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9412471110,
+  "lat": 10.0859953,
+  "lon": 76.5183044,
+  "tags": {
+    "amenity": "marketplace",
+    "name": "Public Market, Rayamangalam"
+  }
+},
+{
+  "type": "node",
+  "id": 9430641186,
+  "lat": 10.1799757,
+  "lon": 76.4239633,
+  "tags": {
+    "name": "Marottichodu 4 Cent Colony",
+    "name:ml": "മരോട്ടിച്ചോട് 4 സെന്റ് കോളനി",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9430641187,
+  "lat": 10.1783337,
+  "lon": 76.4232280,
+  "tags": {
+    "name": "Laksham veedu Colony marottichodu",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9430684495,
+  "lat": 10.1897776,
+  "lon": 76.4493191,
+  "tags": {
+    "name": "Mundangamadam Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9430829875,
+  "lat": 10.1876454,
+  "lon": 76.4288247,
+  "tags": {
+    "name": "Vattaparambu 3 kallucolony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9430829876,
+  "lat": 10.1736864,
+  "lon": 76.4517085,
+  "tags": {
+    "name": "Madathedath Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9431204713,
+  "lat": 10.1978826,
+  "lon": 76.4337009,
+  "tags": {
+    "name": "Vivekananda Colony`",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9431204714,
+  "lat": 10.1773736,
+  "lon": 76.4135069,
+  "tags": {
+    "name": "Kuttilakkara Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9431609648,
+  "lat": 10.1764629,
+  "lon": 76.4309344,
+  "tags": {
+    "name": "Thottekad Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9432729915,
+  "lat": 10.1606599,
+  "lon": 76.4219847,
+  "tags": {
+    "name": "Mattapuram Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9433310928,
+  "lat": 10.1741055,
+  "lon": 76.4075535,
+  "tags": {
+    "name": "Thuramattam Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9433353371,
+  "lat": 10.1849573,
+  "lon": 76.4391254,
+  "tags": {
+    "name": "Aryapara Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9435920281,
+  "lat": 10.1804514,
+  "lon": 76.4349388,
+  "tags": {
+    "name": "Varakkadapara",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9436132274,
+  "lat": 10.1910018,
+  "lon": 76.4496984,
+  "tags": {
+    "name": "Priyadarshini Colony",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9463517781,
+  "lat": 10.1860311,
+  "lon": 76.4625067,
+  "tags": {
+    "addr:city": "Ernakulam",
+    "addr:postcode": "683574",
+    "addr:street": "Kottamam-Kalambattupuram Road",
+    "amenity": "place_of_worship",
+    "denomination": "roman_catholic",
+    "name": "St. Joseph's Shrine, Kalambattupuram",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 9623829832,
+  "lat": 10.1353820,
+  "lon": 76.4572239,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Anthimahakalan (Lord Shiva) Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 9623853223,
+  "lat": 10.1408296,
+  "lon": 76.4586794,
+  "tags": {
+    "name": "Chovvazhchakavu",
+    "name:ml": "ചൊവ്വാഴ്ചക്കാവ്",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 9780875248,
+  "lat": 10.1106743,
+  "lon": 76.4193428,
+  "tags": {
+    "name": "Marampilly",
+    "name:ml": "മാറമ്പള്ളി",
+    "place": "village",
+    "wikidata": "Q6754753",
+    "wikipedia": "en:Marampilly"
+  }
+},
+{
+  "type": "node",
+  "id": 9822323764,
+  "lat": 10.1106342,
+  "lon": 76.5184662,
+  "tags": {
+    "amenity": "police",
+    "name": "Police Station, Kuruppampady",
+    "ref": "15286030"
+  }
+},
+{
+  "type": "node",
+  "id": 10031259021,
+  "lat": 10.0413740,
+  "lon": 76.5062736,
+  "tags": {
+    "amenity": "college",
+    "name": "Cet college",
+    "survey:date": "2022-09-17"
+  }
+},
+{
+  "type": "node",
+  "id": 10255800222,
+  "lat": 10.1653287,
+  "lon": 76.4275746,
+  "tags": {
+    "name": "Kaladi",
+    "network": "IR",
+    "operator": "SR",
+    "railway": "station",
+    "ref": "KLADI"
+  }
+},
+{
+  "type": "node",
+  "id": 10291039146,
+  "lat": 10.1638877,
+  "lon": 76.4781582,
+  "tags": {
+    "name": "Sidhan Kavala",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 10593244958,
+  "lat": 10.1760441,
+  "lon": 76.5046846,
+  "tags": {
+    "name": "Kurichilakode",
+    "name:ml": "കുറിച്ചിലക്കോട്",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 10593244959,
+  "lat": 10.2000140,
+  "lon": 76.5447775,
+  "tags": {
+    "name": "Mulamkuzhi",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 10594530790,
+  "lat": 10.1647992,
+  "lon": 76.5503708,
+  "tags": {
+    "name": "Kombanad",
+    "name:ml": "കൊമ്പനാട്",
+    "place": "village",
+    "wikidata": "Q6428243",
+    "wikipedia": "en:Kombanad"
+  }
+},
+{
+  "type": "node",
+  "id": 10594530791,
+  "lat": 10.1837935,
+  "lon": 76.5530777,
+  "tags": {
+    "name": "Panamkuzhi",
+    "name:ml": "പാണംകുഴി",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 10594530792,
+  "lat": 10.1826789,
+  "lon": 76.5168060,
+  "tags": {
+    "name": "Kodanad",
+    "name:ml": "കോടനാട്",
+    "place": "village",
+    "wikidata": "Q6425204",
+    "wikimedia_commons": "Category:Kodanad",
+    "wikipedia": "en:Kodanad"
+  }
+},
+{
+  "type": "node",
+  "id": 10594587897,
+  "lat": 10.1680168,
+  "lon": 76.5761018,
+  "tags": {
+    "name": "Paniyeli",
+    "name:ml": "പാണിയേലി",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 10594605276,
+  "lat": 10.1894324,
+  "lon": 76.5057850,
+  "tags": {
+    "name": "Chammani",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 10594770587,
+  "lat": 10.1355527,
+  "lon": 76.4667749,
+  "tags": {
+    "name": "Vallam",
+    "name:ml": "വള്ളം",
+    "place": "suburb"
+  }
+},
+{
+  "type": "node",
+  "id": 10594770588,
+  "lat": 10.1285504,
+  "lon": 76.4618075,
+  "tags": {
+    "name": "Rayonapuram",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 10594796320,
+  "lat": 10.1823152,
+  "lon": 76.5388512,
+  "tags": {
+    "name": "Alattuchira",
+    "name:ml": "ആലാട്ടുചിറ",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 10594796321,
+  "lat": 10.1909952,
+  "lon": 76.5290451,
+  "tags": {
+    "name": "Panaguruthottam",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 10594796346,
+  "lat": 10.1868770,
+  "lon": 76.5349030,
+  "tags": {
+    "name": "Kaprikad",
+    "place": "hamlet",
+    "wikidata": "Q6425204",
+    "wikimedia_commons": "Category:Kodanad",
+    "wikipedia": "en:Kodanad"
+  }
+},
+{
+  "type": "node",
+  "id": 10600427295,
+  "lat": 10.1451546,
+  "lon": 76.4260960,
+  "tags": {
+    "name": "Kanjoor",
+    "name:ml": "കാഞ്ഞൂർ",
+    "place": "village",
+    "wikidata": "Q13111123"
+  }
+},
+{
+  "type": "node",
+  "id": 10600427296,
+  "lat": 10.1350774,
+  "lon": 76.4304364,
+  "tags": {
+    "name": "Puthiyedam",
+    "name:ml": "പുതിയേടം",
+    "place": "village",
+    "wikidata": "Q16135083"
+  }
+},
+{
+  "type": "node",
+  "id": 10600427297,
+  "lat": 10.1199848,
+  "lon": 76.4186025,
+  "tags": {
+    "name": "Thekkumbhagom",
+    "name:ml": "തെക്കുംഭാഗം",
+    "place": "village",
+    "wikidata": "Q7780987",
+    "wikipedia": "en:Thekkumbhagom"
+  }
+},
+{
+  "type": "node",
+  "id": 10600427298,
+  "lat": 10.1338523,
+  "lon": 76.4034694,
+  "tags": {
+    "name": "Chowara",
+    "name:ml": "ചൊവ്വര",
+    "place": "suburb",
+    "wikidata": "Q1193525",
+    "wikimedia_commons": "Category:Chowwara",
+    "wikipedia": "en:Chowwara"
+  }
+},
+{
+  "type": "node",
+  "id": 10608577648,
+  "lat": 10.1822883,
+  "lon": 76.4118597,
+  "tags": {
+    "name": "Vengoor",
+    "name:ml": "വേങ്ങൂർ",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 10762968920,
+  "lat": 10.1959730,
+  "lon": 76.4076536,
+  "tags": {
+    "addr:city": "Kottayam District",
+    "addr:housenumber": "Infant Jesus Church",
+    "addr:postcode": "683572",
+    "addr:street": "Kidangoor",
+    "amenity": "place_of_worship",
+    "denomination": "catholic",
+    "name": "Infant Jesus Church, Kidangoor",
+    "phone": "+91 2617778",
+    "religion": "christian",
+    "service_times": "Sunday Mass - 5:45 AM, 7:00 AM, 9:00 AM, Weekday Mass - 5:45 AM, 6:45 AM",
+    "start_date": "1909"
+  }
+},
+{
+  "type": "node",
+  "id": 10883609930,
+  "lat": 10.0476575,
+  "lon": 76.4097923,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "jacobite",
+    "name": "St Mary's  Church,thamarachal",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 10883938575,
+  "lat": 10.0333129,
+  "lon": 76.4912304,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Blandevar Sreemahavishnu Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 10883948795,
+  "lat": 10.0396782,
+  "lon": 76.4875537,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Koodassery Bhagavathy Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 10907097874,
+  "lat": 10.1538140,
+  "lon": 76.5257050,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "IPC Church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 10907172431,
+  "lat": 10.1692902,
+  "lon": 76.5231367,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Vanniyapilly  MahaVishnu Temple",
+    "religion": "hindu"
+  }
+},
+{
+  "type": "node",
+  "id": 10928078097,
+  "lat": 10.1086137,
+  "lon": 76.5005227,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "irngole kavu temple",
+    "religion": "hindu",
+    "wikidata": "Q6070008"
+  }
+},
+{
+  "type": "node",
+  "id": 10928090245,
+  "lat": 10.0994726,
+  "lon": 76.5040772,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "baptist",
+    "name": "st George's jacobite syruch christian church",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 11096995712,
+  "lat": 10.1404294,
+  "lon": 76.4451773,
+  "tags": {
+    "addr:city": "kanjoor",
+    "addr:district": "Eranakulam",
+    "addr:postcode": "683595",
+    "addr:street": "kizhakkumbagam",
+    "amenity": "place_of_worship",
+    "denomination": "roman_catholic",
+    "name": "Infant Jesus church kizhakkumbagam",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 11420167582,
+  "lat": 10.0347797,
+  "lon": 76.5461501,
+  "tags": {
+    "name": "Thrikkalathoor",
+    "name:ml": "തൃക്കളത്തൂർ",
+    "place": "village",
+    "wikidata": "Q7798154",
+    "wikipedia": "en:Thrikkalathoor"
+  }
+},
+{
+  "type": "node",
+  "id": 11420167583,
+  "lat": 10.0198565,
+  "lon": 76.5616964,
+  "tags": {
+    "name": "Pezhakkappilly",
+    "name:ml": "പേഴ്ക്കാപ്പിള്ളി",
+    "place": "village",
+    "wikidata": "Q7179666",
+    "wikipedia": "en:Pezhakkappilly"
+  }
+},
+{
+  "type": "node",
+  "id": 11770037763,
+  "lat": 10.0201865,
+  "lon": 76.4205501,
+  "tags": {
+    "name": "Parakode",
+    "name:ml": "പറക്കോട്",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 11770142984,
+  "lat": 10.0534098,
+  "lon": 76.4316214,
+  "tags": {
+    "name": "Chelakkulam",
+    "name:ml": "ചേലക്കുളം",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 11780799344,
+  "lat": 10.1406187,
+  "lon": 76.5369789,
+  "tags": {
+    "name": "Vengoor West",
+    "name:ml": "വേങ്ങൂർ",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 11831878229,
+  "lat": 10.1222556,
+  "lon": 76.4598457,
+  "tags": {
+    "name": "South Vallom",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 11840562090,
+  "lat": 10.0990111,
+  "lon": 76.4710094,
+  "tags": {
+    "alt_name": "Asharimughal",
+    "name": "Asharimukal",
+    "name:ml": "ആശാരിമുകൾ",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 11840577327,
+  "lat": 10.1074983,
+  "lon": 76.4754362,
+  "tags": {
+    "name": "Pathipalam",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 12358533052,
+  "lat": 10.1685062,
+  "lon": 76.4382056,
+  "tags": {
+    "addr:city": "Kalady",
+    "addr:district": "Ernakulam",
+    "addr:housenumber": "SSUS",
+    "addr:postcode": "683574",
+    "addr:street": "Kalady",
+    "addr:unit": "geography deparment",
+    "amenity": "school",
+    "building:levels": "2",
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "Geography Department",
+    "operator": "Department of General and Higher Education",
+    "operator:type": "public",
+    "operator:wikidata": "Q5260320",
+    "roof:shape": "gabled",
+    "website": "geography@ssus.ac.in"
+  }
+},
+{
+  "type": "node",
+  "id": 12837579901,
+  "lat": 10.0512704,
+  "lon": 76.4957111,
+  "tags": {
+    "addr:postcode": "683556",
+    "addr:street": "Pathalaparambu Road",
+    "amenity": "place_of_worship",
+    "name": "Airapuram Muslim Juma masjis"
+  }
+},
+{
+  "type": "node",
+  "id": 13192051654,
+  "lat": 10.0551380,
+  "lon": 76.5480251,
+  "tags": {
+    "name": "Bethaniyakkunnu",
+    "name:ml": "ബഥാനിയാക്കുന്ന്",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 13192063842,
+  "lat": 10.0652047,
+  "lon": 76.5465189,
+  "tags": {
+    "name": "Kallil",
+    "name:ml": "കല്ലിൽ",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 13647243901,
+  "lat": 10.1178218,
+  "lon": 76.4683304,
+  "tags": {
+    "addr:postcode": "683542",
+    "addr:street": "Perumbavoor - Parappuram Road",
+    "amenity": "place_of_worship",
+    "check_date": "2026-03-14",
+    "check_date:opening_hours": "2026-03-14",
+    "name": "Parappuram Juma Masjid",
+    "opening_hours": "24/7",
+    "religion": "muslim"
+  }
+},
+{
+  "type": "node",
+  "id": 13696998300,
+  "lat": 10.0628772,
+  "lon": 76.3991538,
+  "tags": {
+    "amenity": "music_school",
+    "name": "Joy's academy"
+  }
+},
+{
+  "type": "way",
+  "id": 101374624,
+  "center": {
+    "lat": 10.0897149,
+    "lon": 76.4366036
+  },
+  "tags": {
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "Aluva - Munnar Road",
+    "ref": "SH16"
+  }
+},
+{
+  "type": "way",
+  "id": 101374693,
+  "center": {
+    "lat": 10.1121754,
+    "lon": 76.4261015
+  },
+  "tags": {
+    "bridge": "yes",
+    "comment": "Secondary:MDR:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "secondary",
+    "layer": "1",
+    "maxspeed": "70",
+    "maxspeed:bus": "60",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcycle": "50",
+    "name": "Aluva-Perumbavoor Road",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 101374710,
+  "center": {
+    "lat": 10.0914218,
+    "lon": 76.4442651
+  },
+  "tags": {
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "Aluva - Munnar Road",
+    "ref": "SH16"
+  }
+},
+{
+  "type": "way",
+  "id": 236699724,
+  "center": {
+    "lat": 10.1154755,
+    "lon": 76.4193877
+  },
+  "tags": {
+    "alt_name": "Marampilly bridge",
+    "bridge": "yes",
+    "description": "bridge",
+    "highway": "secondary",
+    "lanes": "2",
+    "layer": "1",
+    "name": "Thiruvairanikkulam Bridge",
+    "oneway": "no",
+    "ref": "MDR",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 284854043,
+  "center": {
+    "lat": 10.1624196,
+    "lon": 76.4414098
+  },
+  "tags": {
+    "alt_name": "Main - Central Road",
+    "bridge": "yes",
+    "bridge:name": "Kalady Bridge",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "MC Road",
+    "oneway": "no",
+    "ref": "SH1",
+    "sidewalk": "both",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 378399003,
+  "center": {
+    "lat": 10.1336438,
+    "lon": 76.4688905
+  },
+  "tags": {
+    "alt_name": "Main - Central Road",
+    "bridge": "yes",
+    "comment": "speed restriction",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "30",
+    "maxspeed:bus": "30",
+    "maxspeed:goods": "30",
+    "maxspeed:hgv": "30",
+    "maxspeed:motorcar": "30",
+    "maxspeed:motorcycle": "30",
+    "maxspeed:taxi": "30",
+    "name": "MC Road",
+    "oneway": "no",
+    "ref": "SH1",
+    "restriction": "school_zone",
+    "sidewalk": "no",
+    "surface": "asphalt",
+    "traffic_calming": "hump"
+  }
+},
+{
+  "type": "way",
+  "id": 383254694,
+  "center": {
+    "lat": 10.0239538,
+    "lon": 76.4790934
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "65",
+    "maxspeed:goods": "40",
+    "maxspeed:hgv": "65",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "60",
+    "name": "Ernakulam - Thekkady Road",
+    "ref": "SH41",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 383741713,
+  "center": {
+    "lat": 10.1142515,
+    "lon": 76.4654735
+  },
+  "tags": {
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "Aluva - Munnar Road",
+    "oneway": "yes",
+    "ref": "SH16"
+  }
+},
+{
+  "type": "way",
+  "id": 383741714,
+  "center": {
+    "lat": 10.1144507,
+    "lon": 76.4654101
+  },
+  "tags": {
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "Aluva - Munnar Road",
+    "oneway": "yes",
+    "ref": "SH16"
+  }
+},
+{
+  "type": "way",
+  "id": 383754671,
+  "center": {
+    "lat": 10.1018035,
+    "lon": 76.5414496
+  },
+  "tags": {
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "Aluva - Munnar Road",
+    "ref": "SH16"
+  }
+},
+{
+  "type": "way",
+  "id": 384271969,
+  "center": {
+    "lat": 10.0209114,
+    "lon": 76.4700479
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "65",
+    "maxspeed:goods": "40",
+    "maxspeed:hgv": "65",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "60",
+    "name": "Ernakulam - Thekkady Road",
+    "ref": "SH41",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 474852805,
+  "center": {
+    "lat": 10.1776197,
+    "lon": 76.4571203
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "name": "Kottamam Bridge"
+  }
+},
+{
+  "type": "way",
+  "id": 549017315,
+  "center": {
+    "lat": 10.1824515,
+    "lon": 76.5045081
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Malayatoor-Kodanad Bridge",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 617825925,
+  "center": {
+    "lat": 10.2002683,
+    "lon": 76.5612577
+  },
+  "tags": {
+    "access": "permissive",
+    "bicycle": "yes",
+    "bridge": "yes",
+    "foot": "yes",
+    "highway": "unclassified",
+    "horse": "no",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Malayattoor Mulamkuzhi Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 617958588,
+  "center": {
+    "lat": 10.1295207,
+    "lon": 76.5096272
+  },
+  "tags": {
+    "bicycle": "yes",
+    "bridge": "yes",
+    "foot": "yes",
+    "highway": "secondary",
+    "horse": "no",
+    "lanes": "2",
+    "layer": "1",
+    "name": "Kodanad Akanad Road",
+    "oneway": "no",
+    "ref": "MDR",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 622240959,
+  "center": {
+    "lat": 10.1754230,
+    "lon": 76.5719643
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "SocietyPalam"
+  }
+},
+{
+  "type": "way",
+  "id": 622299570,
+  "center": {
+    "lat": 10.0972973,
+    "lon": 76.5203181
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "name": "Keezhillam-Kurichilakode",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 622574914,
+  "center": {
+    "lat": 10.1720227,
+    "lon": 76.4938243
+  },
+  "tags": {
+    "bicycle": "yes",
+    "bridge": "yes",
+    "foot": "yes",
+    "highway": "secondary",
+    "horse": "no",
+    "lanes": "1",
+    "layer": "1",
+    "maxspeed": "50",
+    "name": "Vallam Kodanad Road",
+    "oneway": "no",
+    "ref": "MDR",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 622668492,
+  "center": {
+    "lat": 10.0266835,
+    "lon": 76.4464421
+  },
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "bridge": "yes",
+    "cycleway": "no",
+    "foot": "yes",
+    "highway": "primary",
+    "horse": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "65",
+    "maxspeed:goods": "40",
+    "maxspeed:hgv": "65",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "60",
+    "name": "Ernakulam - Thekkady Road",
+    "ref": "SH41",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 622945698,
+  "center": {
+    "lat": 10.1068086,
+    "lon": 76.4876447
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "name": "Kanjiramukku Bridge",
+    "name:ml": "കാഞ്ഞിരമുക്ക് പാലം",
+    "oneway": "no",
+    "ref": "MDR",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 622945701,
+  "center": {
+    "lat": 10.1056303,
+    "lon": 76.4823931
+  },
+  "tags": {
+    "access": "yes",
+    "alt_name": "Main - Central Road",
+    "bicycle": "yes",
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "cycleway": "no",
+    "foot": "yes",
+    "highway": "primary",
+    "horse": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "MC Road",
+    "oneway": "no",
+    "ref": "SH1",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 623290395,
+  "center": {
+    "lat": 10.0883679,
+    "lon": 76.4160672
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Nadakkavu South-Vazhakkulam road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 623290401,
+  "center": {
+    "lat": 10.0870631,
+    "lon": 76.4256884
+  },
+  "tags": {
+    "bridge": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "50",
+    "name": "Edappally-Pukkattupady Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 632712464,
+  "center": {
+    "lat": 10.1889519,
+    "lon": 76.4302151
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "name": "College Road, Mattoor, Kalady",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 632712481,
+  "center": {
+    "lat": 10.1937170,
+    "lon": 76.4315240
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "name": "College Road, Mattoor, Kalady",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 632791707,
+  "center": {
+    "lat": 10.1992579,
+    "lon": 76.4290544
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "horse": "no",
+    "layer": "1",
+    "name": "Thalakkottuparambu Pothiyakkara Road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 632791708,
+  "center": {
+    "lat": 10.1952739,
+    "lon": 76.4070350
+  },
+  "tags": {
+    "access": "permissive",
+    "bicycle": "yes",
+    "bridge": "yes",
+    "foot": "yes",
+    "highway": "residential",
+    "horse": "no",
+    "layer": "1",
+    "maxspeed": "20",
+    "name": "Canal Road",
+    "oneway": "no",
+    "surface": "ground"
+  }
+},
+{
+  "type": "way",
+  "id": 633031369,
+  "center": {
+    "lat": 10.1208300,
+    "lon": 76.4599927
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "name": "Vallom Rayonpuram road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 633180386,
+  "center": {
+    "lat": 10.1946783,
+    "lon": 76.4049150
+  },
+  "tags": {
+    "access": "permissive",
+    "bicycle": "yes",
+    "bridge": "yes",
+    "foot": "yes",
+    "highway": "tertiary",
+    "horse": "no",
+    "layer": "1",
+    "maxspeed": "60",
+    "name": "Kidangoor Vengoor Raod",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 643359228,
+  "center": {
+    "lat": 10.0338919,
+    "lon": 76.4135565
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Pookattupad - Chemmalapady - Kizhakkambalam road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 644435601,
+  "center": {
+    "lat": 10.0677600,
+    "lon": 76.5163371
+  },
+  "tags": {
+    "alt_name": "Main - Central Road",
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "MC Road",
+    "oneway": "no",
+    "ref": "SH1",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 644435605,
+  "center": {
+    "lat": 10.0647671,
+    "lon": 76.5193421
+  },
+  "tags": {
+    "alt_name": "Main - Central Road",
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "MC Road",
+    "oneway": "no",
+    "ref": "SH1",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 644435611,
+  "center": {
+    "lat": 10.0445388,
+    "lon": 76.4893993
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Valamboor - Rubber Park Road",
+    "ref": "MDR",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 644435613,
+  "center": {
+    "lat": 10.0445937,
+    "lon": 76.4886981
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Valamboor - Rubber Park Road",
+    "ref": "MDR",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 646382285,
+  "center": {
+    "lat": 10.0306741,
+    "lon": 76.5486461
+  },
+  "tags": {
+    "alt_name": "Main - Central Road",
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "MC Road",
+    "oneway": "no",
+    "ref": "SH1",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 647193323,
+  "center": {
+    "lat": 10.0238265,
+    "lon": 76.4859297
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "65",
+    "maxspeed:goods": "40",
+    "maxspeed:hgv": "65",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "60",
+    "name": "Ernakulam - Thekkady Road",
+    "ref": "SH41",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 647425818,
+  "center": {
+    "lat": 10.0762767,
+    "lon": 76.5236600
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Panikkarambalam"
+  }
+},
+{
+  "type": "way",
+  "id": 647425820,
+  "center": {
+    "lat": 10.0647811,
+    "lon": 76.5259641
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "name": "Keezhillam-Nellimolam Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 726631471,
+  "center": {
+    "lat": 10.1215560,
+    "lon": 76.4231198
+  },
+  "tags": {
+    "bridge": "yes",
+    "footway": "sidewalk",
+    "highway": "footway",
+    "layer": "1",
+    "name": "kunnuvazhy bridge road"
+  }
+},
+{
+  "type": "way",
+  "id": 744538650,
+  "center": {
+    "lat": 10.0879511,
+    "lon": 76.5782913
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "50",
+    "name": "Panipra Kavu",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 747294918,
+  "center": {
+    "lat": 10.1926748,
+    "lon": 76.4498669
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "60",
+    "name": "Manjapra - Kalady Road"
+  }
+},
+{
+  "type": "way",
+  "id": 764874191,
+  "center": {
+    "lat": 10.0853813,
+    "lon": 76.5184646
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "name": "Old MuvattuPuzha Road"
+  }
+},
+{
+  "type": "way",
+  "id": 788789038,
+  "center": {
+    "lat": 10.1124479,
+    "lon": 76.4220306
+  },
+  "tags": {
+    "bridge": "yes",
+    "comment": "Secondary:MDR:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "secondary",
+    "layer": "1",
+    "maxspeed": "70",
+    "maxspeed:bus": "60",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcycle": "50",
+    "name": "Aluva-Perumbavoor Road",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 788789040,
+  "center": {
+    "lat": 10.1064330,
+    "lon": 76.4269737
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Chembarakky Kunnuvazhi Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 789185256,
+  "center": {
+    "lat": 10.0319433,
+    "lon": 76.4073792
+  },
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "bridge": "yes",
+    "cycleway": "no",
+    "foot": "yes",
+    "highway": "primary",
+    "horse": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "65",
+    "maxspeed:goods": "40",
+    "maxspeed:hgv": "65",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "60",
+    "name": "Ernakulam - Thekkady Road",
+    "ref": "SH41",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 789198477,
+  "center": {
+    "lat": 10.0437584,
+    "lon": 76.4004236
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "name": "Pookkattupady - Kizhakkambalam Road",
+    "road_marking": "yes",
+    "smoothness": "very_good",
+    "source": "bing",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 789198483,
+  "center": {
+    "lat": 10.0580602,
+    "lon": 76.4035560
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Pookattupad- Chemmalapady-Kizhakkambalam road",
+    "road_marking": "yes",
+    "smoothness": "very_good",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 789198489,
+  "center": {
+    "lat": 10.0680340,
+    "lon": 76.4068491
+  },
+  "tags": {
+    "bridge": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "50",
+    "name": "Edappally-Pukkattupady Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 789201271,
+  "center": {
+    "lat": 10.0681024,
+    "lon": 76.4061018
+  },
+  "tags": {
+    "bridge": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "50",
+    "name": "Edappally-Pukkattupady Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 789202649,
+  "center": {
+    "lat": 10.0679662,
+    "lon": 76.4017778
+  },
+  "tags": {
+    "bridge": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "50",
+    "name": "Edappally-Pukkattupady Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 789211266,
+  "center": {
+    "lat": 10.0323349,
+    "lon": 76.4365943
+  },
+  "tags": {
+    "access": "yes",
+    "bicycle": "yes",
+    "bridge": "yes",
+    "cycleway": "no",
+    "foot": "yes",
+    "highway": "primary",
+    "horse": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "65",
+    "maxspeed:goods": "40",
+    "maxspeed:hgv": "65",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "60",
+    "name": "Ernakulam - Thekkady Road",
+    "ref": "SH41",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 789222400,
+  "center": {
+    "lat": 10.0659091,
+    "lon": 76.4378673
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "lanes": "2",
+    "layer": "1",
+    "name": "Chithrappuzha-Ponjassery Road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 789228281,
+  "center": {
+    "lat": 10.0645447,
+    "lon": 76.4377140
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "lanes": "2",
+    "layer": "1",
+    "name": "Chithrappuzha-Ponjassery Road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 789258177,
+  "center": {
+    "lat": 10.0549878,
+    "lon": 76.4354002
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "name": "Chithrappuzha-Ponjassery Road"
+  }
+},
+{
+  "type": "way",
+  "id": 792256035,
+  "center": {
+    "lat": 10.0740090,
+    "lon": 76.5077495
+  },
+  "tags": {
+    "alt_name": "Main - Central Road",
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "MC Road",
+    "oneway": "yes",
+    "ref": "SH1",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 792256037,
+  "center": {
+    "lat": 10.0739791,
+    "lon": 76.5076866
+  },
+  "tags": {
+    "alt_name": "Main - Central Road",
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "MC Road",
+    "oneway": "yes",
+    "ref": "SH1",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 792265174,
+  "center": {
+    "lat": 10.0583281,
+    "lon": 76.5278544
+  },
+  "tags": {
+    "alt_name": "Main - Central Road",
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "MC Road",
+    "oneway": "no",
+    "ref": "SH1",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 795412741,
+  "center": {
+    "lat": 10.0767944,
+    "lon": 76.5724873
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "maxspeed": "50",
+    "name": "Erumalappady-Puthuppadi Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 795877421,
+  "center": {
+    "lat": 10.1790858,
+    "lon": 76.5616520
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "residential",
+    "lanes": "1",
+    "layer": "1",
+    "name": "Paathipalam",
+    "surface": "paved"
+  }
+},
+{
+  "type": "way",
+  "id": 798821139,
+  "center": {
+    "lat": 10.1734161,
+    "lon": 76.4351280
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "name": "4th Mile AA Road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 798821141,
+  "center": {
+    "lat": 10.1682105,
+    "lon": 76.4410225
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "name": "Kalady-Malayattoor Road"
+  }
+},
+{
+  "type": "way",
+  "id": 798821143,
+  "center": {
+    "lat": 10.1716472,
+    "lon": 76.4410759
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Puthankavu road"
+  }
+},
+{
+  "type": "way",
+  "id": 799141098,
+  "center": {
+    "lat": 10.1699408,
+    "lon": 76.5494360
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "import": "yes",
+    "layer": "1",
+    "name": "Kombanad Panamkuzhy Rd",
+    "ref": "MDR",
+    "source": "digitalglobe"
+  }
+},
+{
+  "type": "way",
+  "id": 799267747,
+  "center": {
+    "lat": 10.1117821,
+    "lon": 76.5247495
+  },
+  "tags": {
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "Aluva - Munnar Road",
+    "ref": "SH16",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 799291724,
+  "center": {
+    "lat": 10.1683163,
+    "lon": 76.4345504
+  },
+  "tags": {
+    "alt_name": "Main - Central Road",
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "MC Road",
+    "oneway": "no",
+    "ref": "SH1",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 804877023,
+  "center": {
+    "lat": 10.1122305,
+    "lon": 76.4161390
+  },
+  "tags": {
+    "bridge": "yes",
+    "comment": "Secondary:MDR:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "secondary",
+    "layer": "1",
+    "maxspeed": "70",
+    "maxspeed:bus": "60",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcycle": "50",
+    "name": "Aluva-Perumbavoor Road",
+    "oneway": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 808163877,
+  "center": {
+    "lat": 10.0389178,
+    "lon": 76.4050982
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "name": "Pookkattupady-Kizhakkambalam Road",
+    "road_marking": "yes",
+    "smoothness": "very_good",
+    "source": "bing",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 808298993,
+  "center": {
+    "lat": 10.0567367,
+    "lon": 76.4107109
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "lane_markings": "yes",
+    "lanes": "2",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Pookattupad- Chemmalapady-Kizhakkambalam road",
+    "road_marking": "yes",
+    "smoothness": "very_good",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 810651227,
+  "center": {
+    "lat": 10.1336158,
+    "lon": 76.5348045
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "name": "Kadavungal Bridge",
+    "name:ml": "കടവുങ്കൽ പാലം",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 818847081,
+  "center": {
+    "lat": 10.1275875,
+    "lon": 76.4829996
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "lanes": "2",
+    "layer": "1",
+    "name": "Perumbavoor - Kodanad Road",
+    "ref": "MDR",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 821814278,
+  "center": {
+    "lat": 10.1209491,
+    "lon": 76.5260127
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "name": "Kuruppampady-Panamkuzhy Road",
+    "oneway": "no",
+    "ref": "MDR",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 823517698,
+  "center": {
+    "lat": 10.0375048,
+    "lon": 76.4030087
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "residential",
+    "name": "Thuruthukara - Kizhakkambalam Road"
+  }
+},
+{
+  "type": "way",
+  "id": 826256132,
+  "center": {
+    "lat": 10.1821119,
+    "lon": 76.4331071
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "residential",
+    "name": "Mattoor Pothiyakkara Road"
+  }
+},
+{
+  "type": "way",
+  "id": 827319261,
+  "center": {
+    "lat": 10.1667869,
+    "lon": 76.4376788
+  },
+  "tags": {
+    "alt_name": "Main - Central Road",
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "lanes": "2",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "MC Road",
+    "oneway": "no",
+    "ref": "SH1",
+    "sidewalk": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 827902580,
+  "center": {
+    "lat": 10.0823214,
+    "lon": 76.5736545
+  },
+  "tags": {
+    "bridge": "yes",
+    "comment": "Primary:State Highway:Motor Vehicle Speed as per Kerala Govt restriction G.O. (P) No. 20/2014/Tran src: http://www.keralamvd.gov.in/images/mvd/notifications/2014/20-14.pdf",
+    "highway": "primary",
+    "layer": "1",
+    "maxspeed": "80",
+    "maxspeed:bus": "60",
+    "maxspeed:goods": "65",
+    "maxspeed:hgv": "60",
+    "maxspeed:motorcar": "80",
+    "maxspeed:motorcycle": "50",
+    "maxspeed:taxi": "65",
+    "name": "Aluva - Munnar Road",
+    "ref": "SH16"
+  }
+},
+{
+  "type": "way",
+  "id": 829579361,
+  "center": {
+    "lat": 10.0428656,
+    "lon": 76.4108073
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "maxspeed": "40",
+    "name": "Pookattupad- Chemmalapady-Kizhakkambalam road"
+  }
+},
+{
+  "type": "way",
+  "id": 835275883,
+  "center": {
+    "lat": 10.1584279,
+    "lon": 76.4365075
+  },
+  "tags": {
+    "bridge": "yes",
+    "construction": "rail",
+    "layer": "1",
+    "name": "Angamali - Erumeli new line (u/c)",
+    "railway": "construction"
+  }
+},
+{
+  "type": "way",
+  "id": 842964423,
+  "center": {
+    "lat": 10.0570410,
+    "lon": 76.4939645
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "living_street",
+    "layer": "1",
+    "name": "Pathalaparambu Road"
+  }
+},
+{
+  "type": "way",
+  "id": 842969835,
+  "center": {
+    "lat": 10.0587526,
+    "lon": 76.4934040
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Valayanchira -Cheenikuzhi Road"
+  }
+},
+{
+  "type": "way",
+  "id": 854301033,
+  "center": {
+    "lat": 10.1745465,
+    "lon": 76.4407794
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "name": "4th Mile AA Road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 855293367,
+  "center": {
+    "lat": 10.0251953,
+    "lon": 76.4427827
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "residential",
+    "layer": "1",
+    "name": "minor road passing through mcm hss"
+  }
+},
+{
+  "type": "way",
+  "id": 876012144,
+  "center": {
+    "lat": 10.0869633,
+    "lon": 76.5158579
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "name": "Old MuvattuPuzha Road",
+    "ref": "MDR"
+  }
+},
+{
+  "type": "way",
+  "id": 895451489,
+  "center": {
+    "lat": 10.1399053,
+    "lon": 76.4050107
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "residential",
+    "lanes": "1",
+    "layer": "1",
+    "name": "Kuttickat Kavu road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 895451490,
+  "center": {
+    "lat": 10.1398484,
+    "lon": 76.4053153
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "residential",
+    "lanes": "1",
+    "layer": "1",
+    "name": "Kuttickat Kavu road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 912308765,
+  "center": {
+    "lat": 10.1173002,
+    "lon": 76.5395686
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "thuruthi road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 918490075,
+  "center": {
+    "lat": 10.1329018,
+    "lon": 76.4570198
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "lanes": "2",
+    "length": "289.458",
+    "name": "Parappuram - Vallom Bridge",
+    "opening_date": "24-08-2023",
+    "ref": "MDR",
+    "surface": "paved"
+  }
+},
+{
+  "type": "way",
+  "id": 957144643,
+  "center": {
+    "lat": 10.0731094,
+    "lon": 76.4932449
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Puliyampilly Road"
+  }
+},
+{
+  "type": "way",
+  "id": 960661631,
+  "center": {
+    "lat": 10.1471726,
+    "lon": 76.4259947
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "name": "Aluva Kalady Road"
+  }
+},
+{
+  "type": "way",
+  "id": 960661632,
+  "center": {
+    "lat": 10.1508490,
+    "lon": 76.4259964
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "name": "Aluva Kalady Road"
+  }
+},
+{
+  "type": "way",
+  "id": 961600029,
+  "center": {
+    "lat": 10.0517610,
+    "lon": 76.5703170
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "maxspeed": "50",
+    "name": "Nellikuzhi-Pezhakkappilli Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 962661826,
+  "center": {
+    "lat": 10.0532827,
+    "lon": 76.5715227
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "maxspeed": "50",
+    "name": "Nellikuzhi-Pezhakkappilli Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 964555145,
+  "center": {
+    "lat": 10.0414162,
+    "lon": 76.4405169
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "short road to perumbavoor passing through kummanodu"
+  }
+},
+{
+  "type": "way",
+  "id": 974036371,
+  "center": {
+    "lat": 10.1896196,
+    "lon": 76.4011875
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Valavazhithode Road",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1026650358,
+  "center": {
+    "lat": 10.0738833,
+    "lon": 76.5128023
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Panikkarambalam- Pulluvazhy"
+  }
+},
+{
+  "type": "way",
+  "id": 1027623345,
+  "center": {
+    "lat": 10.0654472,
+    "lon": 76.4980269
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Madathy Pady Canal Korangatti Padam Link Road"
+  }
+},
+{
+  "type": "way",
+  "id": 1040735582,
+  "center": {
+    "lat": 10.0732868,
+    "lon": 76.5421315
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "tertiary",
+    "layer": "1",
+    "name": "Old MuvattuPuzha Road"
+  }
+},
+{
+  "type": "way",
+  "id": 1040783440,
+  "center": {
+    "lat": 10.0260781,
+    "lon": 76.5461184
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "path",
+    "layer": "1",
+    "name": "thottungal kavu road"
+  }
+},
+{
+  "type": "way",
+  "id": 1059773830,
+  "center": {
+    "lat": 10.0752517,
+    "lon": 76.5049587
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Karthavumpady-Pulluvazhy road",
+    "ref": "MDR"
+  }
+},
+{
+  "type": "way",
+  "id": 1060969192,
+  "center": {
+    "lat": 10.0685029,
+    "lon": 76.4932940
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Ambazhachali Road"
+  }
+},
+{
+  "type": "way",
+  "id": 1060969193,
+  "center": {
+    "lat": 10.0792439,
+    "lon": 76.4942664
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Erambli Thazham Road"
+  }
+},
+{
+  "type": "way",
+  "id": 1061013914,
+  "center": {
+    "lat": 10.0725233,
+    "lon": 76.4990574
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "residential",
+    "layer": "1",
+    "name": "Valayanchirangara-Pulluvazhy Road"
+  }
+},
+{
+  "type": "way",
+  "id": 1061282043,
+  "center": {
+    "lat": 10.0503769,
+    "lon": 76.5439625
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "residential",
+    "layer": "1",
+    "name": "Thriveni Kalleppilli Thekalamolam Concrete Road"
+  }
+},
+{
+  "type": "way",
+  "id": 1061323731,
+  "center": {
+    "lat": 10.1010826,
+    "lon": 76.5237859
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "Karthika Auditorium Canal Bund Shutter Road"
+  }
+},
+{
+  "type": "way",
+  "id": 1061611854,
+  "center": {
+    "lat": 10.0708577,
+    "lon": 76.5379003
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "unclassified",
+    "layer": "1",
+    "name": "606 Erappe Road"
+  }
+},
+{
+  "type": "way",
+  "id": 1184173034,
+  "center": {
+    "lat": 10.1968667,
+    "lon": 76.4815484
+  },
+  "tags": {
+    "bicycle": "yes",
+    "bridge": "yes",
+    "foot": "yes",
+    "highway": "residential",
+    "horse": "no",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Naduvattom Sebiyoor Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1184182934,
+  "center": {
+    "lat": 10.1872441,
+    "lon": 76.4811711
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "secondary",
+    "layer": "1",
+    "name": "Malayattoor Road"
+  }
+},
+{
+  "type": "way",
+  "id": 1224759997,
+  "center": {
+    "lat": 10.1930245,
+    "lon": 76.4887231
+  },
+  "tags": {
+    "bicycle": "yes",
+    "bridge": "yes",
+    "foot": "yes",
+    "highway": "residential",
+    "horse": "no",
+    "layer": "1",
+    "maxspeed": "40",
+    "name": "Malayattoor Sebiyoor Road",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1318708192,
+  "center": {
+    "lat": 10.0251662,
+    "lon": 76.4428091
+  },
+  "tags": {
+    "bridge": "yes",
+    "highway": "residential",
+    "layer": "1",
+    "name": "minor road passing through mcm hss"
+  }
+}
+
+  ]
+}

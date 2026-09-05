@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Vaani — share your location</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: #080d11; color: #e9f1f5;
+    font: 15px/1.5 -apple-system, "Segoe UI", system-ui, sans-serif;
+    padding: 24px;
+  }
+  main { width: 100%; max-width: 380px; }
+  h1 { font-size: 17px; margin: 0 0 4px; }
+  h1 b { color: #58c4d6; }
+  p.lede { color: #8397a2; margin: 0 0 22px; font-size: 13.5px; }
+  button, .btn {
+    width: 100%; padding: 14px 16px; border-radius: 6px; border: 1px solid #22313b;
+    background: #17222b; color: #e9f1f5; font-size: 15px; font-weight: 600;
+    cursor: pointer; text-align: center;
+  }
+  button#share { border-color: #58c4d6; background: #123a42; }
+  button:active { transform: translateY(1px); }
+  button:disabled { opacity: .55; }
+  .status {
+    margin-top: 16px; padding: 12px 14px; border-radius: 6px; font-size: 13.5px;
+    border: 1px solid #22313b; display: none;
+  }
+  .status.show { display: block; }
+  .status.ok { border-color: #63c795; color: #63c795; background: rgba(99,199,149,.08); }
+  .status.err { border-color: #f0a340; color: #f0a340; background: rgba(240,163,64,.08); }
+  .fallback { margin-top: 20px; display: none; }
+  .fallback.show { display: block; }
+  .fallback p { font-size: 13px; color: #b6c8d1; margin: 0 0 8px; }
+  input[type=text] {
+    width: 100%; padding: 12px 14px; border-radius: 6px; border: 1px solid #22313b;
+    background: #101820; color: #e9f1f5; font-size: 15px; margin-bottom: 8px;
+  }
+  .brand { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #8397a2; margin-bottom: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">Vaani · Emergency Response</div>
+  <h1>Share your exact location, <b>one tap</b>.</h1>
+  <p class="lede">This helps the rescue team reach you faster than the phone call alone can. It works even if you stay on the line.</p>
+
+  <button id="share">Share my location</button>
+  <div id="status" class="status" role="status"></div>
+
+  <div id="fallback" class="fallback">
+    <p>Can't share location? Type the nearest landmark instead — a temple, school, bridge, or village name.</p>
+    <input id="landmark" type="text" placeholder="e.g. Odakkali temple" autocomplete="off" />
+    <button id="sendLandmark" class="btn">Send landmark</button>
+  </div>
+</main>
+<script>
+(function () {
+  var cid = new URLSearchParams(location.search).get("c");
+  var statusEl = document.getElementById("status");
+  var fallbackEl = document.getElementById("fallback");
+  var shareBtn = document.getElementById("share");
+
+  function say(kind, text) {
+    statusEl.className = "status show " + kind;
+    statusEl.textContent = text;
+  }
+
+  if (!cid) {
+    say("err", "This link is missing its call reference. Ask the operator to resend it.");
+    shareBtn.disabled = true;
+    return;
+  }
+
+  function post(body) {
+    return fetch("/calls/" + encodeURIComponent(cid) + "/location", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }).then(function (r) {
+      if (!r.ok) return r.json().then(function (b) { throw new Error(b.detail || r.statusText); });
+      return r.json();
+    });
+  }
+
+  shareBtn.addEventListener("click", function () {
+    if (!("geolocation" in navigator)) {
+      say("err", "This browser has no location support.");
+      fallbackEl.className = "fallback show";
+      return;
+    }
+    shareBtn.disabled = true;
+    shareBtn.textContent = "Locating…";
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        post({
+          lat: pos.coords.latitude,
+          lon: pos.coords.longitude,
+          error_radius_m: pos.coords.accuracy,
+          source: "gps",
+        }).then(function () {
+          shareBtn.textContent = "Location sent";
+          say("ok", "Thank you. Stay where you are, move to higher ground if you can, and keep this phone with you.");
+        }).catch(function (e) {
+          shareBtn.disabled = false;
+          shareBtn.textContent = "Share my location";
+          say("err", "Could not reach the response centre: " + e.message + ". Try again, or use the landmark below.");
+          fallbackEl.className = "fallback show";
+        });
+      },
+      function (err) {
+        shareBtn.disabled = false;
+        shareBtn.textContent = "Share my location";
+        // A permission this browser already refused is never re-prompted --
+        // the button just fails instantly and looks broken. Say which case
+        // this is, because "it didn't even ask me" has a different fix.
+        say("err", err && err.code === 1
+          ? "This browser is blocking location for this page. Allow it in the address-bar site settings, or name a landmark below."
+          : "Location was not shared. Use the landmark box below instead.");
+        fallbackEl.className = "fallback show";
+      },
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+    );
+  });
+
+  document.getElementById("sendLandmark").addEventListener("click", function () {
+    var v = document.getElementById("landmark").value.trim();
+    if (!v) return;
+    post({ landmark: v, source: "landmark" }).then(function () {
+      say("ok", "Thank you. Stay where you are and keep this phone with you.");
+    }).catch(function (e) {
+      say("err", e.message);
+    });
+  });
+})();
+</script>
+</body>
+</html>

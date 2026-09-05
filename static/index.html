@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vaani — control room</title>
+<style>
+  :root{
+    --ground:#0A1015; --panel:#121A20; --panel-2:#18232A; --line:#22313A;
+    --ink:#E4ECEF; --ink-2:#A9BBC4; --muted:#6D828E;
+    --b3:#E0554A; --b2:#E0913A; --b1:#5E7C8A; --water:#4FAEC0; --ok:#5FB88A;
+    --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+    --sans:"Segoe UI",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+       font-size:14px;overflow:hidden}
+
+  header{display:flex;align-items:center;gap:18px;padding:10px 18px;
+         border-bottom:1px solid var(--line);background:var(--panel)}
+  .brand{font-size:17px;font-weight:600;letter-spacing:.02em}
+  .brand span{color:var(--water)}
+  .tag{font-family:var(--mono);font-size:10.5px;color:var(--muted);
+       letter-spacing:.1em;text-transform:uppercase}
+  .spacer{flex:1}
+  button{font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--ink);
+         background:var(--panel-2);border:1px solid var(--line);padding:6px 13px;
+         cursor:pointer;border-radius:2px}
+  button:hover{border-color:var(--water)}
+  button:focus-visible{outline:2px solid var(--water);outline-offset:1px}
+  button.danger:hover{border-color:var(--b3)}
+
+  #badge{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;
+         padding:5px 11px;border:1px solid var(--line);background:var(--panel-2);border-radius:2px}
+  #badge .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
+  #badge.deg .dot{background:var(--b2)}
+  #badge.deg{border-color:var(--b2)}
+  #badge b{font-weight:600;letter-spacing:.06em}
+  #badge .lost{color:var(--muted)}
+
+  main{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+       height:calc(100vh - 53px)}
+  section{display:flex;flex-direction:column;min-width:0;min-height:0}
+  section+section{border-left:1px solid var(--line)}
+  .head{display:flex;align-items:baseline;gap:10px;padding:9px 16px;
+        border-bottom:1px solid var(--line);background:var(--panel)}
+  .head h2{margin:0;font-size:12px;font-weight:600;letter-spacing:.11em;
+           text-transform:uppercase;color:var(--ink-2)}
+  .head .count{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+  #board{overflow-y:auto;flex:1}
+  .row{display:grid;grid-template-columns:34px 30px 1fr;gap:11px;padding:9px 16px;
+       border-bottom:1px solid var(--line);cursor:pointer;align-items:start}
+  .row:hover{background:var(--panel)}
+  .row.sel{background:var(--panel-2);box-shadow:inset 3px 0 0 var(--water)}
+  .row.twin{box-shadow:inset 3px 0 0 var(--b2)}
+  .row.live{background:rgba(79,174,192,.06)}
+  .row.live .rk{color:var(--water)}
+  .live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;
+            background:var(--water);margin-right:5px;animation:pulse 1.3s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+  @media (prefers-reduced-motion:reduce){.live-dot{animation:none}}
+  .chip.live{color:var(--water);border-color:rgba(79,174,192,.45)}
+  .chip.lang{color:var(--ink-2)}
+  .row.sel.twin{box-shadow:inset 3px 0 0 var(--water)}
+  .rk{font-family:var(--mono);font-size:17px;font-weight:600;color:var(--muted);
+      text-align:right;font-variant-numeric:tabular-nums;line-height:1.25}
+  .row.top .rk{color:var(--ink)}
+  .band{font-family:var(--mono);font-size:10px;font-weight:700;text-align:center;
+        padding:2px 0;border-radius:2px;line-height:1.5}
+  .b3{background:rgba(224,85,74,.17);color:var(--b3);border:1px solid rgba(224,85,74,.4)}
+  .b2{background:rgba(224,145,58,.15);color:var(--b2);border:1px solid rgba(224,145,58,.35)}
+  .b1,.b0{background:rgba(94,124,138,.13);color:var(--b1);border:1px solid rgba(94,124,138,.3)}
+  .txt{font-size:13.5px;line-height:1.4;margin-bottom:3px;overflow-wrap:anywhere}
+  .why{font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.45;
+       overflow-wrap:anywhere}
+  .why .hi{color:var(--water)}
+  .why .warn{color:var(--b2)}
+  .why .crit{color:var(--b3)}
+  .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+  .chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;padding:1px 6px;
+        border:1px solid var(--line);color:var(--muted);border-radius:2px}
+  .chip.kw{color:var(--b2);border-color:rgba(224,145,58,.4)}
+  .chip.flr{color:var(--b3);border-color:rgba(224,85,74,.45)}
+
+  #mapwrap{flex:1;position:relative;overflow:hidden;background:var(--panel)}
+  #surface{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;
+           image-rendering:auto}
+  .pin{position:absolute;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;
+       border:1.5px solid rgba(10,16,21,.85);cursor:pointer;transition:transform .12s}
+  .pin:hover{transform:scale(1.45)}
+  .pin.sel{transform:scale(1.7);border-color:var(--ink);z-index:5}
+  .pin .n{position:absolute;inset:0;font-family:var(--mono);font-size:8px;font-weight:700;
+          color:#0A1015;display:flex;align-items:center;justify-content:center}
+  .err{position:absolute;border:1px dashed rgba(224,145,58,.5);border-radius:50%;
+       pointer-events:none}
+  #roads{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  #roads path{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;
+              stroke-linejoin:round}
+  #roads .cut{stroke:var(--b3);stroke-width:1.6px;opacity:.62}
+  #roads .route{stroke:var(--water);stroke-width:2.6px;
+                filter:drop-shadow(0 0 3px rgba(79,174,192,.55))}
+  #roads .wet{stroke:var(--b3);stroke-width:2.2px;stroke-dasharray:5 4;opacity:.9}
+  #roads .depot{stroke:var(--ink);stroke-width:1.4px}
+  #detail .dsp{color:var(--ink-2)}
+  #detail .dsp .no{color:var(--b3)}
+  #detail .dsp .ok{color:var(--water)}
+  #legend{position:absolute;left:12px;bottom:12px;background:rgba(10,16,21,.82);
+          border:1px solid var(--line);padding:8px 10px;font-family:var(--mono);font-size:9.5px;
+          color:var(--muted);line-height:1.6}
+  #legend .bar{width:118px;height:7px;margin:4px 0 3px;
+       background:linear-gradient(90deg,#EBF0F2,#4FAEC0 60%,#146A82)}
+  #legend .ends{display:flex;justify-content:space-between}
+
+  #detail{border-top:1px solid var(--line);background:var(--panel);padding:11px 16px;
+          font-family:var(--mono);font-size:11px;color:var(--ink-2);line-height:1.65;
+          min-height:96px}
+  #detail .k{color:var(--muted);display:inline-block;width:112px}
+  #detail .none{color:var(--muted)}
+  ::-webkit-scrollbar{width:9px}
+  ::-webkit-scrollbar-thumb{background:var(--line)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">VAANI<span>.</span></div>
+  <div class="tag">Ernakulam · emergency response centre</div>
+  <div id="badge"><span class="dot"></span><b>FULL</b><span class="lost"></span></div>
+  <div class="spacer"></div>
+  <button id="surge">Surge</button>
+  <button id="cut" class="danger">Cut network</button>
+  <button id="reset">Reset</button>
+</header>
+
+<main>
+  <section>
+    <div class="head"><h2>Rescue queue</h2><span class="count" id="qcount"></span></div>
+    <div id="board"></div>
+  </section>
+  <section>
+    <div class="head"><h2>Exposure surface</h2><span class="count">HAND · 30 m · rain 250 mm/72 h</span></div>
+    <div id="mapwrap">
+      <img id="surface" alt="modelled inundation probability">
+      <svg id="roads" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <g id="cutlayer"></g><g id="routelayer"></g>
+      </svg>
+      <div id="legend">
+        EXPOSURE INDEX · FITTED TO OBSERVED EXTENT
+        <div class="bar"></div>
+        <div class="ends"><span>0.0 dry</span><span>1.0 water</span></div>
+        <div id="roadkey" class="none"></div>
+      </div>
+    </div>
+    <div id="detail"><span class="none">Select a call to see the ground beneath it.</span></div>
+  </section>
+</main>
+
+<script>
+const API = "";
+let META = null, CALLS = [], SEL = null, DISPATCH = null;
+
+const el = (h) => { const d = document.createElement("div"); d.innerHTML = h; return d.firstElementChild; };
+const bandColor = (b) => b >= 3 ? "var(--b3)" : b === 2 ? "var(--b2)" : "var(--b1)";
+
+async function loadMeta() {
+  META = await (await fetch(API + "/surface/meta")).json();
+  if (META.available) document.getElementById("surface").src = API + "/surface.png";
+}
+
+function pathOf(coords) {           // GeoJSON [lon,lat] -> svg path in % units
+  let d = "";
+  for (const [lon, lat] of coords) {
+    const p = place(lat, lon); if (!p) continue;
+    d += (d ? "L" : "M") + p.x.toFixed(3) + " " + p.y.toFixed(3) + " ";
+  }
+  return d;
+}
+
+async function loadRoads() {
+  // The cut segments come off the same raster that ranked the callers, and they
+  // are baked, so this layer draws with the cable pulled like everything else.
+  const g = document.getElementById("cutlayer");
+  try {
+    const r = await fetch(API + "/roads/impassable");
+    if (!r.ok) return;
+    const geo = await r.json();
+    g.replaceChildren(...geo.coordinates.map((line) => {
+      const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      p.setAttribute("class", "cut"); p.setAttribute("d", pathOf(line));
+      return p;
+    }));
+    document.getElementById("roadkey").innerHTML =
+      `<span style="color:var(--b3)">&#9473;</span> ${geo.count} road segments impassable `
+      + `(exposure &ge; ${geo.cut})`;
+  } catch (e) { /* no graph baked: the map simply has no road layer */ }
+}
+
+function drawRoute(geo, cls) {
+  const g = document.getElementById("routelayer");
+  if (!geo) { g.replaceChildren(); return; }
+  const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  p.setAttribute("class", cls); p.setAttribute("d", pathOf(geo.coordinates));
+  g.replaceChildren(p);
+}
+
+async function renderDispatch(c) {
+  const box = document.getElementById("dispatch");
+  if (!box) return;
+  if (!c || c.lat === null) { DISPATCH = null; drawRoute(null); box.innerHTML = ""; return; }
+  // The board repaints on every queue event; a route that has already been
+  // computed is repainted from memory rather than refetched, so the line does
+  // not blink out from under the operator every time a call arrives.
+  if (DISPATCH && DISPATCH.id === c.id) {
+    box.innerHTML = DISPATCH.html; drawRoute(DISPATCH.geo, DISPATCH.cls); return;
+  }
+  drawRoute(null);
+  box.innerHTML = `<span class="k">dispatch</span>routing...`;
+  let r;
+  try { r = await (await fetch(API + "/dispatch/" + c.id)).json(); }
+  catch (e) { box.innerHTML = ""; return; }
+  if (SEL !== c.id) return;                        // selection moved on
+  let html, geo = null, cls = "route";
+  if (r.route) {
+    geo = r.route;
+    const bend = r.detour_m > 0
+      ? ` &nbsp;·&nbsp; <span class="ok">+${r.detour_m} m around ${r.blocked_on_direct.length} flooded segment${r.blocked_on_direct.length === 1 ? "" : "s"}</span>`
+      : " &nbsp;·&nbsp; direct road is clear";
+    html = `<span class="k">dispatch</span><span class="dsp">${r.depot.name}`
+      + ` &nbsp;·&nbsp; ${(r.length_m / 1000).toFixed(1)} km &nbsp;·&nbsp; ~${r.eta_min} min${bend}</span>`;
+  } else if (r.reason === "boat_or_air_required") {
+    geo = r.wet_route; cls = "wet";
+    html = `<span class="k">dispatch</span><span class="dsp"><span class="no">BOAT OR AIR REQUIRED</span>`
+      + ` &nbsp;·&nbsp; every road approach from ${r.depot.name} crosses water</span>`;
+  } else {
+    html = `<span class="k">dispatch</span><span class="dsp">${r.detail || r.reason}</span>`;
+  }
+  DISPATCH = { id: c.id, html, geo, cls };
+  box.innerHTML = html;
+  drawRoute(geo, cls);
+}
+
+function place(lat, lon) {
+  if (!META || !META.available) return null;
+  return { x: (lon - META.west) / (META.east - META.west) * 100,
+           y: (META.north - lat) / (META.north - META.south) * 100 };
+}
+
+function markReason(s) {
+  return s
+    .replace(/REQUEST LANDMARK/g, '<span class="crit">REQUEST LANDMARK</span>')
+    .replace(/TERRAIN EDGE[^·]*/g, (m) => `<span class="warn">${m.trim()}</span>`)
+    .replace(/LIFE THREAT[^·]*/g, (m) => `<span class="crit">${m.trim()}</span>`)
+    .replace(/(\d+\.\d m above nearest drainage)/g, '<span class="hi">$1</span>');
+}
+
+function renderBoard() {
+  const board = document.getElementById("board");
+  const twinText = "Water is rising, please help.";
+  board.replaceChildren(...CALLS.map((c) => {
+    const isTwin = c.transcript === twinText;
+    const onCall = c.live_stage && !String(c.live_stage).startsWith("done");
+    const stageLabel = { opening: "listening", locating: "asking location" }[c.live_stage] || c.live_stage;
+    const row = el(`<div class="row ${c.rank === 1 ? "top" : ""} ${isTwin ? "twin" : ""} ${onCall ? "live" : ""} ${SEL === c.id ? "sel" : ""}">
+        <div class="rk">${c.rank}</div>
+        <div class="band b${c.band}">B${c.band}</div>
+        <div>
+          <div class="txt">${c.transcript}</div>
+          <div class="why">${markReason(c.reason)}</div>
+          <div class="chips">
+            ${onCall ? `<span class="chip live"><span class="live-dot"></span>ON CALL · ${stageLabel}</span>` : ""}
+            ${c.from_number ? `<span class="chip">${c.from_number}</span>` : ""}
+            ${c.language && c.language !== "?" ? `<span class="chip lang">${c.language}</span>` : ""}
+            ${c.landmark ? `<span class="chip">📍 ${c.landmark}</span>` : ""}
+            <span class="chip">${c.hazard}</span>
+            ${c.trapped ? '<span class="chip">trapped</span>' : ""}
+            ${c.vulnerable.map((v) => `<span class="chip">${v}</span>`).join("")}
+            <span class="chip ${c.extractor === "keyword" ? "kw" : c.extractor === "llm+floor" ? "flr" : ""}">${c.extractor}${c.extractor_pending ? " · model working" : ""}</span>
+            <span class="chip">±${c.error_radius_m} m</span>
+          </div>
+        </div>
+      </div>`);
+    row.onclick = () => { select(c); };
+    return row;
+  }));
+  const onCallN = CALLS.filter((c) => c.live_stage && !String(c.live_stage).startsWith("done")).length;
+  document.getElementById("qcount").textContent =
+    CALLS.length + " calls · " + CALLS.filter((c) => c.band >= 3).length + " life threat"
+    + (onCallN ? " · " + onCallN + " on the line" : "");
+}
+
+function renderMap() {
+  // a call still being located has no point to draw yet
+  const wrap = document.getElementById("mapwrap");
+  wrap.querySelectorAll(".pin,.err").forEach((n) => n.remove());
+  if (!META || !META.available) return;
+  const spanM = (META.east - META.west) * 111320 * Math.cos(META.north * Math.PI / 180);
+  CALLS.forEach((c) => {
+    if (c.lat === null || c.lon === null) return;
+    const p = place(c.lat, c.lon); if (!p) return;
+    if (c.error_radius_m > 400) {
+      const d = (c.error_radius_m * 2 / spanM) * 100;
+      const ring = el(`<div class="err"></div>`);
+      Object.assign(ring.style, { left: `calc(${p.x}% - ${d / 2}%)`, top: `calc(${p.y}% - ${d / 2}%)`,
+                                 width: d + "%", paddingBottom: d + "%" });
+      wrap.appendChild(ring);
+    }
+    const pin = el(`<div class="pin ${SEL === c.id ? "sel" : ""}"><span class="n">${c.rank}</span></div>`);
+    pin.style.left = p.x + "%"; pin.style.top = p.y + "%";
+    pin.style.background = bandColor(c.band);
+    pin.title = `#${c.rank} · ${c.reason}`;
+    pin.onclick = () => { select(c); };
+    wrap.appendChild(pin);
+  });
+}
+
+function renderDetail(c) {
+  document.getElementById("detail").innerHTML = c ? `
+    <div><span class="k">position</span>${c.rank} of ${CALLS.length} &nbsp;·&nbsp; band ${c.band}${c.floor_applied ? " (life-threat floor applied)" : ""}</div>
+    <div><span class="k">ground</span>${c.exposure_pending ? "locating — no fix yet, ranked on report only" :
+        c.hand_m === null ? "outside mapped area" :
+        c.hand_m + " m above nearest drainage &nbsp;·&nbsp; exposure " + c.exposure_p75}</div>
+    <div><span class="k">location</span>${c.lat === null ? "not yet known — agent is asking" :
+        `${c.lat.toFixed(5)}, ${c.lon.toFixed(5)} &nbsp;·&nbsp; ±${c.error_radius_m} m &nbsp;·&nbsp; ${c.location_source}${c.landmark ? " (" + c.landmark + ")" : ""}`}</div>
+    <div><span class="k">extracted by</span>${c.extractor}${
+        c.extractor_pending ? " (spotter — model still reading)" :
+        c.extractor === "keyword" ? " (model unavailable — spotter)" :
+        c.extractor === "llm+floor" ? ` (<span class="crit">${c.extractor_note}</span>)` : ""
+      } &nbsp;·&nbsp; surface ${c.model_ver}</div>
+    <div><span class="k">waiting</span>${c.age_s} s</div>
+    <div id="dispatch"></div>` :
+    `<span class="none">Select a call to see the ground beneath it.</span>`;
+}
+
+function renderBadge(d) {
+  const b = document.getElementById("badge");
+  const names = ["FULL", "NO MODEL", "NO SPEECH", "COLD"];
+  b.classList.toggle("deg", d.level > 0);
+  b.querySelector("b").textContent = "LEVEL " + d.level + " · " + names[d.level];
+  b.querySelector(".lost").textContent = d.lost.length
+    ? "lost: " + d.lost.join(", ") + " — ranking and routing continue"
+    : "all capabilities online";
+}
+
+function select(c) {
+  if (SEL !== c.id) DISPATCH = null;
+  SEL = c.id;
+  renderBoard(); renderMap(); renderDetail(c); renderDispatch(c);
+}
+
+function connect() {
+  const es = new EventSource(API + "/queue/stream");
+  es.onmessage = (e) => {
+    const q = JSON.parse(e.data);
+    CALLS = q.calls; renderBadge(q.degradation); renderBoard(); renderMap();
+    const sel = CALLS.find((c) => c.id === SEL);
+    if (sel) { renderDetail(sel); renderDispatch(sel); }
+  };
+  es.onerror = () => { es.close(); setTimeout(connect, 2000); };
+}
+
+const post = (p) => fetch(API + p, { method: "POST" });
+document.getElementById("surge").onclick = () => post("/demo/surge");
+document.getElementById("reset").onclick = () => {
+  SEL = null; DISPATCH = null; renderDetail(null); drawRoute(null); post("/demo/reset");
+};
+let offline = false;
+document.getElementById("cut").onclick = (e) => {
+  offline = !offline;
+  e.target.textContent = offline ? "Restore network" : "Cut network";
+  post("/demo/cut-network?offline=" + offline);
+};
+
+loadMeta().then(loadRoads).then(connect);
+</script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+[
+  {
+    "transcript": "Water is rising, please help.",
+    "lat": 10.17978,
+    "lon": 76.40416,
+    "error_radius_m": 40,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture",
+    "_note": "TWIN A - low ground. Identical words to TWIN B."
+  },
+  {
+    "transcript": "Water is rising, please help.",
+    "lat": 10.17183,
+    "lon": 76.42438,
+    "error_radius_m": 40,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture",
+    "_note": "TWIN B - high ground. Identical words to TWIN A."
+  },
+  {
+    "transcript": "There is water in the whole street, we cannot come out, my mother is old and cannot walk.",
+    "lat": 10.07089,
+    "lon": 76.43133,
+    "error_radius_m": 60,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "We are four people on the roof, the water reached the first floor, there is a small child with us.",
+    "lat": 10.13005,
+    "lon": 76.42557,
+    "error_radius_m": 35,
+    "language": "en",
+    "location_source": "gps",
+    "source": "fixture"
+  },
+  {
+    "transcript": "The hill came down behind our house, mud everywhere, one man is trapped under it.",
+    "lat": 10.07906,
+    "lon": 76.42315,
+    "error_radius_m": 120,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "My father is not breathing properly, he needs a hospital, the road ahead is under water.",
+    "lat": 10.10308,
+    "lon": 76.45091,
+    "error_radius_m": 55,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "Some water is coming into the compound but we are fine, just informing.",
+    "lat": 10.06532,
+    "lon": 76.52464,
+    "error_radius_m": 45,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "Water everywhere, near the temple, please send someone quickly.",
+    "lat": 10.19349,
+    "lon": 76.4943,
+    "error_radius_m": 1500,
+    "language": "en",
+    "location_source": "tower",
+    "source": "fixture"
+  },
+  {
+    "transcript": "The wall of our house has cracked and it is leaning, three of us inside, we are afraid to move.",
+    "lat": 10.11116,
+    "lon": 76.40249,
+    "error_radius_m": 50,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "Road is blocked with fallen trees, no vehicle can pass, no one is hurt.",
+    "lat": 10.16466,
+    "lon": 76.5095,
+    "error_radius_m": 70,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "വെള്ളം കയറുന്നു, ഞങ്ങൾ കുടുങ്ങി, ഒരു കുട്ടിയുണ്ട്.",
+    "lat": 10.14256,
+    "lon": 76.4801,
+    "error_radius_m": 40,
+    "language": "ml",
+    "location_source": "gps",
+    "source": "fixture"
+  },
+  {
+    "transcript": "पानी बढ़ रहा है, हम छत पर हैं, मदद भेजिए।",
+    "lat": 10.03574,
+    "lon": 76.46757,
+    "error_radius_m": 45,
+    "language": "hi",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "My wife is pregnant and the labour pains have started, we are cut off by the flood water.",
+    "lat": 10.08811,
+    "lon": 76.44602,
+    "error_radius_m": 50,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "A boy went into the current near the culvert and has not come up, please hurry.",
+    "lat": 10.15602,
+    "lon": 76.44117,
+    "error_radius_m": 65,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "My grandmother uses a wheelchair and the water is at the doorstep, we cannot carry her down alone.",
+    "lat": 10.12488,
+    "lon": 76.48923,
+    "error_radius_m": 55,
+    "language": "en",
+    "location_source": "gps",
+    "source": "fixture"
+  },
+  {
+    "transcript": "Gas cylinder caught fire in the kitchen, smoke is filling the house, we are still inside.",
+    "lat": 10.09623,
+    "lon": 76.41784,
+    "error_radius_m": 40,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "There is a bad cut on my leg from broken glass, bleeding will not stop, water is rising too.",
+    "lat": 10.06217,
+    "lon": 76.4989,
+    "error_radius_m": 60,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "நீர் வீட்டுக்குள் வருகிறது, என் தந்தை நடக்க முடியாதவர், உதவி தேவை.",
+    "lat": 10.1789,
+    "lon": 76.46331,
+    "error_radius_m": 50,
+    "language": "ta",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "వరద నీరు లోపలికి వస్తోంది, పసిపిల్లవాడు ఉన్నాడు, సహాయం కావాలి.",
+    "lat": 10.03015,
+    "lon": 76.44219,
+    "error_radius_m": 55,
+    "language": "te",
+    "location_source": "gps",
+    "source": "fixture"
+  },
+  {
+    "transcript": "ನೀರು ಮನೆಯೊಳಗೆ ಬರುತ್ತಿದೆ, ನಾವು ಸಿಕ್ಕಿಬಿದ್ದಿದ್ದೇವೆ, ಬೇಗ ಬನ್ನಿ.",
+    "lat": 10.14802,
+    "lon": 76.5108,
+    "error_radius_m": 1800,
+    "language": "kn",
+    "location_source": "tower",
+    "source": "fixture"
+  },
+  {
+    "transcript": "Just checking, we heard the siren, but our street is completely dry so far.",
+    "lat": 10.08312,
+    "lon": 76.4067,
+    "error_radius_m": 45,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "Small leak near the compound wall, nothing serious, no need to send anyone yet.",
+    "lat": 10.1935,
+    "lon": 76.44903,
+    "error_radius_m": 50,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "The bridge near our lane is under water, we are safe at home, just letting you know it is impassable.",
+    "lat": 10.11945,
+    "lon": 76.51522,
+    "error_radius_m": 65,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "My neighbour who is blind is alone next door and the lane is flooding, someone should check on him.",
+    "lat": 10.16011,
+    "lon": 76.4348,
+    "error_radius_m": 50,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "Two of us are stuck on a rooftop, the water is still climbing, we do not know how long the roof will hold.",
+    "lat": 10.0521,
+    "lon": 76.40988,
+    "error_radius_m": 45,
+    "language": "en",
+    "location_source": "gps",
+    "source": "fixture"
+  },
+  {
+    "transcript": "Electric wire fell into the standing water outside, sparking, please warn people and send help.",
+    "lat": 10.13699,
+    "lon": 76.4589,
+    "error_radius_m": 55,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "My son has a high fever and the clinic road is flooded, we need him seen urgently.",
+    "lat": 10.09054,
+    "lon": 76.50418,
+    "error_radius_m": 60,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "Water has entered the ground floor overnight, we moved everything upstairs, we are okay for now.",
+    "lat": 10.17512,
+    "lon": 76.41972,
+    "error_radius_m": 50,
+    "language": "en",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "मेरी बुज़ुर्ग माँ को साँस लेने में तकलीफ़ है और घर के बाहर पानी भर गया है।",
+    "lat": 10.02611,
+    "lon": 76.48154,
+    "error_radius_m": 55,
+    "language": "hi",
+    "location_source": "aml",
+    "source": "fixture"
+  },
+  {
+    "transcript": "ഞങ്ങളുടെ വീടിന്റെ മേൽക്കൂര ഇളകി വീഴാൻ പോകുന്നു, അകത്ത് അഞ്ചു പേരുണ്ട്.",
+    "lat": 10.18601,
+    "lon": 76.47217,
+    "error_radius_m": 45,
+    "language": "ml",
+    "location_source": "gps",
+    "source": "fixture"
+  }
+]

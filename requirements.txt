@@ -1,0 +1,27 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+rasterio==1.4.3
+numpy==2.2.1
+pyproj==3.7.0
+python-multipart==0.0.20
+python-dotenv==1.0.0
+
+faster-whisper==1.1.1
+Pillow==11.1.0
+
+# Optional cloud ASR (asr.py). Only imported if GEMINI_API_KEY is set --
+# an unconfigured install runs on faster-whisper alone, same as before.
+google-genai==2.22.0
+
+# Build-time only. None of this is imported by the API, so the demo box can
+# run without it -- these are what build_labels.py and train_exposure.py need.
+scipy==1.15.2
+scikit-learn==1.8.0
+lightgbm==4.7.0
+joblib==1.5.2
+pystac-client==0.9.0
+planetary-computer==1.0.0
+
+# Routing. networkx only -- the graph is built from the Overpass JSON directly,
+# so no osmnx, no geopandas, no shapely.
+networkx==3.5

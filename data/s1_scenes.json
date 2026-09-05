@@ -1,0 +1,8 @@
+{
+  "flood_scene": "S1A_IW_GRDH_1SDV_20180821T004044_20180821T004109_023337_0289D5_rtc",
+  "dry_scene": "S1A_IW_GRDH_1SDV_20180117T004037_20180117T004102_020187_02270C_rtc",
+  "relative_orbit": 165,
+  "flood_datetime": "2018-08-21T00:40:57.143068Z",
+  "dry_datetime": "2018-01-17T00:40:49.805444Z",
+  "dry_orbit": 165
+}
