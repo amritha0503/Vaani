@@ -48,15 +48,16 @@ PROMPT = (
 
 # The offline / noisy-audio path. Add your languages here.
 KEYWORDS = {
-    "trapped":   ["trapped", "stuck", "can't get out", "cannot get out", "फंस", "കുടുങ്ങി"],
+    "trapped":   ["trapped", "stuck", "can't get out", "cannot get out", "save us", "rescue us", "help us",
+                  "फंस", "കുടുങ്ങി", "kudungi", "koodungi", "reksik", "rakshik", "rekshik"],
     # Deliberately NOT "under water" -- callers overwhelmingly use that phrase
     # for a submerged road or ground floor, not a submerged person, and it
     # pins medical_critical + band 3 below. "going under" is said of a person.
-    "drowning":  ["drowning", "going under", "went under", "swept away", "डूब", "മുങ്ങ"],
-    "flood":     ["water", "flood", "rising", "पानी", "बाढ़", "വെള്ളം"],
-    "landslide": ["landslide", "mudslide", "hill came down", "भूस्खलन", "ഉരുൾ"],
-    "medical":   ["bleeding", "unconscious", "not breathing", "heart", "injured"],
-    "child":     ["child", "baby", "kid", "बच्चा", "കുട്ടി"],
+    "drowning":  ["drowning", "going under", "went under", "swept away", "डूब", "മുങ്ങ", "mungi", "moongi"],
+    "flood":     ["water", "flood", "rising", "पानी", "बाढ़", "വെള്ളം", "vellam", "valam", "pongi", "kayarunnu", "uyarunnu"],
+    "landslide": ["landslide", "mudslide", "hill came down", "भूस्खलन", "ഉരുൾ", "urul"],
+    "medical":   ["bleeding", "unconscious", "not breathing", "heart", "injured", "hospital"],
+    "child":     ["child", "baby", "kid", "बच्चा", "കുട്ടി", "kutti"],
     "elderly":   ["old man", "old woman", "elderly", "grandmother", "grandfather"],
     "roof":      ["roof", "terrace", "first floor", "upstairs", "മേൽക്കൂര", "छत", "ऊपर"],
 }

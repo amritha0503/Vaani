@@ -15,7 +15,8 @@ AGE_SATURATES_MIN = 30.0
 
 def band(fields: dict) -> int:
     """The life-threat floor. Nothing below this line can be demoted by terrain."""
-    if fields["trapped"] or fields["medical_critical"]:
+    if (fields.get("trapped") or fields.get("medical_critical")
+            or fields.get("hazard") == "drowning" or fields.get("hazard_class") == "drowning"):
         return 3
     return int(fields["severity_band"])
 

@@ -93,6 +93,7 @@
   },
   {
     "transcript": "വെള്ളം കയറുന്നു, ഞങ്ങൾ കുടുങ്ങി, ഒരു കുട്ടിയുണ്ട്.",
+    "text_english": "Water is rising, we are trapped, there is a child.",
     "lat": 10.14256,
     "lon": 76.4801,
     "error_radius_m": 40,
@@ -102,6 +103,7 @@
   },
   {
     "transcript": "पानी बढ़ रहा है, हम छत पर हैं, मदद भेजिए।",
+    "text_english": "Water is rising, we are on the roof, send help.",
     "lat": 10.03574,
     "lon": 76.46757,
     "error_radius_m": 45,
@@ -156,6 +158,7 @@
   },
   {
     "transcript": "நீர் வீட்டுக்குள் வருகிறது, என் தந்தை நடக்க முடியாதவர், உதவி தேவை.",
+    "text_english": "Water is entering the house, my father cannot walk, help needed.",
     "lat": 10.1789,
     "lon": 76.46331,
     "error_radius_m": 50,
@@ -165,6 +168,7 @@
   },
   {
     "transcript": "వరద నీరు లోపలికి వస్తోంది, పసిపిల్లవాడు ఉన్నాడు, సహాయం కావాలి.",
+    "text_english": "Flood water is coming inside, there is an infant, help is needed.",
     "lat": 10.03015,
     "lon": 76.44219,
     "error_radius_m": 55,
@@ -174,6 +178,7 @@
   },
   {
     "transcript": "ನೀರು ಮನೆಯೊಳಗೆ ಬರುತ್ತಿದೆ, ನಾವು ಸಿಕ್ಕಿಬಿದ್ದಿದ್ದೇವೆ, ಬೇಗ ಬನ್ನಿ.",
+    "text_english": "Water is coming inside the house, we are trapped, come quickly.",
     "lat": 10.14802,
     "lon": 76.5108,
     "error_radius_m": 1800,
@@ -255,6 +260,7 @@
   },
   {
     "transcript": "मेरी बुज़ुर्ग माँ को साँस लेने में तकलीफ़ है और घर के बाहर पानी भर गया है।",
+    "text_english": "My elderly mother is having trouble breathing and water has filled outside the house.",
     "lat": 10.02611,
     "lon": 76.48154,
     "error_radius_m": 55,
@@ -264,6 +270,7 @@
   },
   {
     "transcript": "ഞങ്ങളുടെ വീടിന്റെ മേൽക്കൂര ഇളകി വീഴാൻ പോകുന്നു, അകത്ത് അഞ്ചു പേരുണ്ട്.",
+    "text_english": "The roof of our house is about to collapse, there are five people inside.",
     "lat": 10.18601,
     "lon": 76.47217,
     "error_radius_m": 45,

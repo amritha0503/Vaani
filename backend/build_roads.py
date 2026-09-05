@@ -30,6 +30,8 @@ AOI = (76.399, 10.019, 76.581, 10.201)          # west, south, east, north
 OVERPASS = "https://overpass-api.de/api/interpreter"
 CACHE = Path("data/osm_roads.json")
 OUT = Path("data/roadgraph.json")
+CAMPS_CACHE = Path("data/osm_camps.json")
+CAMPS_OUT = Path("data/relief_camps.json")
 
 # What a rescue vehicle can actually use. No paths, no tracks, no steps.
 DRIVABLE = ("motorway|trunk|primary|secondary|tertiary|unclassified|residential|"
@@ -42,6 +44,11 @@ out body;
 >;
 out skel qt;
 nwr["amenity"~"^(fire_station|police|hospital)$"]({AOI[1]},{AOI[0]},{AOI[3]},{AOI[2]});
+out center;
+"""
+
+CAMPS_QUERY = f"""[out:json][timeout:300];
+nwr["amenity"~"^(school|community_centre)$"]({AOI[1]},{AOI[0]},{AOI[3]},{AOI[2]});
 out center;
 """
 
@@ -70,6 +77,32 @@ def fetch(tries=3):
             log(f"  overpass failed ({type(e).__name__}), retry {attempt + 1}/{tries}")
             time.sleep(10 * (attempt + 1))
     raise SystemExit(f"could not reach Overpass: {last}")
+
+
+def fetch_camps(tries=3):
+    if CAMPS_CACHE.exists():
+        log(f"using cached {CAMPS_CACHE} ({CAMPS_CACHE.stat().st_size / 1e6:.1f} MB)")
+        return json.loads(CAMPS_CACHE.read_text(encoding="utf-8"))
+    body = urllib.parse.urlencode({"data": CAMPS_QUERY}).encode()
+    last = None
+    for attempt in range(tries):
+        try:
+            req = urllib.request.Request(
+                OVERPASS, body, {"User-Agent": "vaani-hackathon/1.0"})
+            with urllib.request.urlopen(req, timeout=300) as r:
+                raw = r.read()
+            CAMPS_CACHE.write_bytes(raw)
+            log(f"fetched {len(raw) / 1e6:.1f} MB camps from Overpass")
+            return json.loads(raw)
+        except Exception as e:
+            last = e
+            log(f"  overpass camps failed ({type(e).__name__}), retry {attempt + 1}/{tries}")
+            time.sleep(5 * (attempt + 1))
+    if CAMPS_OUT.exists():
+        log(f"using existing {CAMPS_OUT} as fallback")
+        return {"elements": []}
+    log(f"warning: could not fetch camps from Overpass ({last})")
+    return {"elements": []}
 
 
 class Sampler:
@@ -190,6 +223,26 @@ if __name__ == "__main__":
         "depots": depots[:12],
     }, separators=(",", ":")), encoding="utf-8")
     log(f"wrote {OUT} ({OUT.stat().st_size / 1e6:.1f} MB)")
+
+    # Seed list of relief camps (schools and community centres)
+    camps = []
+    camps_raw = fetch_camps()
+    for e in camps_raw.get("elements", []):
+        t = e.get("tags", {})
+        a = t.get("amenity")
+        if a not in ("school", "community_centre"):
+            continue
+        lat = e.get("lat") or (e.get("center") or {}).get("lat")
+        lon = e.get("lon") or (e.get("center") or {}).get("lon")
+        if lat is None:
+            continue
+        name = t.get("name") or a.replace("_", " ").title()
+        camps.append({"name": name, "kind": a, "lat": float(lat), "lon": float(lon)})
+    if camps:
+        CAMPS_OUT.write_text(json.dumps(camps, indent=2), encoding="utf-8")
+        log(f"wrote {len(camps)} relief camps to {CAMPS_OUT}")
+    elif CAMPS_OUT.exists():
+        log(f"kept existing {CAMPS_OUT}")
 
     e = np.array([x["exp_max"] for x in edges])
     for cut in (0.4, 0.5, 0.6, 0.7):

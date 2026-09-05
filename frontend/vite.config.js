@@ -17,7 +17,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: "/static/app/",
   build: {
-    outDir: "../static/app",
+    outDir: "../backend/static/app",
     emptyOutDir: true,
     // One CSS file and one JS file, named without hashes: the operator refreshes
     // a laptop, not a CDN, and stable names make the served copy inspectable.

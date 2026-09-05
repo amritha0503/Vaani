@@ -48,9 +48,23 @@ class RoadNetwork:
         # the file as a last resort, not as the thing that drives to you.
         self.candidates = [d for d in self.depots
                            if d["kind"] in ("fire_station", "police")] or self.depots
+        # Relief camp candidates: schools, community centres, and live declared shelters
+        camps_path = Path(path).parent / "relief_camps.json"
+        if not camps_path.exists():
+            camps_path = Path("data/relief_camps.json")
+        self.camp_candidates = []
+        if camps_path.exists():
+            try:
+                self.camp_candidates = json.loads(camps_path.read_text(encoding="utf-8"))
+            except Exception:
+                self.camp_candidates = []
         self._ids = np.array(list(self.nodes), dtype="int64")
         self._lat = np.array([self.nodes[i][0] for i in self._ids])
         self._lon = np.array([self.nodes[i][1] for i in self._ids])
+
+    def add_live_camp(self, camp: dict):
+        """Register an operator-declared relief camp dynamically."""
+        self.camp_candidates.append(camp)
 
     def __len__(self):
         return self.G.number_of_edges()
@@ -95,16 +109,14 @@ class RoadNetwork:
         }
 
     # ---------------------------------------------------------------- routing
-    def route_to(self, lat: float, lon: float, cut: float = FLOOD_CUT) -> dict:
-        """Nearest usable depot -> caller, avoiding flooded road.
+    def _nearest_reachable(self, lat: float, lon: float, candidates: list[dict], cut: float = FLOOD_CUT) -> dict:
+        """Find the nearest reachable candidate (depot or camp), trying dry path first."""
+        if not candidates:
+            return {"route": None, "reason": "no_candidates", "depot": None,
+                    "detail": "no candidates available"}
 
-        Every candidate depot is tried for a DRY route before any of them is
-        allowed to report a wet one. Returning "send a boat" because the closest
-        station happens to be cut off, while a station four kilometres further
-        out has a clear run, is the kind of answer that gets someone killed.
-        """
         target = self.nearest_node(lat, lon)
-        near = sorted(self.candidates,
+        near = sorted(candidates,
                       key=lambda d: (d["lat"] - lat) ** 2 + ((d["lon"] - lon) * 0.985) ** 2)
         best, wet_fallback = None, None
         for depot in near[:6]:
@@ -150,7 +162,49 @@ class RoadNetwork:
                 "detail": "every road approach crosses water above the cut",
             }
         return {"route": None, "reason": "unreachable_by_road", "depot": None,
-                "detail": "no road path from any depot -- caller is off the graph"}
+                "detail": "no road path from any candidate -- caller is off the graph"}
+
+    def route_to(self, lat: float, lon: float, cut: float = FLOOD_CUT) -> dict:
+        """Nearest usable depot -> caller, avoiding flooded road."""
+        return self._nearest_reachable(lat, lon, self.candidates, cut)
+
+    def nearest_camp(self, lat: float, lon: float, cut: float = FLOOD_CUT) -> dict:
+        """Find the nearest reachable relief camp/shelter for this caller.
+
+        Evaluates reachable camps via dry road network.
+        Threshold: risk = "low" only if a dry route exists AND length_m <= 1500.
+        """
+        r = self._nearest_reachable(lat, lon, self.camp_candidates, cut)
+        camp = r.get("depot")
+
+        if r.get("route") and camp:
+            length_m = r["length_m"]
+            camp_name = camp.get("name", "Relief camp")
+            eta_min = r.get("eta_min")
+            if length_m <= 1500:
+                return {
+                    "risk": "low",
+                    "nearest_camp": {"name": camp_name, "length_m": length_m, "eta_min": eta_min},
+                    "reason": f"{camp_name}, {length_m} m by dry road",
+                }
+            else:
+                return {
+                    "risk": "high",
+                    "nearest_camp": {"name": camp_name, "length_m": length_m, "eta_min": eta_min},
+                    "reason": f"{camp_name} is {length_m / 1000.0:.1f} km away (exceeds 1.5 km walkable distance)",
+                }
+
+        # No dry path to any camp
+        if r.get("reason") == "boat_or_air_required":
+            reason = "no relief camp reachable without crossing flooded road"
+        else:
+            reason = "no relief camp reachable by road — location cut off"
+
+        return {
+            "risk": "high",
+            "nearest_camp": None,
+            "reason": reason,
+        }
 
     def impassable(self, cut: float = FLOOD_CUT, limit: int = 4000) -> dict:
         """The cut segments, as GeoJSON, for the map layer."""

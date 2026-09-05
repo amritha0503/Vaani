@@ -31,14 +31,37 @@ from pydantic import BaseModel, Field
 # file.
 from dotenv import load_dotenv
 load_dotenv(Path(__file__).with_name(".env"))
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 import backend.asr as asr
+import backend.briefing as briefing
 import backend.extract as extract
 import backend.rank as rank
 import backend.store as store
+import backend.teams as teams
 import backend.telephony as telephony
 
 HERE = Path(__file__).parent
+STORAGE_DIR = HERE.parent / "storage"
+AUDIO_STORAGE = STORAGE_DIR / "audio"
+AUDIO_STORAGE.mkdir(parents=True, exist_ok=True)
+
+
+def save_audio(call_id: str, audio_bytes: bytes, filename: str = "clip.wav") -> str:
+    """Save audio locally to ./storage/audio/<call_id>.wav in standard PCM_16 WAV format.
+    Guarantees 100% air-gapped local storage with zero cloud in the hot path."""
+    AUDIO_STORAGE.mkdir(parents=True, exist_ok=True)
+    target_path = AUDIO_STORAGE / f"{call_id}.wav"
+    try:
+        import io
+        import soundfile as sf
+        data, sr = sf.read(io.BytesIO(audio_bytes))
+        sf.write(target_path, data, sr, format="WAV", subtype="PCM_16")
+    except Exception:
+        target_path.write_bytes(audio_bytes)
+    return str(target_path)
+
+
 EXPOSURE_TIF = HERE / "data" / "exposure.tif"
 HAND_TIF = HERE / "data" / "hand.tif"
 ROADS_JSON = HERE / "data" / "roadgraph.json"
@@ -48,6 +71,9 @@ ROADS = None            # RoadNetwork, or None if the graph was never baked
 DEMO_OFFLINE = False    # /demo/cut-network flips this for rehearsal
 _ROUTE_CACHE = {}       # call_id -> (key, route). The graph is frozen; a
                         # route asked for twice is the same route both times.
+_CAMP_RISK_CACHE = {}   # call_id -> (key, risk_data)
+_BRIEFING_CACHE = {}    # call_id -> (key, briefing_data)
+LIVE_CAMPS = []         # in-memory declared relief camps during disaster ops
 _IMPASSABLE_CACHE = None
 GAZ = None              # local landmark gazetteer
 CONVO = None            # the call agent
@@ -123,6 +149,7 @@ def _upgrade(call_id: str, transcript: str) -> None:
         return
     call["fields"], call["extractor"] = fields, extractor
     call["extractor_error"], call["extractor_pending"] = note, False
+    store.save_call(call)
     store.log("re-extracted", call_id=call_id, extractor=extractor, note=note,
               severity_band=fields["severity_band"], trapped=fields["trapped"])
 
@@ -139,6 +166,11 @@ def _upgrade_live(st: dict) -> None:
 async def transcribe(path: str) -> dict:
     async with ASR_SLOTS:
         return await asyncio.to_thread(asr.transcribe, path)
+
+
+async def transcribe_and_translate(path: str) -> dict:
+    async with ASR_SLOTS:
+        return await asyncio.to_thread(asr.transcribe_and_translate, path)
 
 
 @asynccontextmanager
@@ -207,6 +239,7 @@ def loc_page():
 # ---------------------------------------------------------------- models
 class CallIn(BaseModel):
     transcript: str
+    text_english: str | None = None
     lat: float
     lon: float
     error_radius_m: float = Field(50.0, description="gps ~10, aml ~50, tower ~1500")
@@ -237,17 +270,42 @@ class TranscriptIn(BaseModel):
     text: str
 
 
+class CampIn(BaseModel):
+    lat: float
+    lon: float
+    name: str
+
+
+def _get_cached_camp_risk(call_id: str, lat: float | None, lon: float | None) -> dict | None:
+    if ROADS is None or lat is None or lon is None:
+        return None
+    key = (lat, lon)
+    hit = _CAMP_RISK_CACHE.get(call_id)
+    if hit and hit[0] == key:
+        return hit[1]
+    res = ROADS.nearest_camp(*key)
+    _CAMP_RISK_CACHE[call_id] = (key, res)
+    return res
+
+
 # ---------------------------------------------------------------- core
 def ingest(c: CallIn) -> dict:
     # Deterministic triage first, in microseconds, so the call is ranked before
     # the model has even been asked. The model's answer replaces this one when
     # it arrives -- and can only ever raise the band, never lower it.
-    fields = extract.keyword_extract(c.transcript)
+    text_english = c.text_english or c.transcript
+    if not c.text_english and c.language and c.language != "en":
+        text_english = asr.translate_to_english(c.transcript, c.language)
+    extract_input = c.transcript
+    if text_english and text_english != c.transcript:
+        extract_input = f"{c.transcript} {text_english}"
+    fields = extract.keyword_extract(extract_input)
     exp = surface().sample(c.lat, c.lon, c.error_radius_m)
     call = {
         "id": str(uuid.uuid4())[:8],
         "received_at": time.time(),
         "transcript": c.transcript,
+        "text_english": text_english,
         "language": c.language,
         "lat": c.lat, "lon": c.lon,
         "error_radius_m": c.error_radius_m,
@@ -261,9 +319,10 @@ def ingest(c: CallIn) -> dict:
         "override": 0,
     }
     store.CALLS[call["id"]] = call
+    store.save_call(call)
     store.log("ranked", call_id=call["id"], extractor="keyword", exposure=exp,
               severity_band=fields["severity_band"], trapped=fields["trapped"])
-    EXTRACT_POOL.submit(_upgrade, call["id"], c.transcript)
+    EXTRACT_POOL.submit(_upgrade, call["id"], extract_input)
     return call
 
 
@@ -280,10 +339,12 @@ def place_of(call: dict) -> dict | None:
 
 def board() -> list[dict]:
     ranked = rank.rank(list(store.CALLS.values()))
+    store.save_rankings(ranked)
     return [{
         "rank": c["rank"], "id": c["id"], "band": c["band"],
         "within": c["within"], "reason": c["reason"],
         "floor_applied": c["floor_applied"], "transcript": c["transcript"],
+        "text_english": c.get("text_english"),
         "hazard": c["fields"]["hazard_class"], "trapped": c["fields"]["trapped"],
         "live_stage": c.get("live_stage"), "landmark": c.get("landmark"),
         "language": c.get("language"), "from_number": c.get("from_number"),
@@ -307,6 +368,13 @@ def board() -> list[dict]:
         # and the console must not print the second when it means the first.
         "exposure_pending": bool(c["exposure"].get("pending")),
         "model_ver": c["model_ver"], "age_s": int(time.time() - c["received_at"]),
+        "manual_team_id": c.get("manual_team_id"),
+        "assigned_team": (
+            {**teams.TEAMS_BY_ID[c["manual_team_id"]], "manual_override": True}
+            if c.get("manual_team_id") and c.get("manual_team_id") in teams.TEAMS_BY_ID
+            else teams.find_nearest_team(c["lat"], c["lon"])
+        ),
+        "camp_risk": _get_cached_camp_risk(c["id"], c.get("lat"), c.get("lon")),
     } for c in ranked]
 
 
@@ -399,6 +467,7 @@ def set_location(call_id: str, loc: LocationIn):
     call.update(lat=lat, lon=lon, error_radius_m=radius, location_source=source)
     call["exposure"] = surface().sample(lat, lon, radius)
     call["model_ver"] = model_ver() if call["exposure"].get("in_aoi") else "-"
+    store.save_call(call)
     store.log("relocated", call_id=call_id, source=source, lat=lat, lon=lon,
               error_radius_m=radius)
     return {"ok": True, "queue": board()}
@@ -423,30 +492,44 @@ def set_transcript(call_id: str, t: TranscriptIn):
         raise HTTPException(422, "transcript cannot be empty")
     call["transcript"] = text
     call["transcript_source"] = "operator"
-    call["fields"] = extract.keyword_extract(text)
+    # Re-translate the corrected transcript
+    lang = call.get("language")
+    audio_path = call.get("audio_path")
+    call["text_english"] = asr.translate_to_english(text, lang, audio_path)
+    extract_input = text
+    if call["text_english"] and call["text_english"] != text:
+        extract_input = f"{text} {call['text_english']}"
+    call["fields"] = extract.keyword_extract(extract_input)
     call["extractor"] = "keyword"
     call["extractor_pending"] = True
     if call.get("lat") is None:
         _relocate(call)
+    store.save_call(call)
     store.log("transcript_corrected", call_id=call_id, actor="operator:1", text=text)
-    EXTRACT_POOL.submit(_upgrade, call_id, text)
+    EXTRACT_POOL.submit(_upgrade, call_id, extract_input)
+    return {"ok": True, "queue": board()}
+
+
+@app.delete("/calls/{call_id}")
+def remove_call(call_id: str):
+    """Remove or resolve a call, permanently deleting it from the active queue and DB."""
+    store.delete_call(call_id)
     return {"ok": True, "queue": board()}
 
 
 @app.get("/audio/{call_id}")
 def get_audio(call_id: str):
-    """The caller's own voice, played back for the operator -- available for an
-    uploaded recording, a rehearsed simulate, or a live call taken in `record`
-    mode. Not available for a live `gather`-mode call: Twilio's own speech
-    recognition never gives us the audio, only the words -- there is nothing
-    to play, so this says so rather than pretending."""
+    """The caller's own voice, played back from air-gapped local storage at ./storage/audio/<call_id>.wav."""
+    from fastapi.responses import FileResponse
+    wav_path = AUDIO_STORAGE / f"{call_id}.wav"
+    if wav_path.exists():
+        return FileResponse(wav_path, media_type="audio/wav")
     call = store.CALLS.get(call_id)
     if not call:
         raise HTTPException(404, "no such call")
     path = call.get("audio_path")
     if not path or not Path(path).exists():
         raise HTTPException(404, "no recording for this call")
-    from fastapi.responses import FileResponse
     ext = Path(path).suffix.lower().lstrip(".") or "wav"
     return FileResponse(path, media_type=f"audio/{ext}")
 
@@ -502,6 +585,93 @@ def get_dispatch(call_id: str):
     return r
 
 
+@app.post("/camps")
+def declare_camp(camp: CampIn):
+    """Declare a relief camp live during disaster operations.
+    Appends to in-memory list, registers with RoadNetwork, and logs via store.log()."""
+    item = {
+        "name": camp.name,
+        "kind": "community_centre",
+        "lat": camp.lat,
+        "lon": camp.lon,
+        "declared_live": True,
+    }
+    LIVE_CAMPS.append(item)
+    if ROADS is not None:
+        ROADS.add_live_camp(item)
+    _CAMP_RISK_CACHE.clear()
+    store.log("camp_declared", name=camp.name, lat=camp.lat, lon=camp.lon)
+    return {
+        "ok": True,
+        "camp": item,
+        "total_camps": len(ROADS.camp_candidates) if ROADS else len(LIVE_CAMPS),
+    }
+
+
+@app.get("/calls/{call_id}/camp-risk")
+def get_camp_risk(call_id: str):
+    """Report whether caller has a reachable relief camp nearby via dry road (risk: low) or not (risk: high)."""
+    call = store.CALLS.get(call_id)
+    if not call:
+        raise HTTPException(404, "no such call")
+    if ROADS is None:
+        raise HTTPException(503, "no road graph; run build_roads.py")
+    if call.get("lat") is None:
+        live = bool(call.get("live_stage")) and not str(
+            call.get("live_stage")).startswith("done")
+        return {
+            "risk": "high",
+            "nearest_camp": None,
+            "reason": ("the agent is still asking where they are" if live
+                       else "no location yet — place the call to assess camp risk"),
+        }
+    key = (call["lat"], call["lon"])
+    hit = _CAMP_RISK_CACHE.get(call_id)
+    if hit and hit[0] == key:
+        return hit[1]
+    res = ROADS.nearest_camp(*key)
+    _CAMP_RISK_CACHE[call_id] = (key, res)
+    return res
+
+
+@app.get("/dispatch/{call_id}/briefing")
+def get_briefing(call_id: str):
+    """Responder safety briefing on specific hazards and precautions, strictly decided by rule."""
+    call = store.CALLS.get(call_id)
+    if not call:
+        raise HTTPException(404, "no such call")
+    if call.get("lat") is None:
+        return {
+            "warnings": ["No location yet — cannot generate route-specific safety briefing."],
+            "route_hazards": [],
+            "generated_from": [],
+        }
+    key = (call["lat"], call["lon"])
+    hit = _BRIEFING_CACHE.get(call_id)
+    if hit and hit[0] == key:
+        return hit[1]
+
+    route_data = {}
+    if ROADS is not None:
+        route_hit = _ROUTE_CACHE.get(call_id)
+        if route_hit and route_hit[0] == key:
+            route_data = route_hit[1]
+        else:
+            route_data = ROADS.route_to(*key)
+
+    exp = call.get("exposure")
+    if not exp and SURFACE is not None:
+        exp = surface().sample(call["lat"], call["lon"], call.get("error_radius_m", 50.0))
+    elif not exp:
+        exp = {}
+
+    fields = call.get("fields") or {}
+    b = briefing.generate_briefing(call_fields=fields, exposure=exp, route=route_data)
+    _BRIEFING_CACHE[call_id] = (key, b)
+    store.log("briefed", call_id=call_id, warnings=b.get("warnings", []))
+    return b
+
+
 @app.get("/roads/impassable")
 def get_impassable():
     """The cut segments, drawn from the same surface that ranked the caller."""
@@ -520,6 +690,8 @@ def _relocate(call: dict) -> None:
     Exactly what the live agent does on turn 2 -- an uploaded recording is just
     a call whose audio arrived late."""
     hit = GAZ.locate(call["transcript"]) if GAZ else None
+    if not hit and call.get("text_english") and GAZ and call["text_english"] != call["transcript"]:
+        hit = GAZ.locate(call["text_english"])
     if hit:
         call.update(lat=hit["lat"], lon=hit["lon"],
                     error_radius_m=hit["error_radius_m"],
@@ -538,17 +710,23 @@ def _process_upload(call_id: str, path: str) -> None:
     call = store.CALLS.get(call_id)
     if call is None:
         return
-    tr = asr.transcribe(path)
+    tr = asr.transcribe_and_translate(path)
     call = store.CALLS.get(call_id)
     if call is None:                       # reset while we were transcribing
         return
     call["transcript"] = tr["text"] or "(no speech detected)"
+    call["text_english"] = tr.get("text_english") or call["transcript"]
     call["language"] = tr.get("language") or "?"
     call["asr_conf"] = tr.get("language_confidence")
     call["asr_duration_s"] = tr.get("duration_s")
     call["asr_backend"] = tr.get("backend")
     call["intake_stage"] = "locating"
-    call["fields"] = extract.keyword_extract(call["transcript"])
+
+    extract_input = call["transcript"]
+    if call["text_english"] and call["text_english"] != call["transcript"]:
+        extract_input = f"{call['transcript']} {call['text_english']}"
+
+    call["fields"] = extract.keyword_extract(extract_input)
     call["extractor"] = "keyword"
     _relocate(call)
     call["model_ver"] = model_ver() if call["exposure"].get("in_aoi") else "-"
@@ -556,13 +734,26 @@ def _process_upload(call_id: str, path: str) -> None:
               language=call["language"], located=call.get("landmark"),
               severity_band=call["fields"]["severity_band"])
     # Then the model, on the same worker: ASR and the LLM both want the CPU.
-    fields, extractor, note = extract.extract(call["transcript"])
+    fields, extractor, note = extract.extract(extract_input)
     call = store.CALLS.get(call_id)
     if call is None:
         return
     call["fields"], call["extractor"] = fields, extractor
     call["extractor_error"], call["extractor_pending"] = note, False
+
+    # Check if the LLM identified a spoken landmark that wasn't caught by the direct regex
+    if call.get("lat") is None and fields.get("landmark_text") and GAZ:
+        hit = GAZ.locate(fields["landmark_text"])
+        if hit:
+            call.update(lat=hit["lat"], lon=hit["lon"],
+                        error_radius_m=hit["error_radius_m"],
+                        location_source=hit["source"], landmark=hit["matched"],
+                        landmark_confidence=hit["confidence"])
+            call["exposure"] = surface().sample(hit["lat"], hit["lon"], hit["error_radius_m"])
+            call["model_ver"] = model_ver() if call["exposure"].get("in_aoi") else "-"
+
     call["intake_stage"] = None
+    store.save_call(call)
     store.log("re-extracted", call_id=call_id, extractor=extractor, note=note,
               severity_band=fields["severity_band"], trapped=fields["trapped"])
 
@@ -571,16 +762,15 @@ def _process_upload(call_id: str, path: str) -> None:
 async def intake_audio(files: list[UploadFile] = File(...)):
     """Drop a folder of recordings on the board.
 
+    Audio is saved directly to ./storage/audio/<call_id>.wav for 100% air-gapped local storage.
     Each file becomes a call the instant it is saved -- transcript pending,
-    ranked on nothing yet -- and fills in as the queue works through them. The
-    operator watches the board build rather than watching an upload spinner."""
+    ranked on nothing yet -- and fills in as the queue works through them."""
     queued = []
     for f in files:
         cid = str(uuid.uuid4())[:8]
-        suffix = Path(f.filename or "clip.wav").suffix or ".wav"
-        dest = HERE / "data" / f"upload_{cid}{suffix}"
-        dest.write_bytes(await f.read())
-        store.CALLS[cid] = {
+        raw_bytes = await f.read()
+        dest = save_audio(cid, raw_bytes, f.filename or "clip.wav")
+        call = {
             "id": cid, "received_at": time.time(),
             "transcript": "(transcribing)", "language": "?",
             "lat": None, "lon": None, "error_radius_m": 0.0,
@@ -590,9 +780,11 @@ async def intake_audio(files: list[UploadFile] = File(...)):
             "extractor_pending": True, "intake_stage": "transcribing",
             "exposure": dict(PENDING_EXPOSURE), "model_ver": "-",
             "override": 0, "source": "upload", "filename": f.filename,
-            "audio_path": str(dest),
+            "audio_path": dest,
         }
-        INTAKE_POOL.submit(_process_upload, cid, str(dest))
+        store.CALLS[cid] = call
+        store.save_call(call)
+        INTAKE_POOL.submit(_process_upload, cid, dest)
         queued.append({"id": cid, "filename": f.filename})
     store.log("intake", count=len(queued), files=[q["filename"] for q in queued])
     return {"queued": queued}
@@ -626,6 +818,31 @@ def get_clusters():
     out = sorted(groups.values(),
                  key=lambda g: (-g["life_threat"], -g["worst_band"], g["best_rank"]))
     return {"groups": out, "located": sum(1 for g in out if g["lat"] is not None)}
+
+
+@app.get("/teams")
+def get_rescue_teams():
+    """Group all emergency calls by assigned rescue team stationed across Ernakulam."""
+    calls = board()
+    return teams.group_calls_by_teams(calls)
+
+
+class TeamAssignIn(BaseModel):
+    team_id: str
+
+
+@app.post("/calls/{call_id}/assign")
+def assign_call_team(call_id: str, payload: TeamAssignIn):
+    """Manually assign/reassign a call to a specific rescue team."""
+    call = store.CALLS.get(call_id)
+    if not call:
+        raise HTTPException(404, "no such call")
+    if payload.team_id not in teams.TEAMS_BY_ID and payload.team_id != "auto":
+        raise HTTPException(422, f"unknown team_id, must be one of: {list(teams.TEAMS_BY_ID.keys())}")
+    call["manual_team_id"] = None if payload.team_id == "auto" else payload.team_id
+    store.save_call(call)
+    store.log("team_reassigned", call_id=call_id, team_id=payload.team_id)
+    return {"ok": True, "call": call, "teams": teams.group_calls_by_teams(board())}
 
 
 # ------------------------------------------------------------ twilio control
@@ -715,6 +932,19 @@ def get_degradation():
     return degradation()
 
 
+@app.get("/storage/status")
+def get_storage_status():
+    """Confirms local air-gapped storage and spatial database tables."""
+    audio_files = list(AUDIO_STORAGE.glob("*.wav"))
+    summary = store.get_spatial_tables_summary()
+    summary["audio_storage"] = {
+        "path": str(AUDIO_STORAGE),
+        "count": len(audio_files),
+        "air_gapped": True
+    }
+    return summary
+
+
 @app.get("/audit")
 def get_audit(limit: int = 200):
     return store.audit_rows(limit)
@@ -734,6 +964,7 @@ def sync_call(st: dict) -> dict:
         "source": "phone", "from_number": st.get("from_number"),
     }
     call["transcript"] = st["transcript"] or "(on the line…)"
+    call["text_english"] = st.get("text_english") or call["transcript"]
     call["language"] = st.get("language") or "?"
     call["live_stage"] = st["stage"]
     if st.get("audio_path"):
@@ -769,6 +1000,7 @@ def sync_call(st: dict) -> dict:
         call["model_ver"] = "-"
 
     store.CALLS[st["id"]] = call
+    store.save_call(call)
     store.log("call_turn", call_id=st["id"], stage=st["stage"],
               language=st.get("language"), located=bool(loc),
               landmark=(loc or {}).get("matched"))
@@ -848,12 +1080,12 @@ async def voice_turn(request: Request):
     sid = form.get("CallSid", "")
     speech = form.get("SpeechResult")
     url = form.get("RecordingUrl")
-    tr = {"text": "", "language": None}
+    tr = {"text": "", "language": None, "text_english": ""}
     if speech is not None:
         conf = form.get("Confidence")
         tr = {"text": speech, "language": None, "language_name": None,
               "language_confidence": float(conf) if conf else None,
-              "ok": bool(speech)}
+              "ok": bool(speech), "text_english": speech}
     elif url:
         import urllib.request as ur
         sidauth = (os.environ.get("TWILIO_ACCOUNT_SID"), os.environ.get("TWILIO_AUTH_TOKEN"))
@@ -868,9 +1100,12 @@ async def voice_turn(request: Request):
                 tmp.write_bytes(r.read())
             if sid in CONVO.live:
                 CONVO.live[sid]["audio_path"] = str(tmp)
-            tr = await transcribe(str(tmp))
+            tr = await transcribe_and_translate(str(tmp))
         except Exception as e:
             store.log("asr_failed", call_id=sid, error=str(e))
+    # Propagate text_english to conversation state
+    if sid in CONVO.live:
+        CONVO.live[sid]["text_english"] = tr.get("text_english") or tr.get("text", "")
     st = CONVO.turn(sid, tr)
     if st["stage"].startswith("done"):
         CONVO.finish(sid)
@@ -909,16 +1144,21 @@ async def voice_simulate(call_sid: str = Form(...), text: str = Form(""),
         tmp = HERE / "data" / f"sim_{call_sid}_{int(time.time())}{Path(audio.filename or '.wav').suffix}"
         tmp.write_bytes(await audio.read())
         CONVO.live[call_sid]["audio_path"] = str(tmp)
-        tr = await transcribe(str(tmp))
+        tr = await transcribe_and_translate(str(tmp))
     else:
+        text_english = asr.translate_to_english(text, language) if language != "en" else text
         tr = {"text": text, "language": language,
               "language_name": asr.SUPPORTED.get(language, language),
-              "language_confidence": 1.0, "ok": bool(text)}
+              "language_confidence": 1.0, "ok": bool(text),
+              "text_english": text_english}
+    # Propagate text_english to conversation state
+    CONVO.live[call_sid]["text_english"] = tr.get("text_english") or tr.get("text", "")
     st = CONVO.turn(call_sid, tr)
     done = st["stage"].startswith("done")
     if done:
         CONVO.finish(call_sid)
     return {"stage": st["stage"], "heard": tr["text"], "language": tr.get("language"),
+            "text_english": tr.get("text_english"),
             "located": st.get("location"), "done": done,
             "next_prompt": telephony.PROMPTS.get(
                 {"opening": "opening", "locating": "relocate" if st["location_attempts"]

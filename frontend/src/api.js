@@ -18,9 +18,24 @@ const json = async (path, init) => {
 export const api = {
   queue: () => json("/queue"),
   clusters: () => json("/clusters"),
+  teams: () => json("/teams"),
+  assignTeam: (callId, teamId) =>
+    json(`/calls/${callId}/assign`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ team_id: teamId }),
+    }),
   meta: () => json("/surface/meta"),
   impassable: () => json("/roads/impassable"),
   dispatch: (id) => json(`/dispatch/${id}`),
+  campRisk: (id) => json(`/calls/${id}/camp-risk`),
+  briefing: (id) => json(`/dispatch/${id}/briefing`),
+  declareCamp: (camp) =>
+    json("/camps", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(camp),
+    }),
   audit: (limit = 60) => json(`/audit?limit=${limit}`),
   twilioStatus: () => json("/twilio/status"),
   dial: (to) => json(`/twilio/dial?to=${encodeURIComponent(to)}`, { method: "POST" }),
@@ -52,6 +67,7 @@ export const api = {
     for (const f of files) body.append("files", f, f.name);
     return json("/intake/audio", { method: "POST", body });
   },
+  removeCall: (id) => json(`/calls/${id}`, { method: "DELETE" }),
 };
 
 /**

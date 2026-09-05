@@ -6,6 +6,7 @@ import MapPanel from "./components/MapPanel.jsx";
 import DetailPanel from "./components/DetailPanel.jsx";
 import { UploadPanel, TwilioPanel } from "./components/Intake.jsx";
 import { SeverityPanel, LocationPanel } from "./components/Groups.jsx";
+import { TeamsPanel } from "./components/TeamsPanel.jsx";
 import AuditPanel from "./components/Audit.jsx";
 
 export default function App() {
@@ -13,13 +14,16 @@ export default function App() {
   const [tab, setTab] = useState("ops");
   const [selected, setSelected] = useState(null);
   const [bandFilter, setBandFilter] = useState(null);
+  const [teamFilter, setTeamFilter] = useState(null);
   const [route, setRoute] = useState(null);
   const [routeState, setRouteState] = useState("idle");
   const [announcement, setAnnouncement] = useState("");
   const [placing, setPlacing] = useState(null); // call id being placed by a map click, or null
   const lastTop = useRef(null);
 
-  const visible = bandFilter == null ? calls : calls.filter((c) => c.band === bandFilter);
+  const visible = calls
+    .filter((c) => bandFilter == null || c.band === bandFilter)
+    .filter((c) => teamFilter == null || c.assigned_team?.team_id === teamFilter);
   const call = calls.find((c) => c.id === selected) ?? null;
 
   // The route is fetched once per selected call and cached server-side too, so
@@ -104,6 +108,22 @@ export default function App() {
         >
           <AuditPanel onSelect={select} />
         </main>
+      ) : tab === "teams" ? (
+        <main
+          id="panel-teams"
+          role="tabpanel"
+          aria-labelledby="tab-teams"
+          className="min-h-0 flex-1 overflow-y-auto p-3"
+        >
+          <TeamsPanel
+            onSelectTeam={(t) => {
+              setTeamFilter(t);
+              if (t) setTab("ops");
+            }}
+            activeTeam={teamFilter}
+            onSelectCall={select}
+          />
+        </main>
       ) : tab === "ops" ? (
         <main
           id="panel-ops"
@@ -125,6 +145,24 @@ export default function App() {
                 </button>
               </div>
             )}
+            {teamFilter != null && (
+              <div className="flex items-center gap-3 border-b border-line bg-raised px-5 py-2">
+                <p className="font-mono text-[11px] text-ink-2">
+                  Assigned to{" "}
+                  <span className="font-bold text-water">
+                    {calls.find((c) => c.assigned_team?.team_id === teamFilter)?.assigned_team
+                      ?.team_name || teamFilter}
+                  </span>{" "}
+                  — {visible.length} targets
+                </p>
+                <button
+                  onClick={() => setTeamFilter(null)}
+                  className="ml-auto rounded-sm border border-line px-2 py-1 font-mono text-[10px] text-muted hover:text-ink"
+                >
+                  Clear team filter
+                </button>
+              </div>
+            )}
             <Queue
               calls={visible}
               selected={selected}
@@ -141,6 +179,7 @@ export default function App() {
               pickMode={placing != null}
               onPick={onPick}
               onCancelPick={() => setPlacing(null)}
+              activeTeam={teamFilter}
             />
             <DetailPanel call={call} route={route} routeState={routeState} onPickOnMap={pickOnMap} />
           </div>
