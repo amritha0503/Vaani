@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* Control room, refined. Every colour here clears WCAG AA against the surface
+   it is used on -- the muted tone is deliberately lighter than a designer would
+   pick, because this is read at a distance, on a projector, at 3am. */
+@theme {
+  --color-ground: #080d11;
+  --color-panel: #101820;
+  --color-raised: #17222b;
+  --color-line: #22313b;
+  --color-line-soft: #1a2831;
+
+  --color-ink: #e9f1f5;
+  --color-ink-2: #b6c8d1;
+  --color-muted: #8397a2;
+
+  --color-band3: #ff6f61;
+  --color-band2: #f0a340;
+  --color-band1: #86a2b0;
+  --color-water: #58c4d6;
+  --color-ok: #63c795;
+
+  --font-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* One focus style everywhere, always visible, never removed. */
+:where(a, button, [tabindex], input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-water);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes vaani-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+.pulse {
+  animation: vaani-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes vaani-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+.sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 25%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-water) 55%, transparent),
+    transparent
+  );
+  animation: vaani-sweep 1.6s linear infinite;
+}
