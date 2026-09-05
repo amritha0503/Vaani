@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api, bandName } from "../api.js";
+import SafetyBriefing from "./SafetyBriefing.jsx";
 
 function Line({ label, children }) {
   return (
@@ -358,6 +359,24 @@ export default function DetailPanel({ call, route, routeState, onPickOnMap }) {
             {ground}
           </span>
         </Line>
+        {call.assigned_team && (
+          <Line label="rescue team">
+            <span className="font-semibold text-water">
+              🚒 {call.assigned_team.team_name}
+            </span>
+            <span className="text-muted">
+              {" "}· {call.assigned_team.hub} ({call.assigned_team.distance_km} km away)
+            </span>
+            {call.assigned_team.within_radius ? (
+              <span className="text-ok"> · within service radius</span>
+            ) : (
+              <span className="text-band2"> · outside standard radius</span>
+            )}
+            {call.assigned_team.manual_override && (
+              <span className="text-band3"> · operator-reassigned</span>
+            )}
+          </Line>
+        )}
         {call.lat != null && (
           <Line label="cross-section">
             <CrossSection callId={call.id} lat={call.lat} lon={call.lon} />
@@ -424,6 +443,34 @@ export default function DetailPanel({ call, route, routeState, onPickOnMap }) {
               )}
             </>
           )}
+        </Line>
+        <Line label="camp risk">
+          {call.camp_risk ? (
+            <div className="flex flex-wrap items-center gap-2">
+              <span
+                className={`rounded-full border px-2 py-0.5 font-mono text-[9.5px] font-bold ${
+                  call.camp_risk.risk === "low"
+                    ? "border-ok/40 bg-ok/15 text-ok"
+                    : "border-band3/40 bg-band3/15 text-band3"
+                }`}
+              >
+                {call.camp_risk.risk.toUpperCase()} RISK
+              </span>
+              <span className="text-ink-2">{call.camp_risk.reason}</span>
+              {call.camp_risk.nearest_camp && (
+                <span className="text-muted">
+                  (~{call.camp_risk.nearest_camp.eta_min} min walking/drive)
+                </span>
+              )}
+            </div>
+          ) : call.lat == null ? (
+            <span className="text-muted">place call on map to compute camp proximity</span>
+          ) : (
+            <span className="text-muted">evaluating dry routes to nearest relief camps…</span>
+          )}
+        </Line>
+        <Line label="safety brief">
+          <SafetyBriefing callId={call.id} />
         </Line>
         {call.text_english && call.text_english !== call.transcript && (
           <Line label="english">

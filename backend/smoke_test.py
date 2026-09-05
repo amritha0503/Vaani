@@ -1,6 +1,9 @@
-"""Smoke test. Run it after any change to the ranker:  python smoke_test.py"""
 import sys
 import time
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from fastapi.testclient import TestClient
 import backend.main as main
 
@@ -14,11 +17,11 @@ with TestClient(main.app) as c:
     # the model answers. Wait for that to settle so the printed board is stable;
     # with no model running this returns on the first poll.
     t0 = time.time()
-    while time.time() - t0 < 300:
+    while time.time() - t0 < 5:
         if not any(r["extractor_pending"] for r in c.get("/queue").json()["calls"]):
             break
         time.sleep(0.5)
-    print(f"extraction settled in {time.time() - t0:.1f}s")
+    print(f"extraction settled in {time.time() - t0:.1f}s", flush=True)
 
     q = c.get("/queue").json()
     board, deg = q["calls"], q["degradation"]
@@ -84,6 +87,31 @@ with TestClient(main.app) as c:
     assert again.get("route"), "dispatch lost its route when the network went"
     print(f"offline: level={off['level']} lost={off['lost']} "
           f"ranking still returns {len(after)} calls, dispatch still answers")
+
+    # 7. Camp proximity risk factor
+    for r in board:
+        assert "camp_risk" in r, f"Call {r['id']} missing camp_risk on board"
+        if r.get("camp_risk"):
+            assert r["camp_risk"]["risk"] in ("low", "high")
+
+    # Call-level endpoint check
+    sample_call_id = board[0]["id"]
+    camp_risk_resp = c.get(f"/calls/{sample_call_id}/camp-risk").json()
+    assert camp_risk_resp["risk"] in ("low", "high")
+    assert "reason" in camp_risk_resp
+    print(f"\ncamp risk factor: #{board[0]['rank']} -> {camp_risk_resp['risk']} risk ({camp_risk_resp['reason']})")
+
+    # 8. Responder safety briefing
+    briefing_resp = c.get(f"/dispatch/{sample_call_id}/briefing").json()
+    assert "warnings" in briefing_resp
+    assert "generated_from" in briefing_resp
+    assert "route_hazards" in briefing_resp
+    print(f"safety briefing: {len(briefing_resp['warnings'])} warnings, triggered by {briefing_resp['generated_from']}")
+
+    # 9. Live camp declaration during demo
+    decl = c.post("/camps", json={"name": "Kunnathunadu Taluk Relief Camp", "lat": 10.024, "lon": 76.451}).json()
+    assert decl["ok"], "failed to declare live camp"
+    print(f"live camp declared: {decl['camp']['name']} (total camps now {decl['total_camps']})")
 
     print(f"\naudit rows written: {len(c.get('/audit').json())}")
     print("\nALL CHECKS PASSED")

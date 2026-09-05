@@ -1,0 +1,104 @@
+[
+  {
+    "name": "Govt Boys Higher Secondary School, Aluva",
+    "kind": "school",
+    "lat": 10.1135,
+    "lon": 76.4712
+  },
+  {
+    "name": "St. Joseph's Higher Secondary School, Aluva",
+    "kind": "school",
+    "lat": 10.1552,
+    "lon": 76.4045
+  },
+  {
+    "name": "Govt Higher Secondary School, Perumbavoor",
+    "kind": "school",
+    "lat": 10.1148,
+    "lon": 76.4778
+  },
+  {
+    "name": "Asram Higher Secondary School, Perumbavoor",
+    "kind": "school",
+    "lat": 10.1192,
+    "lon": 76.4863
+  },
+  {
+    "name": "Govt Sanskrit Higher Secondary School, Kalady",
+    "kind": "school",
+    "lat": 10.1705,
+    "lon": 76.4432
+  },
+  {
+    "name": "Brahmanandodayam Higher Secondary School, Kalady",
+    "kind": "school",
+    "lat": 10.1742,
+    "lon": 76.4415
+  },
+  {
+    "name": "MGM Higher Secondary School, Kuruppampady",
+    "kind": "school",
+    "lat": 10.1132,
+    "lon": 76.5185
+  },
+  {
+    "name": "St. Thomas Higher Secondary School, Keezhillam",
+    "kind": "school",
+    "lat": 10.0825,
+    "lon": 76.5352
+  },
+  {
+    "name": "Govt Vocational Higher Secondary School, Kunnathunadu",
+    "kind": "school",
+    "lat": 10.0452,
+    "lon": 76.4485
+  },
+  {
+    "name": "St. Mary's Higher Secondary School, Morakkala",
+    "kind": "school",
+    "lat": 10.0525,
+    "lon": 76.4423
+  },
+  {
+    "name": "Okkal Sree Narayana Higher Secondary School",
+    "kind": "school",
+    "lat": 10.1452,
+    "lon": 76.4605
+  },
+  {
+    "name": "Valayanchirangara Community Hall",
+    "kind": "community_centre",
+    "lat": 10.0655,
+    "lon": 76.4852
+  },
+  {
+    "name": "Rayamangalam Panchayat Community Hall",
+    "kind": "community_centre",
+    "lat": 10.0982,
+    "lon": 76.5205
+  },
+  {
+    "name": "Vengola Panchayat Community Centre",
+    "kind": "community_centre",
+    "lat": 10.0952,
+    "lon": 76.4552
+  },
+  {
+    "name": "Aluva East Town Community Hall",
+    "kind": "community_centre",
+    "lat": 10.1580,
+    "lon": 76.4250
+  },
+  {
+    "name": "Koovappady Community Centre",
+    "kind": "community_centre",
+    "lat": 10.1650,
+    "lon": 76.4980
+  },
+  {
+    "name": "Pattimattom Relief Shelter & Community Hall",
+    "kind": "community_centre",
+    "lat": 10.0270,
+    "lon": 76.4500
+  }
+]

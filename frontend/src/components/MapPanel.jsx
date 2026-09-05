@@ -30,10 +30,22 @@ const pathOf = (meta, coords) => {
   return d;
 };
 
-export default function MapPanel({ calls, selected, onSelect, route, pickMode, onPick, onCancelPick }) {
+export default function MapPanel({
+  calls,
+  selected,
+  onSelect,
+  route,
+  pickMode,
+  onPick,
+  onCancelPick,
+  activeTeam,
+}) {
   const { data: meta } = usePoll(api.meta, 60_000);
+  const { data: teamsData } = usePoll(api.teams, 10_000);
+  const rescueBases = teamsData?.teams ?? [];
   const [cut, setCut] = useState(null);
   const [showCut, setShowCut] = useState(true);
+  const [showBases, setShowBases] = useState(true);
   const [beforeAfter, setBeforeAfter] = useState(100); // 100 = all "after" (exposure)
   const wrapRef = useRef(null);
 
@@ -110,6 +122,13 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
             {showCut ? "Hide" : "Show"} cut roads
           </button>
         )}
+        <button
+          onClick={() => setShowBases((v) => !v)}
+          aria-pressed={showBases}
+          className="rounded-sm border border-line px-2 py-1 font-mono text-[10px] text-muted transition-colors hover:text-ink"
+        >
+          {showBases ? "Hide" : "Show"} bases
+        </button>
       </div>
 
       {pickMode && (
@@ -182,7 +201,91 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
               style={{ filter: "drop-shadow(0 0 3px rgba(88,196,214,.5))" }}
             />
           )}
+          {showBases &&
+            meta &&
+            calls.map((c) => {
+              if (!c.assigned_team || c.lat == null || c.lon == null) return null;
+              if (activeTeam && c.assigned_team.team_id !== activeTeam) return null;
+              const bp = project(meta, c.assigned_team.base_lat, c.assigned_team.base_lon);
+              const cp = project(meta, c.lat, c.lon);
+              if (!bp || !cp) return null;
+              const isSel = selected === c.id;
+              return (
+                <line
+                  key={`line-${c.id}`}
+                  x1={`${bp.x}%`}
+                  y1={`${bp.y}%`}
+                  x2={`${cp.x}%`}
+                  y2={`${cp.y}%`}
+                  stroke={c.assigned_team.color || "var(--color-water)"}
+                  strokeWidth={isSel ? "1.8" : "0.9"}
+                  strokeDasharray={isSel ? "none" : "3 3"}
+                  strokeOpacity={isSel ? "0.9" : activeTeam ? "0.6" : "0.3"}
+                  vectorEffect="non-scaling-stroke"
+                />
+              );
+            })}
         </svg>
+
+        {meta?.available &&
+          showBases &&
+          rescueBases.map((base) => {
+            const bp = project(meta, base.lat, base.lon);
+            if (!bp) return null;
+            const spanM =
+              (meta.east - meta.west) * 111320 * Math.cos((meta.north * Math.PI) / 180);
+            const radiusM = (base.radius_km || 10) * 1000;
+            const diameterPct = ((radiusM * 2) / spanM) * 100;
+            const isTargeted = activeTeam === base.id;
+
+            return (
+              <div key={base.id}>
+                {/* Coverage radius circle */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute rounded-full border border-dashed transition-all"
+                  style={{
+                    left: `calc(${bp.x}% - ${diameterPct / 2}%)`,
+                    top: `calc(${bp.y}% - ${diameterPct / 2}%)`,
+                    width: `${diameterPct}%`,
+                    paddingBottom: `${diameterPct}%`,
+                    borderColor: `${base.color}${isTargeted ? "90" : "35"}`,
+                    backgroundColor: isTargeted ? `${base.color}14` : "transparent",
+                  }}
+                />
+
+                {/* Rescue Base Station Badge */}
+                <div
+                  className={`pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2 transition-all ${
+                    isTargeted ? "z-20 scale-110" : "z-10 hover:scale-110"
+                  }`}
+                  style={{ left: `${bp.x}%`, top: `${bp.y}%` }}
+                  title={`${base.name} · ${base.hub} · ${base.total_assigned} assigned victims (${base.life_threats} critical)`}
+                >
+                  <div
+                    className="flex items-center gap-1.5 rounded-full border border-ground/90 px-2 py-0.5 shadow-md backdrop-blur-sm"
+                    style={{
+                      backgroundColor: base.color,
+                      color: "#0b1215",
+                      boxShadow: isTargeted
+                        ? `0 0 14px ${base.color}`
+                        : "0 1px 4px rgba(0,0,0,0.5)",
+                    }}
+                  >
+                    <span className="font-mono text-[10px] font-black">🚒</span>
+                    <span className="whitespace-nowrap font-mono text-[9px] font-extrabold tracking-tight">
+                      {base.name}
+                    </span>
+                    {base.total_assigned > 0 && (
+                      <span className="rounded-full bg-ground/85 px-1 py-0.2 font-mono text-[8px] font-bold text-ink">
+                        {base.total_assigned}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
 
         {meta?.available &&
           calls.map((c) => {
@@ -193,6 +296,10 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
               (meta.east - meta.west) * 111320 * Math.cos((meta.north * Math.PI) / 180);
             const d = ((c.error_radius_m * 2) / spanM) * 100;
             const isSel = selected === c.id;
+            const isDimmed = activeTeam && c.assigned_team?.team_id !== activeTeam;
+            const teamName = c.assigned_team?.team_name;
+            const teamDist = c.assigned_team?.distance_km;
+
             return (
               <div key={c.id}>
                 {c.error_radius_m > 400 && (
@@ -213,9 +320,9 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
                     onSelect(c.id);
                   }}
                   aria-label={`Position ${c.rank} on the map, ${bandName(c.band)}. ${c.reason}`}
-                  title={`#${c.rank} · ${c.reason}`}
+                  title={`#${c.rank} · ${c.reason}${teamName ? ` · 🚒 ${teamName} (${teamDist} km)` : ""}`}
                   className={`absolute grid h-[15px] w-[15px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-ground/80 font-mono text-[8px] font-bold text-ground transition-transform hover:scale-150 ${
-                    isSel ? "z-10 scale-[1.7] !border-ink" : ""
+                    isSel ? "z-20 scale-[1.7] !border-ink shadow-lg" : isDimmed ? "opacity-35" : ""
                   }`}
                   style={{
                     left: `${p.x}%`,

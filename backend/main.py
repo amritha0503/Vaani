@@ -34,9 +34,11 @@ load_dotenv(Path(__file__).with_name(".env"))
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 import backend.asr as asr
+import backend.briefing as briefing
 import backend.extract as extract
 import backend.rank as rank
 import backend.store as store
+import backend.teams as teams
 import backend.telephony as telephony
 
 HERE = Path(__file__).parent
@@ -69,6 +71,9 @@ ROADS = None            # RoadNetwork, or None if the graph was never baked
 DEMO_OFFLINE = False    # /demo/cut-network flips this for rehearsal
 _ROUTE_CACHE = {}       # call_id -> (key, route). The graph is frozen; a
                         # route asked for twice is the same route both times.
+_CAMP_RISK_CACHE = {}   # call_id -> (key, risk_data)
+_BRIEFING_CACHE = {}    # call_id -> (key, briefing_data)
+LIVE_CAMPS = []         # in-memory declared relief camps during disaster ops
 _IMPASSABLE_CACHE = None
 GAZ = None              # local landmark gazetteer
 CONVO = None            # the call agent
@@ -265,6 +270,24 @@ class TranscriptIn(BaseModel):
     text: str
 
 
+class CampIn(BaseModel):
+    lat: float
+    lon: float
+    name: str
+
+
+def _get_cached_camp_risk(call_id: str, lat: float | None, lon: float | None) -> dict | None:
+    if ROADS is None or lat is None or lon is None:
+        return None
+    key = (lat, lon)
+    hit = _CAMP_RISK_CACHE.get(call_id)
+    if hit and hit[0] == key:
+        return hit[1]
+    res = ROADS.nearest_camp(*key)
+    _CAMP_RISK_CACHE[call_id] = (key, res)
+    return res
+
+
 # ---------------------------------------------------------------- core
 def ingest(c: CallIn) -> dict:
     # Deterministic triage first, in microseconds, so the call is ranked before
@@ -345,6 +368,13 @@ def board() -> list[dict]:
         # and the console must not print the second when it means the first.
         "exposure_pending": bool(c["exposure"].get("pending")),
         "model_ver": c["model_ver"], "age_s": int(time.time() - c["received_at"]),
+        "manual_team_id": c.get("manual_team_id"),
+        "assigned_team": (
+            {**teams.TEAMS_BY_ID[c["manual_team_id"]], "manual_override": True}
+            if c.get("manual_team_id") and c.get("manual_team_id") in teams.TEAMS_BY_ID
+            else teams.find_nearest_team(c["lat"], c["lon"])
+        ),
+        "camp_risk": _get_cached_camp_risk(c["id"], c.get("lat"), c.get("lon")),
     } for c in ranked]
 
 
@@ -555,6 +585,93 @@ def get_dispatch(call_id: str):
     return r
 
 
+@app.post("/camps")
+def declare_camp(camp: CampIn):
+    """Declare a relief camp live during disaster operations.
+    Appends to in-memory list, registers with RoadNetwork, and logs via store.log()."""
+    item = {
+        "name": camp.name,
+        "kind": "community_centre",
+        "lat": camp.lat,
+        "lon": camp.lon,
+        "declared_live": True,
+    }
+    LIVE_CAMPS.append(item)
+    if ROADS is not None:
+        ROADS.add_live_camp(item)
+    _CAMP_RISK_CACHE.clear()
+    store.log("camp_declared", name=camp.name, lat=camp.lat, lon=camp.lon)
+    return {
+        "ok": True,
+        "camp": item,
+        "total_camps": len(ROADS.camp_candidates) if ROADS else len(LIVE_CAMPS),
+    }
+
+
+@app.get("/calls/{call_id}/camp-risk")
+def get_camp_risk(call_id: str):
+    """Report whether caller has a reachable relief camp nearby via dry road (risk: low) or not (risk: high)."""
+    call = store.CALLS.get(call_id)
+    if not call:
+        raise HTTPException(404, "no such call")
+    if ROADS is None:
+        raise HTTPException(503, "no road graph; run build_roads.py")
+    if call.get("lat") is None:
+        live = bool(call.get("live_stage")) and not str(
+            call.get("live_stage")).startswith("done")
+        return {
+            "risk": "high",
+            "nearest_camp": None,
+            "reason": ("the agent is still asking where they are" if live
+                       else "no location yet — place the call to assess camp risk"),
+        }
+    key = (call["lat"], call["lon"])
+    hit = _CAMP_RISK_CACHE.get(call_id)
+    if hit and hit[0] == key:
+        return hit[1]
+    res = ROADS.nearest_camp(*key)
+    _CAMP_RISK_CACHE[call_id] = (key, res)
+    return res
+
+
+@app.get("/dispatch/{call_id}/briefing")
+def get_briefing(call_id: str):
+    """Responder safety briefing on specific hazards and precautions, strictly decided by rule."""
+    call = store.CALLS.get(call_id)
+    if not call:
+        raise HTTPException(404, "no such call")
+    if call.get("lat") is None:
+        return {
+            "warnings": ["No location yet — cannot generate route-specific safety briefing."],
+            "route_hazards": [],
+            "generated_from": [],
+        }
+    key = (call["lat"], call["lon"])
+    hit = _BRIEFING_CACHE.get(call_id)
+    if hit and hit[0] == key:
+        return hit[1]
+
+    route_data = {}
+    if ROADS is not None:
+        route_hit = _ROUTE_CACHE.get(call_id)
+        if route_hit and route_hit[0] == key:
+            route_data = route_hit[1]
+        else:
+            route_data = ROADS.route_to(*key)
+
+    exp = call.get("exposure")
+    if not exp and SURFACE is not None:
+        exp = surface().sample(call["lat"], call["lon"], call.get("error_radius_m", 50.0))
+    elif not exp:
+        exp = {}
+
+    fields = call.get("fields") or {}
+    b = briefing.generate_briefing(call_fields=fields, exposure=exp, route=route_data)
+    _BRIEFING_CACHE[call_id] = (key, b)
+    store.log("briefed", call_id=call_id, warnings=b.get("warnings", []))
+    return b
+
+
 @app.get("/roads/impassable")
 def get_impassable():
     """The cut segments, drawn from the same surface that ranked the caller."""
@@ -701,6 +818,31 @@ def get_clusters():
     out = sorted(groups.values(),
                  key=lambda g: (-g["life_threat"], -g["worst_band"], g["best_rank"]))
     return {"groups": out, "located": sum(1 for g in out if g["lat"] is not None)}
+
+
+@app.get("/teams")
+def get_rescue_teams():
+    """Group all emergency calls by assigned rescue team stationed across Ernakulam."""
+    calls = board()
+    return teams.group_calls_by_teams(calls)
+
+
+class TeamAssignIn(BaseModel):
+    team_id: str
+
+
+@app.post("/calls/{call_id}/assign")
+def assign_call_team(call_id: str, payload: TeamAssignIn):
+    """Manually assign/reassign a call to a specific rescue team."""
+    call = store.CALLS.get(call_id)
+    if not call:
+        raise HTTPException(404, "no such call")
+    if payload.team_id not in teams.TEAMS_BY_ID and payload.team_id != "auto":
+        raise HTTPException(422, f"unknown team_id, must be one of: {list(teams.TEAMS_BY_ID.keys())}")
+    call["manual_team_id"] = None if payload.team_id == "auto" else payload.team_id
+    store.save_call(call)
+    store.log("team_reassigned", call_id=call_id, team_id=payload.team_id)
+    return {"ok": True, "call": call, "teams": teams.group_calls_by_teams(board())}
 
 
 # ------------------------------------------------------------ twilio control

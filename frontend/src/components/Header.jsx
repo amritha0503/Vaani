@@ -52,6 +52,7 @@ function Badge({ degradation, connected }) {
 
 const TABS = [
   { id: "ops", label: "Operations", hint: "the ranked queue, the surface and the route" },
+  { id: "teams", label: "Rescue teams", hint: "assigned rescue bases, coverage radius and rosters" },
   { id: "intake", label: "Intake & triage", hint: "upload recordings, dial back, group the board" },
   { id: "audit", label: "Audit log", hint: "every override and system event, in order" },
 ];

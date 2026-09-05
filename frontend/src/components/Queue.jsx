@@ -120,6 +120,14 @@ function Row({ call, selected, onSelect, refFn }) {
               </Chip>
             )}
             {call.source === "upload" && <Chip>upload</Chip>}
+            {call.assigned_team && (
+              <Chip tone="!text-water !border-water/40 font-semibold">
+                <span>🚒 {call.assigned_team.team_name}</span>
+                {call.assigned_team.distance_km != null && (
+                  <span className="text-muted font-normal ml-1">· {call.assigned_team.distance_km} km</span>
+                )}
+              </Chip>
+            )}
             {call.place && <Chip>{call.place.name}</Chip>}
             {call.language && call.language !== "?" && <Chip>{call.language}</Chip>}
             <Chip>{call.hazard}</Chip>
