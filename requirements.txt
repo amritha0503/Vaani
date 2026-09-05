@@ -11,7 +11,10 @@ Pillow==11.1.0
 
 # Optional cloud ASR (asr.py). Only imported if GEMINI_API_KEY is set --
 # an unconfigured install runs on faster-whisper alone, same as before.
-google-genai==2.22.0
+# Pinned <2.0 deliberately: this machine's Python also has
+# google-cloud-aiplatform and langchain-google-genai installed, both of which
+# require google-genai<2.0 -- 2.x installs cleanly but silently breaks them.
+google-genai==1.75.0
 
 # Build-time only. None of this is imported by the API, so the demo box can
 # run without it -- these are what build_labels.py and train_exposure.py need.
