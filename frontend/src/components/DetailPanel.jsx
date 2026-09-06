@@ -3,11 +3,11 @@ import { api, bandName } from "../api.js";
 
 function Line({ label, children }) {
   return (
-    <div className="grid grid-cols-[104px_minmax(0,1fr)] gap-2 py-[3px]">
-      <dt className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
+    <div className="grid grid-cols-[110px_minmax(0,1fr)] gap-2 py-[4px]">
+      <dt className="text-[11.5px] uppercase tracking-[0.06em] text-muted">
         {label}
       </dt>
-      <dd className="min-w-0 font-mono text-[11px] leading-relaxed text-ink-2">
+      <dd className="min-w-0 font-mono text-[12px] leading-relaxed text-ink-2">
         {children}
       </dd>
     </div>
@@ -40,9 +40,9 @@ function CrossSection({ callId, lat, lon }) {
   }, [callId, lat, lon]);
 
   if (lat == null) return null;
-  if (state === "loading") return <p className="font-mono text-[10.5px] text-muted">reading terrain…</p>;
+  if (state === "loading") return <p className="text-[12px] text-muted">reading terrain…</p>;
   if (state === "error" || !sec) {
-    return <p className="font-mono text-[10.5px] text-muted">no cross-section outside the mapped area</p>;
+    return <p className="text-[12px] text-muted">no cross-section outside the mapped area</p>;
   }
 
   const pts = sec.points.filter((p) => p.hand_m != null);
@@ -132,17 +132,17 @@ function LocationFix({ callId, onPickOnMap }) {
       <button
         onClick={useGps}
         disabled={busy}
-        className="rounded-sm border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted transition-colors hover:border-water hover:text-ink disabled:opacity-50"
+        className="rounded-sm border border-line px-1.5 py-0.5 text-[11.5px] text-muted transition-colors hover:border-water hover:text-ink disabled:opacity-50"
       >
         {busy ? "locating…" : "use my GPS"}
       </button>
       <button
         onClick={() => onPickOnMap?.(callId)}
-        className="rounded-sm border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted transition-colors hover:border-water hover:text-ink"
+        className="rounded-sm border border-line px-1.5 py-0.5 text-[11.5px] text-muted transition-colors hover:border-water hover:text-ink"
       >
         pick on map
       </button>
-      {error && <span className="font-mono text-[10px] text-band2">{error}</span>}
+      {error && <span className="text-[11.5px] text-band2">{error}</span>}
     </div>
   );
 }
@@ -179,7 +179,7 @@ function TranscriptEditor({ call }) {
         <span className="text-ink">{call.transcript}</span>{" "}
         <button
           onClick={() => setEditing(true)}
-          className="rounded-sm border border-line px-1.5 py-0.5 font-mono text-[9.5px] text-muted transition-colors hover:border-water hover:text-ink"
+          className="rounded-sm border border-line px-1.5 py-0.5 text-[11px] text-muted transition-colors hover:border-water hover:text-ink"
         >
           edit
         </button>
@@ -198,13 +198,13 @@ function TranscriptEditor({ call }) {
         rows={2}
         autoFocus
         aria-label="Corrected transcript"
-        className="w-full rounded-sm border border-line bg-ground px-2 py-1.5 font-mono text-[11px] text-ink"
+        className="w-full rounded-sm border border-line bg-ground px-2 py-1.5 text-[13px] text-ink"
       />
       <div className="mt-1 flex gap-2">
         <button
           onClick={submit}
           disabled={busy || !text.trim()}
-          className="rounded-sm border border-water/50 bg-water/10 px-2 py-1 font-mono text-[10.5px] text-water disabled:opacity-40"
+          className="rounded-sm border border-water/50 bg-water/10 px-2 py-1 text-[12px] text-water disabled:opacity-40"
         >
           {busy ? "re-triaging…" : "re-triage"}
         </button>
@@ -214,7 +214,7 @@ function TranscriptEditor({ call }) {
             setEditing(false);
           }}
           disabled={busy}
-          className="rounded-sm border border-line px-2 py-1 font-mono text-[10.5px] text-muted"
+          className="rounded-sm border border-line px-2 py-1 text-[12px] text-muted"
         >
           cancel
         </button>
@@ -275,7 +275,7 @@ function OverridePanel({ call }) {
         onClick={() => send(-1)}
         disabled={busy || call.band === 0}
         title="Demote one band — key [ "
-        className="rounded-sm border border-line bg-raised px-2 py-1 font-mono text-[10.5px] text-ink-2 transition-colors hover:border-band2 disabled:opacity-35"
+        className="rounded-sm border border-line bg-raised px-2.5 py-1.5 text-[12px] font-medium text-ink-2 transition-colors hover:border-band2 disabled:opacity-35"
       >
         ▼ demote
       </button>
@@ -283,14 +283,14 @@ function OverridePanel({ call }) {
         onClick={() => send(1)}
         disabled={busy || call.band === 3}
         title="Escalate one band — key ]"
-        className="rounded-sm border border-line bg-raised px-2 py-1 font-mono text-[10.5px] text-ink-2 transition-colors hover:border-band3 disabled:opacity-35"
+        className="rounded-sm border border-line bg-raised px-2.5 py-1.5 text-[12px] font-medium text-ink-2 transition-colors hover:border-band3 disabled:opacity-35"
       >
         ▲ escalate
       </button>
       {call.override !== 0 && call.override != null && (
-        <span className="font-mono text-[10px] text-band2">operator-adjusted</span>
+        <span className="text-[11.5px] text-band2">operator-adjusted</span>
       )}
-      <span className="ml-auto font-mono text-[9.5px] text-muted">[ / ] to override</span>
+      <span className="ml-auto font-mono text-[10.5px] text-muted">[ / ] to override</span>
     </div>
   );
 }
@@ -305,7 +305,7 @@ export default function DetailPanel({ call, route, routeState, onPickOnMap }) {
         <h2 id="detail-heading" className="sr-only">
           Call detail
         </h2>
-        <p className="font-mono text-[11px] text-muted">
+        <p className="text-[13px] text-muted">
           Select a call to see the ground beneath it, and the road to it.
         </p>
       </section>
@@ -417,7 +417,7 @@ export default function DetailPanel({ call, route, routeState, onPickOnMap }) {
         <Line label="transcript">
           <TranscriptEditor call={call} />
           {lowConfidence && (
-            <p className="mt-1 text-band2">
+            <p className="mt-1 font-sans text-band2">
               LOW-CONFIDENCE TRANSCRIPTION ({Math.round((call.asr_conf ?? 0) * 100)}%
               {call.asr_duration_s != null && `, ${call.asr_duration_s.toFixed(1)}s clip`}) —
               listen to the recording below and correct it if it's wrong

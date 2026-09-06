@@ -1,5 +1,5 @@
 import { api, usePoll } from "../api.js";
-import { Panel } from "./Intake.jsx";
+import { Panel } from "./Panel.jsx";
 
 const TONE = {
   overridden: "text-band2",
@@ -68,12 +68,12 @@ export default function AuditPanel({ onSelect }) {
       note={rows.length ? `${rows.length} events` : "waiting for the first event"}
     >
       {error && (
-        <p role="alert" className="font-mono text-[11px] text-band3">
+        <p role="alert" className="text-[12.5px] text-band3">
           {error}
         </p>
       )}
       {!rows.length && !error && (
-        <p className="font-mono text-[11px] leading-relaxed text-muted">
+        <p className="text-[12.5px] leading-relaxed text-muted">
           Every ranking decision, override, dispatch and system-state change is
           written here as it happens — this is the accountability trail behind
           the board, not a summary of it.
@@ -93,7 +93,7 @@ export default function AuditPanel({ onSelect }) {
             <li key={r.id}>
               <Tag
                 onClick={clickable ? () => onSelect(r.call_id) : undefined}
-                className={`grid w-full grid-cols-[64px_112px_56px_minmax(0,1fr)] items-baseline gap-2 rounded-[3px] px-2 py-1 text-left font-mono text-[10.5px] ${
+                className={`grid w-full grid-cols-[68px_120px_60px_minmax(0,1fr)] items-baseline gap-2 rounded-[3px] px-2 py-1.5 text-left font-mono text-[12px] ${
                   clickable ? "transition-colors hover:bg-raised" : ""
                 }`}
               >

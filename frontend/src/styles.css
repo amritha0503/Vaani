@@ -1,24 +1,30 @@
 @import "tailwindcss";
 
-/* Control room, refined. Every colour here clears WCAG AA against the surface
-   it is used on -- the muted tone is deliberately lighter than a designer would
-   pick, because this is read at a distance, on a projector, at 3am. */
+/* Operations centre, in daylight. Every colour here clears WCAG AA as text
+   against the surface it sits on -- most of this UI runs small (10-13px),
+   which needs 4.5:1, not the 3:1 minimum reserved for large text. */
 @theme {
-  --color-ground: #080d11;
-  --color-panel: #101820;
-  --color-raised: #17222b;
-  --color-line: #22313b;
-  --color-line-soft: #1a2831;
+  --color-ground: #eef2f5;
+  --color-panel: #ffffff;
+  --color-raised: #e4ecf1;
+  --color-line: #cbd6dd;
+  --color-line-soft: #e2e8ec;
 
-  --color-ink: #e9f1f5;
-  --color-ink-2: #b6c8d1;
-  --color-muted: #8397a2;
+  --color-ink: #101c24;
+  --color-ink-2: #3a4c56;
+  --color-muted: #5b707b;
 
-  --color-band3: #ff6f61;
-  --color-band2: #f0a340;
-  --color-band1: #86a2b0;
-  --color-water: #58c4d6;
-  --color-ok: #63c795;
+  --color-band3: #c8352b;
+  --color-band2: #a15c00;
+  --color-band1: #46626f;
+  --color-water: #0f7d94;
+  --color-ok: #177a4f;
+
+  /* The exposure map's colour ramp is server-rendered raster imagery with a
+     fixed dark-to-teal scale -- it is data, not UI chrome, so it does not
+     follow the theme above. Named here rather than left as bare hex. */
+  --color-map-dry: #0f1a20;
+  --color-map-wet: #58c4d6;
 
   --font-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
   --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
@@ -35,7 +41,7 @@ body {
   background: var(--color-ground);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 15px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -51,7 +57,7 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-line);
+  background: color-mix(in srgb, var(--color-line) 100%, black 15%);
   border-radius: 6px;
 }
 ::-webkit-scrollbar-track {

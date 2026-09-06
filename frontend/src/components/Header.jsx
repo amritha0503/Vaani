@@ -11,7 +11,7 @@ const LADDER = [
 function Badge({ degradation, connected }) {
   if (!degradation) {
     return (
-      <div className="flex items-center gap-2 rounded-sm border border-line px-3 py-1.5 font-mono text-[11px] text-muted">
+      <div className="flex items-center gap-2 rounded-sm border border-line px-3 py-1.5 font-mono text-[12px] text-muted">
         <span className="h-2 w-2 rounded-full bg-muted" aria-hidden="true" />
         CONNECTING
       </div>
@@ -21,7 +21,7 @@ function Badge({ degradation, connected }) {
   const lost = degradation.lost.join(", ");
   return (
     <div
-      className={`flex min-w-0 items-center gap-2.5 rounded-sm border bg-raised px-3 py-1.5 font-mono text-[11px] ${rung.tone}`}
+      className={`flex min-w-0 items-center gap-2.5 rounded-sm border bg-raised px-3 py-1.5 font-mono text-[12px] ${rung.tone}`}
       role="status"
       aria-label={
         `System level ${degradation.level}, ${rung.name}. ` +
@@ -50,13 +50,14 @@ function Badge({ degradation, connected }) {
   );
 }
 
-const TABS = [
-  { id: "ops", label: "Operations", hint: "the ranked queue, the surface and the route" },
-  { id: "intake", label: "Intake & triage", hint: "upload recordings, dial back, group the board" },
-  { id: "audit", label: "Audit log", hint: "every override and system event, in order" },
+const STEPS = [
+  { id: "intake", n: 1, label: "Intake", hint: "a call arrives — upload a recording or dial one back" },
+  { id: "triage", n: 2, label: "Triage & rank", hint: "the ranked queue, by severity and by place" },
+  { id: "dispatch", n: 3, label: "Dispatch", hint: "the surface, the route, and the call's full detail" },
+  { id: "audit", n: 4, label: "Audit", hint: "every override and system event, in order" },
 ];
 
-export default function Header({ tab, onTab, degradation, connected }) {
+export default function Header({ step, onStep, degradation, connected }) {
   const [offline, setOffline] = useState(false);
   const [busy, setBusy] = useState(null);
 
@@ -73,19 +74,19 @@ export default function Header({ tab, onTab, degradation, connected }) {
     }
   };
 
-  const onTabKey = (e) => {
-    const i = TABS.findIndex((t) => t.id === tab);
-    if (e.key === "ArrowRight") onTab(TABS[(i + 1) % TABS.length].id);
-    if (e.key === "ArrowLeft") onTab(TABS[(i - 1 + TABS.length) % TABS.length].id);
+  const onStepKey = (e) => {
+    const i = STEPS.findIndex((s) => s.id === step);
+    if (e.key === "ArrowRight") onStep(STEPS[(i + 1) % STEPS.length].id);
+    if (e.key === "ArrowLeft") onStep(STEPS[(i - 1 + STEPS.length) % STEPS.length].id);
   };
 
   return (
-    <header className="flex flex-wrap items-center gap-x-5 gap-y-3 border-b border-line bg-panel px-4 py-2.5 sm:px-6">
+    <header className="flex flex-wrap items-center gap-x-5 gap-y-3 border-b border-line bg-panel px-4 py-3 sm:px-6">
       <div className="flex items-baseline gap-3">
-        <span className="text-[17px] font-semibold tracking-tight">
+        <span className="text-[18px] font-semibold tracking-tight text-ink">
           VAANI<span className="text-water">.</span>
         </span>
-        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+        <span className="hidden text-[12px] text-muted sm:inline">
           Ernakulam · emergency response centre
         </span>
       </div>
@@ -93,26 +94,31 @@ export default function Header({ tab, onTab, degradation, connected }) {
       <nav
         className="flex gap-1 rounded-sm bg-raised p-0.5"
         role="tablist"
-        aria-label="Console sections"
-        onKeyDown={onTabKey}
+        aria-label="How a call moves through this system"
+        onKeyDown={onStepKey}
       >
-        {TABS.map((t) => (
+        {STEPS.map((s) => (
           <button
-            key={t.id}
+            key={s.id}
             role="tab"
-            id={`tab-${t.id}`}
-            aria-selected={tab === t.id}
-            aria-controls={`panel-${t.id}`}
-            tabIndex={tab === t.id ? 0 : -1}
-            title={t.hint}
-            onClick={() => onTab(t.id)}
-            className={`rounded-[3px] px-3 py-1.5 text-[12.5px] font-medium transition-colors ${
-              tab === t.id
+            id={`tab-${s.id}`}
+            aria-selected={step === s.id}
+            aria-controls={`panel-${s.id}`}
+            tabIndex={step === s.id ? 0 : -1}
+            title={s.hint}
+            onClick={() => onStep(s.id)}
+            className={`flex items-center gap-1.5 rounded-[3px] px-3 py-1.5 text-[13px] font-medium transition-colors ${
+              step === s.id
                 ? "bg-panel text-ink shadow-[inset_0_0_0_1px_var(--color-line)]"
                 : "text-muted hover:text-ink-2"
             }`}
           >
-            {t.label}
+            <span
+              className={`font-mono text-[11px] ${step === s.id ? "text-water" : "text-muted"}`}
+            >
+              {s.n}
+            </span>
+            {s.label}
           </button>
         ))}
       </nav>
@@ -121,11 +127,14 @@ export default function Header({ tab, onTab, degradation, connected }) {
         <Badge degradation={degradation} connected={connected} />
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 rounded-sm border border-line-soft px-2 py-1.5">
+        <span className="font-mono text-[9.5px] uppercase tracking-[0.1em] text-muted">
+          Demo
+        </span>
         <button
           onClick={() => act("surge", api.surge)}
           disabled={busy === "surge"}
-          className="rounded-sm border border-line bg-raised px-3 py-1.5 text-[12.5px] font-medium text-ink transition-colors hover:border-water disabled:opacity-50"
+          className="rounded-sm px-2.5 py-1 text-[12px] text-ink-2 transition-colors hover:bg-raised disabled:opacity-50"
         >
           {busy === "surge" ? "Injecting…" : "Surge"}
         </button>
@@ -137,17 +146,15 @@ export default function Header({ tab, onTab, degradation, connected }) {
             })
           }
           aria-pressed={offline}
-          className={`rounded-sm border px-3 py-1.5 text-[12.5px] font-medium transition-colors ${
-            offline
-              ? "border-band3/60 bg-band3/15 text-band3"
-              : "border-line bg-raised text-ink hover:border-band3"
+          className={`rounded-sm px-2.5 py-1 text-[12px] transition-colors ${
+            offline ? "bg-band3/15 text-band3" : "text-ink-2 hover:bg-raised"
           }`}
         >
           {offline ? "Restore network" : "Cut network"}
         </button>
         <button
           onClick={() => act("reset", api.reset)}
-          className="rounded-sm border border-line bg-raised px-3 py-1.5 text-[12.5px] font-medium text-muted transition-colors hover:border-line hover:text-ink"
+          className="rounded-sm px-2.5 py-1 text-[12px] text-muted transition-colors hover:bg-raised hover:text-ink-2"
         >
           Reset
         </button>

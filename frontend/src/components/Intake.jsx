@@ -1,21 +1,6 @@
 import { useRef, useState } from "react";
 import { api, usePoll } from "../api.js";
-
-function Panel({ title, note, children, className = "" }) {
-  return (
-    <section
-      className={`flex min-h-0 flex-col rounded-sm border border-line bg-panel ${className}`}
-    >
-      <div className="flex items-baseline gap-3 border-b border-line px-4 py-2.5">
-        <h2 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-2">
-          {title}
-        </h2>
-        {note && <p className="font-mono text-[10.5px] text-muted">{note}</p>}
-      </div>
-      <div className="min-h-0 flex-1 overflow-y-auto p-4">{children}</div>
-    </section>
-  );
-}
+import { Panel } from "./Panel.jsx";
 
 /* ------------------------------------------------------------------ upload */
 
@@ -117,12 +102,12 @@ export function UploadPanel({ calls, onSelect, onPickOnMap }) {
           dragging ? "border-water bg-water/5" : "border-line"
         }`}
       >
-        <p className="text-[13px] text-ink-2">
+        <p className="text-[14px] text-ink-2">
           Drop call recordings here, or
         </p>
         <button
           onClick={() => inputRef.current?.click()}
-          className="mt-2 rounded-sm border border-line bg-raised px-3 py-1.5 text-[12.5px] font-medium text-ink transition-colors hover:border-water"
+          className="mt-2 rounded-sm border border-line bg-raised px-3 py-1.5 text-[13.5px] font-medium text-ink transition-colors hover:border-water"
         >
           Choose audio files
         </button>
@@ -138,7 +123,7 @@ export function UploadPanel({ calls, onSelect, onPickOnMap }) {
             e.target.value = "";
           }}
         />
-        <p className="mx-auto mt-3 max-w-md font-mono text-[10.5px] leading-relaxed text-muted">
+        <p className="mx-auto mt-3 max-w-md text-[12.5px] leading-relaxed text-muted">
           Each file lands on the board immediately and fills in as it is worked:
           transcribed locally by Whisper, triaged by the spotter, geocoded from any
           landmark it mentions, then re-read by the model. Nothing is uploaded
@@ -147,12 +132,12 @@ export function UploadPanel({ calls, onSelect, onPickOnMap }) {
       </div>
 
       {error && (
-        <p role="alert" className="mt-3 font-mono text-[11px] text-band3">
+        <p role="alert" className="mt-3 text-[12.5px] text-band3">
           {error}
         </p>
       )}
       {gpsError && (
-        <p role="alert" className="mt-3 font-mono text-[11px] text-band2">
+        <p role="alert" className="mt-3 text-[12.5px] text-band2">
           {gpsError}
         </p>
       )}
@@ -170,24 +155,24 @@ export function UploadPanel({ calls, onSelect, onPickOnMap }) {
                   disabled={!call}
                   className="flex w-full items-center gap-3 rounded-[3px] px-2 py-1.5 text-left transition-colors hover:bg-raised disabled:cursor-default"
                 >
-                  <span className="min-w-0 flex-1 truncate font-mono text-[11px] text-ink-2">
+                  <span className="min-w-0 flex-1 truncate font-mono text-[12px] text-ink-2">
                     {q.filename}
                   </span>
-                  <span className={`font-mono text-[10.5px] ${st.tone}`}>{st.label}</span>
+                  <span className={`font-mono text-[11.5px] ${st.tone}`}>{st.label}</span>
                 </button>
                 {needsLocation && (
                   <div className="flex items-center gap-2 px-2 pb-1.5">
-                    <span className="font-mono text-[10px] text-band2">no landmark heard —</span>
+                    <span className="text-[11.5px] text-band2">no landmark heard —</span>
                     <button
                       onClick={() => useGps(q.id)}
                       disabled={gpsBusy === q.id}
-                      className="rounded-sm border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted transition-colors hover:border-water hover:text-ink disabled:opacity-50"
+                      className="rounded-sm border border-line px-1.5 py-0.5 text-[11.5px] text-muted transition-colors hover:border-water hover:text-ink disabled:opacity-50"
                     >
                       {gpsBusy === q.id ? "locating…" : "use my GPS"}
                     </button>
                     <button
                       onClick={() => onPickOnMap?.(q.id)}
-                      className="rounded-sm border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted transition-colors hover:border-water hover:text-ink"
+                      className="rounded-sm border border-line px-1.5 py-0.5 text-[11.5px] text-muted transition-colors hover:border-water hover:text-ink"
                     >
                       pick on map
                     </button>
@@ -209,14 +194,14 @@ function Field({ label, value, ok }) {
     <div className="flex items-baseline gap-2 py-1">
       <span
         aria-hidden="true"
-        className={`font-mono text-[11px] ${ok ? "text-ok" : "text-band2"}`}
+        className={`font-mono text-[12px] ${ok ? "text-ok" : "text-band2"}`}
       >
         {ok ? "✓" : "○"}
       </span>
-      <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
+      <span className="font-mono text-[11.5px] uppercase tracking-[0.08em] text-muted">
         {label}
       </span>
-      <span className="min-w-0 flex-1 truncate font-mono text-[11px] text-ink-2">
+      <span className="min-w-0 flex-1 truncate font-mono text-[12px] text-ink-2">
         {value ?? <span className="text-band2">not set</span>}
       </span>
     </div>
@@ -258,13 +243,13 @@ export function TwilioPanel() {
 
       {!ready && (
         <div className="mt-3 space-y-2">
-          <p className="font-mono text-[10.5px] leading-relaxed text-muted">
+          <p className="text-[12.5px] leading-relaxed text-muted">
             Twilio is the ingress only — transcription, extraction, geocoding,
             exposure and ranking all stay on this box. To wire it, start a tunnel,
             set three variables in the window that runs the server, then point the
             number&apos;s <em>A call comes in</em> webhook at the URL above.
           </p>
-          <pre className="whitespace-pre-wrap break-words rounded-sm border border-line bg-ground px-3 py-2 font-mono text-[10.5px] leading-relaxed text-ink-2">
+          <pre className="whitespace-pre-wrap break-words rounded-sm border border-line bg-ground px-3 py-2 font-mono text-[11.5px] leading-relaxed text-ink-2">
 {`cloudflared tunnel --url http://localhost:8000
 
 $env:VAANI_PUBLIC_URL   = "https://<tunnel>.trycloudflare.com"
@@ -274,7 +259,7 @@ $env:TWILIO_NUMBER      = "+1..."`}
           </pre>
           <button
             onClick={refresh}
-            className="rounded-sm border border-line bg-raised px-3 py-1.5 text-[12px] text-ink-2 transition-colors hover:border-water hover:text-ink"
+            className="rounded-sm border border-line bg-raised px-3 py-1.5 text-[12.5px] text-ink-2 transition-colors hover:border-water hover:text-ink"
           >
             Re-check configuration
           </button>
@@ -282,10 +267,7 @@ $env:TWILIO_NUMBER      = "+1..."`}
       )}
 
       <form onSubmit={dial} className="mt-4 space-y-2">
-        <label
-          htmlFor="dial-to"
-          className="block font-mono text-[10px] uppercase tracking-[0.08em] text-muted"
-        >
+        <label htmlFor="dial-to" className="block text-[12.5px] text-ink-2">
           Call a number back — the same agent runs the conversation
         </label>
         <div className="flex gap-2">
@@ -297,12 +279,12 @@ $env:TWILIO_NUMBER      = "+1..."`}
             onChange={(e) => setTo(e.target.value)}
             placeholder="+919778167232"
             disabled={!ready}
-            className="min-w-0 flex-1 rounded-sm border border-line bg-ground px-3 py-1.5 font-mono text-[12px] text-ink placeholder:text-muted/70 disabled:opacity-50"
+            className="min-w-0 flex-1 rounded-sm border border-line bg-ground px-3 py-1.5 font-mono text-[13px] text-ink placeholder:text-muted/70 disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={!ready || !to || busy}
-            className="rounded-sm border border-line bg-raised px-3 py-1.5 text-[12.5px] font-medium text-ink transition-colors hover:border-water disabled:opacity-40"
+            className="rounded-sm border border-line bg-raised px-3 py-1.5 text-[13.5px] font-medium text-ink transition-colors hover:border-water disabled:opacity-40"
           >
             {busy ? "Dialling…" : "Dial"}
           </button>
@@ -310,7 +292,7 @@ $env:TWILIO_NUMBER      = "+1..."`}
         {result && (
           <p
             role="status"
-            className={`font-mono text-[11px] ${result.ok ? "text-ok" : "text-band3"}`}
+            className={`text-[12.5px] ${result.ok ? "text-ok" : "text-band3"}`}
           >
             {result.text}
           </p>
@@ -319,5 +301,3 @@ $env:TWILIO_NUMBER      = "+1..."`}
     </Panel>
   );
 }
-
-export { Panel };

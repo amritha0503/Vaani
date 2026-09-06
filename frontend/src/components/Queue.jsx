@@ -6,7 +6,7 @@ const TWIN = "Water is rising, please help.";
 function Chip({ children, tone = "", caps = true }) {
   return (
     <span
-      className={`rounded-[3px] border border-line px-1.5 py-px font-mono text-[9.5px] tracking-[0.06em] text-muted ${
+      className={`rounded-[3px] border border-line px-1.5 py-px font-mono text-[10.5px] tracking-[0.06em] text-muted ${
         caps ? "uppercase" : ""
       } ${tone}`}
     >
@@ -19,7 +19,7 @@ function Chip({ children, tone = "", caps = true }) {
 function Reason({ text }) {
   const parts = text.split(" · ");
   return (
-    <span className="font-mono text-[10.5px] leading-relaxed text-muted">
+    <span className="text-[12.5px] leading-relaxed text-muted">
       {parts.map((p, i) => {
         const tone = /LIFE THREAT|REQUEST LANDMARK/.test(p)
           ? "text-band3"
@@ -49,10 +49,10 @@ function TwinProof({ calls }) {
   const [a, b] = twins;
   return (
     <div className="border-b border-line bg-band2/10 px-4 py-2 sm:px-5">
-      <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-band2">
+      <p className="text-[12px] font-semibold text-band2">
         Twin-call proof — identical words, different ground
       </p>
-      <div className="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-0.5 font-mono text-[11px] text-ink-2">
+      <div className="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-0.5 font-mono text-[12px] text-ink-2">
         <span className="text-ink">#{a.rank}</span>
         <span>{a.hand_m != null ? `${a.hand_m.toFixed(1)} m above drainage` : "no fix"} · exposure {a.exposure_p75}</span>
         <span className="text-muted">vs</span>
@@ -80,7 +80,7 @@ function Row({ call, selected, onSelect, refFn }) {
         } ${selected ? "shadow-[inset_3px_0_0_var(--color-water)]" : twin ? "shadow-[inset_3px_0_0_var(--color-band2)]" : ""}`}
       >
         <span
-          className={`pt-px text-right font-mono text-[16px] font-semibold tabular-nums ${
+          className={`pt-px text-right font-mono text-[18px] font-semibold tabular-nums ${
             call.rank === 1 ? "text-ink" : "text-muted"
           }`}
         >
@@ -88,14 +88,14 @@ function Row({ call, selected, onSelect, refFn }) {
         </span>
 
         <span
-          className={`mt-0.5 rounded-[3px] border py-0.5 text-center font-mono text-[10px] font-bold ${bandClass(call.band)}`}
+          className={`mt-0.5 rounded-[3px] border py-0.5 text-center font-mono text-[11px] font-bold ${bandClass(call.band)}`}
           title={bandName(call.band)}
         >
           B{call.band}
         </span>
 
         <span className="min-w-0">
-          <span className="block truncate text-[13.5px] leading-snug text-ink">
+          <span className="block truncate text-[14.5px] leading-snug text-ink">
             {call.transcript}
           </span>
           <span className="mt-0.5 block">
@@ -178,14 +178,11 @@ export default function Queue({ calls, selected, onSelect, connected }) {
       className="flex min-w-0 flex-1 flex-col lg:min-h-0"
       aria-labelledby="queue-heading"
     >
-      <div className="flex items-baseline gap-3 border-b border-line bg-panel px-4 py-2.5 sm:px-5">
-        <h2
-          id="queue-heading"
-          className="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-2"
-        >
+      <div className="flex items-baseline gap-3 border-b border-line bg-panel px-4 py-3 sm:px-5">
+        <h2 id="queue-heading" className="text-[15px] font-semibold text-ink">
           Rescue queue
         </h2>
-        <p className="font-mono text-[11px] text-muted">
+        <p className="font-mono text-[12.5px] text-muted">
           {calls.length} call{calls.length === 1 ? "" : "s"}
           {threats > 0 && (
             <>
@@ -194,7 +191,7 @@ export default function Queue({ calls, selected, onSelect, connected }) {
             </>
           )}
         </p>
-        <p className="ml-auto hidden font-mono text-[10px] text-muted lg:block">
+        <p className="ml-auto hidden text-[11.5px] text-muted lg:block">
           ↑↓ to move · terrain reorders within a band, never across one
         </p>
       </div>
@@ -203,10 +200,10 @@ export default function Queue({ calls, selected, onSelect, connected }) {
 
       {calls.length === 0 ? (
         <div className="flex flex-1 flex-col items-center justify-center gap-2 px-6 text-center">
-          <p className="text-[13px] text-ink-2">
+          <p className="text-[14px] text-ink-2">
             {connected ? "No calls on the board." : "Waiting for the queue stream…"}
           </p>
-          <p className="max-w-sm font-mono text-[11px] leading-relaxed text-muted">
+          <p className="max-w-sm text-[12.5px] leading-relaxed text-muted">
             Inject the fixture surge, upload recordings from Intake, or take a call.
             Calls appear the moment they connect and fill in as the agent works.
           </p>

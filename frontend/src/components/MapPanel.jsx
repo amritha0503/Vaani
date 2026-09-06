@@ -78,16 +78,13 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
       className="flex min-h-0 min-w-0 flex-1 flex-col lg:sticky lg:top-0"
       aria-labelledby="map-heading"
     >
-      <div className="flex items-baseline gap-3 border-b border-line bg-panel px-4 py-2.5 sm:px-5">
-        <h2
-          id="map-heading"
-          className="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-2"
-        >
+      <div className="flex items-baseline gap-3 border-b border-line bg-panel px-4 py-3 sm:px-5">
+        <h2 id="map-heading" className="text-[15px] font-semibold text-ink">
           Exposure surface
         </h2>
-        <p className="font-mono text-[11px] text-muted">HAND · 30 m · rain 250 mm/72 h</p>
+        <p className="font-mono text-[11.5px] text-muted">HAND · 30 m · rain 250 mm/72 h</p>
         {meta?.available && (
-          <label className="ml-auto flex items-center gap-2 font-mono text-[10px] text-muted">
+          <label className="ml-auto flex items-center gap-2 text-[11.5px] text-muted">
             <span className="hidden sm:inline">before</span>
             <input
               type="range"
@@ -105,7 +102,7 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
           <button
             onClick={() => setShowCut((v) => !v)}
             aria-pressed={showCut}
-            className="rounded-sm border border-line px-2 py-1 font-mono text-[10px] text-muted transition-colors hover:text-ink"
+            className="rounded-sm border border-line px-2 py-1 text-[11.5px] text-muted transition-colors hover:text-ink"
           >
             {showCut ? "Hide" : "Show"} cut roads
           </button>
@@ -113,7 +110,7 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
       </div>
 
       {pickMode && (
-        <div className="border-b border-line bg-water/10 px-4 py-1.5 font-mono text-[10.5px] text-water sm:px-5">
+        <div className="border-b border-line bg-water/10 px-4 py-1.5 text-[12px] text-water sm:px-5">
           Click the map to place this call · Esc to cancel
         </div>
       )}
@@ -145,7 +142,7 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
             )}
           </>
         ) : (
-          <p className="absolute inset-0 flex items-center justify-center px-6 text-center font-mono text-[11px] text-muted">
+          <p className="absolute inset-0 flex items-center justify-center px-6 text-center text-[13px] text-muted">
             No baked surface. Run build_terrain.py, then train_exposure.py.
           </p>
         )}
@@ -179,7 +176,10 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
               strokeLinecap="round"
               strokeLinejoin="round"
               vectorEffect="non-scaling-stroke"
-              style={{ filter: "drop-shadow(0 0 3px rgba(88,196,214,.5))" }}
+              style={{
+                filter:
+                  "drop-shadow(0 0 3px color-mix(in srgb, var(--color-water) 60%, transparent))",
+              }}
             />
           )}
         </svg>
@@ -214,7 +214,7 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
                   }}
                   aria-label={`Position ${c.rank} on the map, ${bandName(c.band)}. ${c.reason}`}
                   title={`#${c.rank} · ${c.reason}`}
-                  className={`absolute grid h-[15px] w-[15px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-ground/80 font-mono text-[8px] font-bold text-ground transition-transform hover:scale-150 ${
+                  className={`absolute grid h-[16px] w-[16px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/80 font-mono text-[8.5px] font-bold text-white transition-transform hover:scale-150 ${
                     isSel ? "z-10 scale-[1.7] !border-ink" : ""
                   }`}
                   style={{
@@ -234,11 +234,14 @@ export default function MapPanel({ calls, selected, onSelect, route, pickMode, o
             );
           })}
 
-        <div className="absolute bottom-3 left-3 rounded-sm border border-line bg-ground/85 px-3 py-2 font-mono text-[9.5px] leading-relaxed text-muted backdrop-blur-sm">
+        <div className="absolute bottom-3 left-3 rounded-sm border border-line bg-panel/95 px-3 py-2 font-mono text-[10.5px] leading-relaxed text-muted shadow-sm">
           <p className="tracking-[0.08em]">EXPOSURE INDEX · FITTED TO OBSERVED EXTENT</p>
           <div
             className="my-1 h-[7px] w-[118px] rounded-[1px]"
-            style={{ background: "linear-gradient(90deg,#0F1A20,#2C7C90 55%,#58C4D6)" }}
+            style={{
+              background:
+                "linear-gradient(90deg,var(--color-map-dry),#2C7C90 55%,var(--color-map-wet))",
+            }}
             aria-hidden="true"
           />
           <div className="flex justify-between">

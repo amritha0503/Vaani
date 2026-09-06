@@ -10,7 +10,7 @@ import AuditPanel from "./components/Audit.jsx";
 
 export default function App() {
   const { calls, degradation, connected } = useQueue();
-  const [tab, setTab] = useState("ops");
+  const [step, setStep] = useState("triage");
   const [selected, setSelected] = useState(null);
   const [bandFilter, setBandFilter] = useState(null);
   const [route, setRoute] = useState(null);
@@ -54,9 +54,12 @@ export default function App() {
     );
   }, [calls]);
 
+  // Picking a call anywhere in the pipeline (Triage's queue, its severity and
+  // location groupings, the audit trail) carries it forward to Dispatch,
+  // already selected -- the same step where its map, route and full detail live.
   const select = (id) => {
     setSelected(id);
-    setTab("ops");
+    setStep("dispatch");
   };
 
   const pickOnMap = (id) => {
@@ -85,8 +88,8 @@ export default function App() {
       </a>
 
       <Header
-        tab={tab}
-        onTab={setTab}
+        step={step}
+        onStep={setStep}
         degradation={degradation}
         connected={connected}
       />
@@ -95,31 +98,32 @@ export default function App() {
         {announcement}
       </p>
 
-      {tab === "audit" ? (
+      {step === "intake" ? (
         <main
-          id="panel-audit"
+          id="panel-intake"
           role="tabpanel"
-          aria-labelledby="tab-audit"
-          className="min-h-0 flex-1 overflow-y-auto p-3"
+          aria-labelledby="tab-intake"
+          className="grid min-h-0 flex-1 grid-cols-1 gap-3 overflow-y-auto p-3 lg:grid-cols-2"
         >
-          <AuditPanel onSelect={select} />
+          <UploadPanel calls={calls} onSelect={select} onPickOnMap={pickOnMap} />
+          <TwilioPanel />
         </main>
-      ) : tab === "ops" ? (
+      ) : step === "triage" ? (
         <main
-          id="panel-ops"
+          id="panel-triage"
           role="tabpanel"
-          aria-labelledby="tab-ops"
+          aria-labelledby="tab-triage"
           className="grid min-h-0 flex-1 grid-cols-1 overflow-y-auto lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:overflow-hidden"
         >
           <div className="flex min-h-0 flex-col border-line lg:border-r">
             {bandFilter != null && (
               <div className="flex items-center gap-3 border-b border-line bg-raised px-5 py-2">
-                <p className="font-mono text-[11px] text-ink-2">
+                <p className="text-[12.5px] text-ink-2">
                   Filtered to band {bandFilter} — {visible.length} of {calls.length} calls
                 </p>
                 <button
                   onClick={() => setBandFilter(null)}
-                  className="ml-auto rounded-sm border border-line px-2 py-1 font-mono text-[10px] text-muted hover:text-ink"
+                  className="ml-auto rounded-sm border border-line px-2 py-1 text-[11.5px] text-muted hover:text-ink"
                 >
                   Clear filter
                 </button>
@@ -128,41 +132,45 @@ export default function App() {
             <Queue
               calls={visible}
               selected={selected}
-              onSelect={setSelected}
+              onSelect={select}
               connected={connected}
             />
           </div>
-          <div className="flex min-h-0 flex-col">
-            <MapPanel
+          <div className="flex min-h-0 flex-col gap-3 overflow-y-auto p-3">
+            <SeverityPanel
               calls={calls}
-              selected={selected}
-              onSelect={setSelected}
-              route={route}
-              pickMode={placing != null}
-              onPick={onPick}
-              onCancelPick={() => setPlacing(null)}
+              activeBand={bandFilter}
+              onPickBand={setBandFilter}
             />
-            <DetailPanel call={call} route={route} routeState={routeState} onPickOnMap={pickOnMap} />
+            <LocationPanel calls={calls} onSelect={select} />
           </div>
+        </main>
+      ) : step === "dispatch" ? (
+        <main
+          id="panel-dispatch"
+          role="tabpanel"
+          aria-labelledby="tab-dispatch"
+          className="flex min-h-0 flex-1 flex-col overflow-y-auto lg:overflow-hidden"
+        >
+          <MapPanel
+            calls={calls}
+            selected={selected}
+            onSelect={setSelected}
+            route={route}
+            pickMode={placing != null}
+            onPick={onPick}
+            onCancelPick={() => setPlacing(null)}
+          />
+          <DetailPanel call={call} route={route} routeState={routeState} onPickOnMap={pickOnMap} />
         </main>
       ) : (
         <main
-          id="panel-intake"
+          id="panel-audit"
           role="tabpanel"
-          aria-labelledby="tab-intake"
-          className="grid min-h-0 flex-1 grid-cols-1 gap-3 overflow-y-auto p-3 lg:grid-cols-2 xl:grid-cols-4"
+          aria-labelledby="tab-audit"
+          className="min-h-0 flex-1 overflow-y-auto p-3"
         >
-          <UploadPanel calls={calls} onSelect={select} onPickOnMap={pickOnMap} />
-          <TwilioPanel />
-          <SeverityPanel
-            calls={calls}
-            activeBand={bandFilter}
-            onPickBand={(b) => {
-              setBandFilter(b);
-              if (b != null) setTab("ops");
-            }}
-          />
-          <LocationPanel calls={calls} onSelect={select} />
+          <AuditPanel onSelect={select} />
         </main>
       )}
     </div>

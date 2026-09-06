@@ -1,5 +1,5 @@
 import { api, bandName, usePoll } from "../api.js";
-import { Panel } from "./Intake.jsx";
+import { Panel } from "./Panel.jsx";
 
 const BANDS = [3, 2, 1, 0];
 const BAND_TONE = {
@@ -45,11 +45,11 @@ export function SeverityPanel({ calls, onPickBand, activeBand }) {
                 }`}
               >
                 <div className="flex items-baseline gap-2">
-                  <span className={`font-mono text-[11px] font-bold ${tone.text}`}>
+                  <span className={`font-mono text-[12px] font-bold ${tone.text}`}>
                     B{band}
                   </span>
-                  <span className="text-[12.5px] text-ink-2">{bandName(band)}</span>
-                  <span className="ml-auto font-mono text-[12px] tabular-nums text-ink">
+                  <span className="text-[13px] text-ink-2">{bandName(band)}</span>
+                  <span className="ml-auto font-mono text-[13px] tabular-nums text-ink">
                     {rows.length}
                   </span>
                 </div>
@@ -61,7 +61,7 @@ export function SeverityPanel({ calls, onPickBand, activeBand }) {
                   <div className={`h-full ${tone.bar}`} style={{ width: `${pct}%` }} />
                 </div>
                 {rows.length > 0 && (
-                  <p className="mt-1.5 truncate font-mono text-[10.5px] text-muted">
+                  <p className="mt-1.5 truncate text-[12.5px] text-muted">
                     {rows
                       .slice(0, 2)
                       .map((r) => r.transcript)
@@ -73,7 +73,7 @@ export function SeverityPanel({ calls, onPickBand, activeBand }) {
           );
         })}
       </ul>
-      <p className="mt-3 font-mono text-[10px] leading-relaxed text-muted">
+      <p className="mt-3 text-[12.5px] leading-relaxed text-muted">
         Band comes from the reported life threat, never from terrain. Exposure
         reorders calls inside a band and can never move one across a band
         boundary — click a band to filter the queue to it.
@@ -98,12 +98,12 @@ export function LocationPanel({ onSelect, calls }) {
       note={groups.length ? `${groups.length} places` : "waiting for fixes"}
     >
       {error && (
-        <p role="alert" className="font-mono text-[11px] text-band3">
+        <p role="alert" className="text-[12.5px] text-band3">
           {error}
         </p>
       )}
       {!groups.length && !error && (
-        <p className="font-mono text-[11px] leading-relaxed text-muted">
+        <p className="text-[12.5px] leading-relaxed text-muted">
           No calls placed yet. A landmark a caller names is geocoded against 393
           local OSM places; when nothing matches, the call stays here rather than
           being given a coordinate nobody stands at.
@@ -120,20 +120,20 @@ export function LocationPanel({ onSelect, calls }) {
               >
                 <div className="flex items-baseline gap-2">
                   <span
-                    className={`truncate text-[13px] ${unplaced ? "text-muted italic" : "text-ink"}`}
+                    className={`truncate text-[13.5px] ${unplaced ? "text-muted italic" : "text-ink"}`}
                   >
                     {g.place}
                   </span>
                   {g.kind && (
-                    <span className="font-mono text-[9.5px] uppercase tracking-[0.08em] text-muted">
+                    <span className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-muted">
                       {g.kind}
                     </span>
                   )}
-                  <span className="ml-auto font-mono text-[11px] tabular-nums text-ink-2">
+                  <span className="ml-auto font-mono text-[12px] tabular-nums text-ink-2">
                     {g.calls} call{g.calls === 1 ? "" : "s"}
                   </span>
                 </div>
-                <div className="mt-1 flex flex-wrap items-baseline gap-x-3 font-mono text-[10.5px] text-muted">
+                <div className="mt-1 flex flex-wrap items-baseline gap-x-3 font-mono text-[11.5px] text-muted">
                   {g.life_threat > 0 && (
                     <span className="text-band3">{g.life_threat} life threat</span>
                   )}

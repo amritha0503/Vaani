@@ -137,10 +137,10 @@ export const bandName = (b) =>
 
 export const bandClass = (b) =>
   b >= 3
-    ? "text-band3 border-band3/45 bg-band3/12"
+    ? "text-band3 border-band3/55 bg-band3/8"
     : b === 2
-      ? "text-band2 border-band2/40 bg-band2/12"
-      : "text-band1 border-band1/35 bg-band1/10";
+      ? "text-band2 border-band2/50 bg-band2/8"
+      : "text-band1 border-band1/45 bg-band1/8";
 
 export const fmtAge = (s) =>
   s < 60 ? `${s}s` : `${Math.floor(s / 60)}m ${String(s % 60).padStart(2, "0")}s`;
