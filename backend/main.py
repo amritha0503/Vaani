@@ -34,6 +34,7 @@ load_dotenv(Path(__file__).with_name(".env"))
 
 import backend.asr as asr
 import backend.extract as extract
+import backend.msg91 as msg91
 import backend.rank as rank
 import backend.store as store
 import backend.telephony as telephony
@@ -500,6 +501,113 @@ def get_dispatch(call_id: str):
               length_m=r.get("length_m"), detour_m=r.get("detour_m"),
               blocked=len(r.get("blocked_on_direct") or []))
     return r
+
+
+# ------------------------------------------------------- crew dispatch brief
+# A short, deterministic hazard-and-precautions text for the crew heading to
+# a call, sent by SMS through MSG91. Deterministic on purpose, same floor as
+# the rest of this app: every line here comes from a field the spotter,
+# model or ranker already computed, never phrased by a model -- the message
+# a crew reads before walking into water must never be a guess.
+HAZARD_PRECAUTIONS = {
+    "flood": "Do not wade or drive through moving water. Watch for submerged "
+             "hazards and collapsed road edges.",
+    "landslide": "Slope may still be unstable. Do not approach the debris "
+                 "face; check for further movement before entering.",
+    "structural": "Building may be structurally compromised. Assess for "
+                  "further collapse before entering.",
+    "medical": "Bring medical kit. Confirm airway/breathing on arrival "
+               "before extraction.",
+    "fire": "Check for gas/electrical hazards before entry.",
+    "other": "Confirm the hazard on scene before committing to an approach.",
+}
+VULNERABLE_NOTE = {
+    "child": "child on scene", "elderly": "elderly person on scene",
+    "disabled": "person with a disability on scene",
+    "pregnant": "pregnant occupant on scene", "injured": "injured occupant on scene",
+}
+BAND_NAME = ["no immediate risk", "minor", "serious", "life threat"]
+
+
+def _crew_brief(call: dict, route: dict | None) -> str:
+    f = call["fields"]
+    hazard = f["hazard_class"]
+    lines = [f"VAANI DISPATCH -- band {call['band']} ({BAND_NAME[call['band']]}), {hazard}."]
+
+    place = call.get("place")
+    if place:
+        lines.append(f"Near {place['name']}.")
+    if call.get("landmark"):
+        lines.append(f"Caller landmark: {call['landmark']}.")
+
+    flags = []
+    if f["trapped"]:
+        flags.append("occupant(s) trapped")
+    if f["medical_critical"]:
+        flags.append("medically critical")
+    flags += [VULNERABLE_NOTE.get(v, v) for v in f["vulnerable"]]
+    if flags:
+        lines.append(("; ".join(flags) + ".").capitalize())
+
+    exp = call.get("exposure") or {}
+    if exp.get("hand_m") is not None:
+        lines.append(f"Ground: {exp['hand_m']:.1f} m above nearest drainage, "
+                      f"exposure {exp['p75']}.")
+
+    if route and route.get("route"):
+        detour = route.get("detour_m") or 0
+        lines.append(
+            f"Route: {route['depot']['name']} -> {route['length_m'] / 1000:.1f} km, "
+            f"~{route['eta_min']} min" +
+            (f", +{detour} m detour around flooding." if detour > 0 else ", direct road clear.")
+        )
+    elif route and route.get("reason") == "boat_or_air_required":
+        lines.append(f"ROAD ACCESS BLOCKED from {route['depot']['name']} "
+                      "-- boat or air required.")
+
+    lines.append("Precaution: " + HAZARD_PRECAUTIONS.get(hazard, HAZARD_PRECAUTIONS["other"]))
+    return " ".join(lines)
+
+
+class CrewBriefIn(BaseModel):
+    to: str
+
+
+@app.post("/calls/{call_id}/crew-brief")
+def send_crew_brief(call_id: str, body: CrewBriefIn):
+    """Demo endpoint: compose the brief above for this call and send it by
+    SMS through MSG91 to whatever number is typed on the console. Not tied
+    to a real crew roster -- this shows the alert a dispatched crew would
+    receive, to a number entered for the demo."""
+    if call_id not in store.CALLS:
+        raise HTTPException(404, "no such call")
+    if not msg91.configured():
+        raise HTTPException(503, "MSG91_AUTH_KEY not set -- see backend/.env")
+
+    # rank.rank() returns freshly-scored COPIES ({**c, "band": ..., ...}) --
+    # it does not write band/reason/rank back onto store.CALLS itself. Read
+    # the same ranked view board() and every other endpoint reads, so the
+    # brief always matches whatever the operator currently sees on screen,
+    # override included.
+    call = next(c for c in rank.rank(list(store.CALLS.values())) if c["id"] == call_id)
+    place_of(call)  # same lazy place lookup board() uses, populates call["place"]
+
+    route = None
+    if ROADS is not None and call.get("lat") is not None:
+        try:
+            route = get_dispatch(call_id)
+        except HTTPException:
+            route = None
+
+    text = _crew_brief(call, route)
+    result = msg91.send(body.to, text)
+    store.log("crew_brief_sent" if result["ok"] else "crew_brief_failed",
+              call_id=call_id, to=body.to, detail=result["detail"][:200])
+    # A rejected send still returns 200 with the composed text and MSG91's own
+    # reason attached -- a judge should see what the crew would have read even
+    # when delivery itself fails, rather than just an opaque error.
+    return {"ok": result["ok"], "to": body.to, "message": text,
+            "detail": None if result["ok"] else result["detail"][:200]}
 
 
 @app.get("/roads/impassable")

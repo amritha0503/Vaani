@@ -47,6 +47,12 @@ export const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text }),
     }),
+  sendCrewBrief: (id, to) =>
+    json(`/calls/${id}/crew-brief`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ to }),
+    }),
   upload: (files) => {
     const body = new FormData();
     for (const f of files) body.append("files", f, f.name);

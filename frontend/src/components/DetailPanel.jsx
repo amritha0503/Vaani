@@ -295,6 +295,68 @@ function OverridePanel({ call }) {
   );
 }
 
+/** The alert a dispatched crew would actually receive: hazard, precautions,
+ *  the route the crew is heading in on. Built entirely from fields the
+ *  spotter/model/ranker already computed -- never phrased by a model -- and
+ *  sent by SMS through MSG91. Demo-scoped: it goes to whatever number is
+ *  typed here, not a real crew roster. */
+function CrewBrief({ callId }) {
+  const [to, setTo] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState(null); // {ok, message, detail} | {ok:false, text} on hard failure
+
+  const send = async (e) => {
+    e.preventDefault();
+    setBusy(true);
+    setResult(null);
+    try {
+      const r = await api.sendCrewBrief(callId, to);
+      setResult(r);
+    } catch (err) {
+      setResult({ ok: false, text: err.message });
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={send} className="flex flex-wrap items-center gap-2">
+        <input
+          type="tel"
+          inputMode="tel"
+          value={to}
+          onChange={(e) => setTo(e.target.value)}
+          placeholder="+919778167232"
+          aria-label="Crew phone number for the dispatch brief SMS"
+          className="min-w-0 flex-1 rounded-sm border border-line bg-ground px-2 py-1 font-mono text-[12px] text-ink placeholder:text-muted/70"
+        />
+        <button
+          type="submit"
+          disabled={!to || busy}
+          className="rounded-sm border border-line bg-raised px-2.5 py-1 text-[12px] font-medium text-ink transition-colors hover:border-water disabled:opacity-40"
+        >
+          {busy ? "Sending…" : "Send SMS brief"}
+        </button>
+      </form>
+      {result && (
+        <div className="mt-1.5">
+          <p className={`text-[11.5px] ${result.ok ? "text-ok" : "text-band3"}`}>
+            {result.ok
+              ? `Sent to ${result.to}.`
+              : result.text ?? `MSG91 could not deliver it — ${result.detail}`}
+          </p>
+          {result.message && (
+            <p className="mt-1 rounded-sm border border-line bg-ground px-2 py-1.5 text-[11.5px] leading-relaxed text-ink-2">
+              {result.message}
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function DetailPanel({ call, route, routeState, onPickOnMap }) {
   if (!call) {
     return (
@@ -413,6 +475,14 @@ export default function DetailPanel({ call, route, routeState, onPickOnMap }) {
               )}
             </>
           )}
+        </Line>
+        <Line label="crew brief">
+          <p className="mb-1.5 text-ink-2">
+            Hazard and precautions for whoever is heading to this call — sent by
+            SMS through MSG91. Demo: goes to any number typed here, not a real
+            crew roster.
+          </p>
+          <CrewBrief callId={call.id} />
         </Line>
         <Line label="transcript">
           <TranscriptEditor call={call} />

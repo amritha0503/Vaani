@@ -9,6 +9,8 @@ const TONE = {
   call_ended: "text-band2",
   sms_failed: "text-band2",
   asr_failed: "text-band2",
+  crew_brief_sent: "text-ok",
+  crew_brief_failed: "text-band2",
 };
 
 /** The few fields worth a glance, per action -- everything else in the payload
@@ -38,6 +40,10 @@ function detail(action, p) {
       return `to ${p.to} — ${p.error ?? ""}`;
     case "dialled":
       return `to ${p.to} · ${p.status ?? ""}`;
+    case "crew_brief_sent":
+      return `to ${p.to} · via MSG91`;
+    case "crew_brief_failed":
+      return `to ${p.to} — ${p.detail ?? ""}`;
     case "intake":
       return `${p.count} file${p.count === 1 ? "" : "s"}`;
     case "degraded":

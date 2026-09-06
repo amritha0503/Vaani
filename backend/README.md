@@ -104,6 +104,7 @@ C and D are never blocked. `GET /health/degradation` reports which is live.
 | `POST /calls/{id}/override` | operator promote/demote by one band, always audited — the console binds this to `[` and `]` |
 | `POST /calls/{id}/location` | place a call by hand: `{lat, lon, error_radius_m?, source?}` (a map click, a phone's GPS) or `{landmark}` (geocoded through the same gazetteer the agent uses). 422 rather than a guess when a landmark is not recognised |
 | `POST /calls/{id}/transcript` | `{text}` — the operator listened to the recording and typed what was actually said. Re-triages on the corrected words and geocodes any landmark they contain; never wipes a location fix the call already has |
+| `POST /calls/{id}/crew-brief` | `{to}` — a hazard-and-precautions brief for this call, composed only from fields the spotter/model/ranker already computed, sent by SMS through MSG91 to whatever number is given. Demo-scoped: not tied to a real crew roster. Returns `{ok, message, detail}` even on a rejected send, so the composed brief is visible either way |
 | `GET /audio/{id}` | the caller's own recording, when one was kept (an upload, a rehearsed simulate, or a live call taken in `record` mode) — 404, not a fabricated clip, when there is none |
 | `GET /exposure` | `lat, lon, radius_m` → p50/p75/p90 + HAND. Pure raster read |
 | `GET /exposure/section` | `lat, lon` → HAND sampled outward in the direction that actually descends toward drainage — the number behind "ground" as a line, not a point |
